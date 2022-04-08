@@ -1,0 +1,5 @@
+PLL_Name	DE10_Lite_SOPC:u0|DE10_Lite_SOPC_system_pll:system_pll|DE10_Lite_SOPC_system_pll_altpll_f9t2:sd1|pll7
+PLLJITTER	26
+PLLSPEmax	84
+PLLSPEmin	-53
+

@@ -1,0 +1,103 @@
+13:19:20 **** Incremental Build of configuration Nios II for project LT24_Painter ****
+make all 
+Info: Building ../LT24_Painter_bsp/
+P:/altera/16.0/nios2eds/bin/gnu/H-x86_64-mingw32/bin/make --no-print-directory -C ../LT24_Painter_bsp/
+[BSP build complete]
+Info: Compiling graphic_lib/simple_graphics.c to obj/default/graphic_lib/simple_graphics.o
+nios2-elf-gcc -xc -MP -MMD -c -I../LT24_Painter_bsp//HAL/inc -I../LT24_Painter_bsp/ -I../LT24_Painter_bsp//drivers/inc -Iterasic_lib -Igraphic_lib -Ifonts  -pipe -D__hal__ -DALT_NO_INSTRUCTION_EMULATION -DALT_SINGLE_THREADED    -O0 -g -Wall   -mno-hw-div -mhw-mul -mno-hw-mulx  -o obj/default/graphic_lib/simple_graphics.o graphic_lib/simple_graphics.c
+In file included from graphic_lib/simple_graphics.c:15:0:
+graphic_lib/simple_graphics.h:173:16: warning: inline function 'alpha_blending' declared but never defined
+ __inline__ int alpha_blending ( int horiz_offset,
+                ^
+graphic_lib/simple_graphics.h:166:16: warning: inline function 'read_from_frame' declared but never defined
+ __inline__ int read_from_frame (int horiz,
+                ^
+graphic_lib/simple_graphics.h:160:16: warning: inline function 'merge_color_channels' declared but never defined
+ __inline__ int merge_color_channels(int color_depth,
+                ^
+graphic_lib/simple_graphics.h:154:16: warning: inline function 'seperate_color_channels' declared but never defined
+ __inline__ int seperate_color_channels( int color_depth,
+                ^
+graphic_lib/simple_graphics.c: In function 'vid_get_pixel':
+graphic_lib/simple_graphics.c:361:1: warning: control reaches end of non-void function [-Wreturn-type]
+ }
+ ^
+graphic_lib/simple_graphics.c: In function 'vid_copy_line_to_frame_buffer':
+graphic_lib/simple_graphics.c:623:1: warning: control reaches end of non-void function [-Wreturn-type]
+ }
+ ^
+Info: Compiling graphic_lib/simple_text.c to obj/default/graphic_lib/simple_text.o
+nios2-elf-gcc -xc -MP -MMD -c -I../LT24_Painter_bsp//HAL/inc -I../LT24_Painter_bsp/ -I../LT24_Painter_bsp//drivers/inc -Iterasic_lib -Igraphic_lib -Ifonts  -pipe -D__hal__ -DALT_NO_INSTRUCTION_EMULATION -DALT_SINGLE_THREADED    -O0 -g -Wall   -mno-hw-div -mhw-mul -mno-hw-mulx  -o obj/default/graphic_lib/simple_text.o graphic_lib/simple_text.c
+graphic_lib/simple_text.c: In function 'vid_print_char_alpha':
+graphic_lib/simple_text.c:294:49: warning: pointer targets in passing argument 2 of 'seperate_color_channels' differ in signedness [-Wpointer-sign]
+   seperate_color_channels(display->color_depth, (char *)&color, &original_red, &original_green, &original_blue);
+                                                 ^
+graphic_lib/simple_text.c:83:5: note: expected 'unsigned char *' but argument is of type 'char *'
+ int seperate_color_channels(int color_depth, unsigned char * color, unsigned char * red, unsigned char * green, unsigned char * blue)
+     ^
+graphic_lib/simple_text.c:306:68: warning: pointer targets in passing argument 5 of 'merge_color_channels' differ in signedness [-Wpointer-sign]
+       merge_color_channels(display->color_depth, red, green, blue, (char *)&new_color);
+                                                                    ^
+graphic_lib/simple_text.c:127:5: note: expected 'unsigned char *' but argument is of type 'char *'
+ int merge_color_channels(int color_depth, unsigned char red, unsigned char green, unsigned char blue, unsigned char * color)
+     ^
+graphic_lib/simple_text.c: In function 'read_from_frame':
+graphic_lib/simple_text.c:216:1: warning: control reaches end of non-void function [-Wreturn-type]
+ }
+ ^
+Info: Compiling gui.c to obj/default/gui.o
+nios2-elf-gcc -xc -MP -MMD -c -I../LT24_Painter_bsp//HAL/inc -I../LT24_Painter_bsp/ -I../LT24_Painter_bsp//drivers/inc -Iterasic_lib -Igraphic_lib -Ifonts  -pipe -D__hal__ -DALT_NO_INSTRUCTION_EMULATION -DALT_SINGLE_THREADED    -O0 -g -Wall   -mno-hw-div -mhw-mul -mno-hw-mulx  -o obj/default/gui.o gui.c
+In file included from gui.c:35:0:
+graphic_lib/simple_graphics.h:173:16: warning: inline function 'alpha_blending' declared but never defined
+ __inline__ int alpha_blending ( int horiz_offset,
+                ^
+graphic_lib/simple_graphics.h:166:16: warning: inline function 'read_from_frame' declared but never defined
+ __inline__ int read_from_frame (int horiz,
+                ^
+graphic_lib/simple_graphics.h:160:16: warning: inline function 'merge_color_channels' declared but never defined
+ __inline__ int merge_color_channels(int color_depth,
+                ^
+graphic_lib/simple_graphics.h:154:16: warning: inline function 'seperate_color_channels' declared but never defined
+ __inline__ int seperate_color_channels( int color_depth,
+                ^
+Info: Compiling gui_vpg.c to obj/default/gui_vpg.o
+nios2-elf-gcc -xc -MP -MMD -c -I../LT24_Painter_bsp//HAL/inc -I../LT24_Painter_bsp/ -I../LT24_Painter_bsp//drivers/inc -Iterasic_lib -Igraphic_lib -Ifonts  -pipe -D__hal__ -DALT_NO_INSTRUCTION_EMULATION -DALT_SINGLE_THREADED    -O0 -g -Wall   -mno-hw-div -mhw-mul -mno-hw-mulx  -o obj/default/gui_vpg.o gui_vpg.c
+gui_vpg.c: In function 'VPG_ColorPanel':
+gui_vpg.c:73:20: warning: format '%x' expects argument of type 'unsigned int', but argument 3 has type 'alt_u32 {aka long unsigned int}' [-Wformat=]
+     sprintf(szText,"Panel: %08xh", Color);
+                    ^
+gui_vpg.c:73:20: warning: format '%x' expects argument of type 'unsigned int', but argument 3 has type 'alt_u32 {aka long unsigned int}' [-Wformat=]
+In file included from gui_vpg.c:36:0:
+gui_vpg.c: At top level:
+graphic_lib/simple_graphics.h:173:16: warning: inline function 'alpha_blending' declared but never defined
+ __inline__ int alpha_blending ( int horiz_offset,
+                ^
+graphic_lib/simple_graphics.h:166:16: warning: inline function 'read_from_frame' declared but never defined
+ __inline__ int read_from_frame (int horiz,
+                ^
+graphic_lib/simple_graphics.h:160:16: warning: inline function 'merge_color_channels' declared but never defined
+ __inline__ int merge_color_channels(int color_depth,
+                ^
+graphic_lib/simple_graphics.h:154:16: warning: inline function 'seperate_color_channels' declared but never defined
+ __inline__ int seperate_color_channels( int color_depth,
+                ^
+Info: Linking LT24_Painter.elf
+nios2-elf-g++  -T'../LT24_Painter_bsp//linker.x' -msys-crt0='../LT24_Painter_bsp//obj/HAL/src/crt0.o' -msys-lib=hal_bsp -L../LT24_Painter_bsp/   -Wl,-Map=LT24_Painter.map   -O0 -g -Wall   -mno-hw-div -mhw-mul -mno-hw-mulx  -o LT24_Painter.elf obj/default/fonts/tahomabold_20.o obj/default/fonts/tahomabold_32.o obj/default/geometry.o obj/default/graphic_lib/ILI9341.o obj/default/graphic_lib/simple_graphics.o obj/default/graphic_lib/simple_text.o obj/default/gui.o obj/default/gui_vpg.o obj/default/main.o obj/default/terasic_lib/I2C.o obj/default/terasic_lib/SEG7.o obj/default/terasic_lib/debug.o obj/default/terasic_lib/queue.o obj/default/terasic_lib/touch_spi.o -lm -msys-lib=m
+nios2-elf-insert LT24_Painter.elf --thread_model hal --cpu_name nios2_gen2 --qsys true --simulation_enabled false --id 0 --sidp 0x80000c0 --timestamp 1474261687 --stderr_dev jtag_uart --stdin_dev jtag_uart --stdout_dev jtag_uart --sopc_system_name DE10_Lite_SOPC --quartus_project_dir "J:/Terasic_svn_Taiwan/tmax10/trunk/test/daughter_card/C7_version/DE10_Lite_LT24_Painter" --sopcinfo J:/Terasic_svn_Taiwan/tmax10/trunk/test/daughter_card/C7_version/DE10_Lite_LT24_Painter/software/LT24_Painter_bsp/../../DE10_Lite_SOPC.sopcinfo
+Info: (LT24_Painter.elf) 225 KBytes program size (code + initialized data).
+Info:                    61200 KBytes free for stack + heap.
+Info: Creating LT24_Painter.objdump
+nios2-elf-objdump --disassemble --syms --all-header --source LT24_Painter.elf >LT24_Painter.objdump
+[LT24_Painter build complete]
+13:20:41 **** Incremental Build of configuration Nios II for project LT24_Painter ****
+make all 
+Info: Building ../LT24_Painter_bsp/
+P:/altera/16.0/nios2eds/bin/gnu/H-x86_64-mingw32/bin/make --no-print-directory -C ../LT24_Painter_bsp/
+[BSP build complete]
+[LT24_Painter build complete]
+13:25:08 **** Incremental Build of configuration Nios II for project LT24_Painter ****
+make all 
+Info: Building ../LT24_Painter_bsp/
+P:/altera/16.0/nios2eds/bin/gnu/H-x86_64-mingw32/bin/make --no-print-directory -C ../LT24_Painter_bsp/
+[BSP build complete]
+[LT24_Painter build complete]

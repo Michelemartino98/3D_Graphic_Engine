@@ -1,0 +1,9 @@
+13:25:08 **** Incremental Build of configuration Nios II for project LT24_Painter ****
+make all 
+Info: Building ../LT24_Painter_bsp/
+P:/altera/16.0/nios2eds/bin/gnu/H-x86_64-mingw32/bin/make --no-print-directory -C ../LT24_Painter_bsp/
+[BSP build complete]
+[LT24_Painter build complete]
+
+13:25:08 Build Finished (took 690ms)
+
