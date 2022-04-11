@@ -8,7 +8,7 @@
 #ifndef CONFIG_H_
 #define CONFIG_H_
 
-
+#define GREEN 0b0000011111100000
 
 
 
