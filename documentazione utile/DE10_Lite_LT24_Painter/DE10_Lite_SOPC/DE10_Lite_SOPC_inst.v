@@ -1,7 +1,6 @@
 	DE10_Lite_SOPC u0 (
 		.clk_clk                                          (<connected-to-clk_clk>),                                          //                                       clk.clk
 		.clk_sdram_clk                                    (<connected-to-clk_sdram_clk>),                                    //                                 clk_sdram.clk
-		.clk_vga_clk                                      (<connected-to-clk_vga_clk>),                                      //                                   clk_vga.clk
 		.lcd_reset_n_external_connection_export           (<connected-to-lcd_reset_n_external_connection_export>),           //           lcd_reset_n_external_connection.export
 		.lt24_controller_conduit_end_cs                   (<connected-to-lt24_controller_conduit_end_cs>),                   //               lt24_controller_conduit_end.cs
 		.lt24_controller_conduit_end_rs                   (<connected-to-lt24_controller_conduit_end_rs>),                   //                                          .rs
@@ -27,6 +26,14 @@
 		.touch_panel_spi_external_MISO                    (<connected-to-touch_panel_spi_external_MISO>),                    //                  touch_panel_spi_external.MISO
 		.touch_panel_spi_external_MOSI                    (<connected-to-touch_panel_spi_external_MOSI>),                    //                                          .MOSI
 		.touch_panel_spi_external_SCLK                    (<connected-to-touch_panel_spi_external_SCLK>),                    //                                          .SCLK
-		.touch_panel_spi_external_SS_n                    (<connected-to-touch_panel_spi_external_SS_n>)                     //                                          .SS_n
+		.touch_panel_spi_external_SS_n                    (<connected-to-touch_panel_spi_external_SS_n>),                    //                                          .SS_n
+		.video_vga_controller_0_external_interface_CLK    (<connected-to-video_vga_controller_0_external_interface_CLK>),    // video_vga_controller_0_external_interface.CLK
+		.video_vga_controller_0_external_interface_HS     (<connected-to-video_vga_controller_0_external_interface_HS>),     //                                          .HS
+		.video_vga_controller_0_external_interface_VS     (<connected-to-video_vga_controller_0_external_interface_VS>),     //                                          .VS
+		.video_vga_controller_0_external_interface_BLANK  (<connected-to-video_vga_controller_0_external_interface_BLANK>),  //                                          .BLANK
+		.video_vga_controller_0_external_interface_SYNC   (<connected-to-video_vga_controller_0_external_interface_SYNC>),   //                                          .SYNC
+		.video_vga_controller_0_external_interface_R      (<connected-to-video_vga_controller_0_external_interface_R>),      //                                          .R
+		.video_vga_controller_0_external_interface_G      (<connected-to-video_vga_controller_0_external_interface_G>),      //                                          .G
+		.video_vga_controller_0_external_interface_B      (<connected-to-video_vga_controller_0_external_interface_B>)       //                                          .B
 	);
 

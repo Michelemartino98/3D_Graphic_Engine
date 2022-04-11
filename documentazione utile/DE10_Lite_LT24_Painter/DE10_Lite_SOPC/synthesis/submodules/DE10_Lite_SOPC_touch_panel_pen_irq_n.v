@@ -1,4 +1,4 @@
-//Legal Notice: (C)2016 Altera Corporation. All rights reserved.  Your
+//Legal Notice: (C)2022 Altera Corporation. All rights reserved.  Your
 //use of Altera Corporation's design tools, logic functions and other
 //software and tools, and its AMPP partner logic functions, and any
 //output files any of the foregoing (including device programming or
@@ -44,17 +44,18 @@ module DE10_Lite_SOPC_touch_panel_pen_irq_n (
   input            write_n;
   input   [ 31: 0] writedata;
 
-  wire             clk_en;
-  reg              d1_data_in;
-  reg              d2_data_in;
-  wire             data_in;
-  reg              edge_capture;
-  wire             edge_capture_wr_strobe;
-  wire             edge_detect;
-  wire             irq;
-  reg              irq_mask;
-  wire             read_mux_out;
-  reg     [ 31: 0] readdata;
+
+wire             clk_en;
+reg              d1_data_in;
+reg              d2_data_in;
+wire             data_in;
+reg              edge_capture;
+wire             edge_capture_wr_strobe;
+wire             edge_detect;
+wire             irq;
+reg              irq_mask;
+wire             read_mux_out;
+reg     [ 31: 0] readdata;
   assign clk_en = 1;
   //s1, which is an e_avalon_slave
   assign read_mux_out = ({1 {(address == 0)}} & data_in) |

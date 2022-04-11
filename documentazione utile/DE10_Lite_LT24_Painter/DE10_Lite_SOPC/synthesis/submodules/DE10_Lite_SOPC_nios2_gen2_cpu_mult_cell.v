@@ -1,4 +1,4 @@
-//Legal Notice: (C)2016 Altera Corporation. All rights reserved.  Your
+//Legal Notice: (C)2022 Altera Corporation. All rights reserved.  Your
 //use of Altera Corporation's design tools, logic functions and other
 //software and tools, and its AMPP partner logic functions, and any
 //output files any of the foregoing (including device programming or
@@ -42,12 +42,13 @@ module DE10_Lite_SOPC_nios2_gen2_cpu_mult_cell (
   input            clk;
   input            reset_n;
 
-  wire    [ 31: 0] M_mul_cell_p1;
-  wire    [ 31: 0] M_mul_cell_p2;
-  wire    [ 31: 0] M_mul_cell_p3;
-  wire             mul_clr;
-  wire    [ 31: 0] mul_src1;
-  wire    [ 31: 0] mul_src2;
+
+wire    [ 31: 0] M_mul_cell_p1;
+wire    [ 31: 0] M_mul_cell_p2;
+wire    [ 31: 0] M_mul_cell_p3;
+wire             mul_clr;
+wire    [ 31: 0] mul_src1;
+wire    [ 31: 0] mul_src2;
   assign mul_clr = ~reset_n;
   assign mul_src1 = E_src1;
   assign mul_src2 = E_src2;

@@ -3,12 +3,14 @@
  <debug showDebugMenu="0" />
  <systemtable filter="All Interfaces">
   <columns>
-   <connections preferredWidth="239" />
+   <connections preferredWidth="319" />
    <irq preferredWidth="34" />
-   <inputclock preferredWidth="168" />
+   <inputclock preferredWidth="99" />
+   <name preferredWidth="196" />
   </columns>
  </systemtable>
- <library expandedCategories="Library,Project" />
- <window width="1280" height="984" x="0" y="0" />
+ <library
+   expandedCategories="Library,Project,Library/University Program/Audio &amp; Video/Video,Library/University Program/Audio &amp; Video,Library/University Program" />
+ <window width="1920" height="1042" x="0" y="0" />
  <hdlexample language="VERILOG" />
 </preferences>

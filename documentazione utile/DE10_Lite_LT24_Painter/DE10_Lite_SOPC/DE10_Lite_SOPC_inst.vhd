@@ -2,7 +2,6 @@
 		port (
 			clk_clk                                          : in    std_logic                     := 'X';             -- clk
 			clk_sdram_clk                                    : out   std_logic;                                        -- clk
-			clk_vga_clk                                      : out   std_logic;                                        -- clk
 			lcd_reset_n_external_connection_export           : out   std_logic;                                        -- export
 			lt24_controller_conduit_end_cs                   : out   std_logic;                                        -- cs
 			lt24_controller_conduit_end_rs                   : out   std_logic;                                        -- rs
@@ -28,7 +27,15 @@
 			touch_panel_spi_external_MISO                    : in    std_logic                     := 'X';             -- MISO
 			touch_panel_spi_external_MOSI                    : out   std_logic;                                        -- MOSI
 			touch_panel_spi_external_SCLK                    : out   std_logic;                                        -- SCLK
-			touch_panel_spi_external_SS_n                    : out   std_logic                                         -- SS_n
+			touch_panel_spi_external_SS_n                    : out   std_logic;                                        -- SS_n
+			video_vga_controller_0_external_interface_CLK    : out   std_logic;                                        -- CLK
+			video_vga_controller_0_external_interface_HS     : out   std_logic;                                        -- HS
+			video_vga_controller_0_external_interface_VS     : out   std_logic;                                        -- VS
+			video_vga_controller_0_external_interface_BLANK  : out   std_logic;                                        -- BLANK
+			video_vga_controller_0_external_interface_SYNC   : out   std_logic;                                        -- SYNC
+			video_vga_controller_0_external_interface_R      : out   std_logic_vector(3 downto 0);                     -- R
+			video_vga_controller_0_external_interface_G      : out   std_logic_vector(3 downto 0);                     -- G
+			video_vga_controller_0_external_interface_B      : out   std_logic_vector(3 downto 0)                      -- B
 		);
 	end component DE10_Lite_SOPC;
 
@@ -36,7 +43,6 @@
 		port map (
 			clk_clk                                          => CONNECTED_TO_clk_clk,                                          --                                       clk.clk
 			clk_sdram_clk                                    => CONNECTED_TO_clk_sdram_clk,                                    --                                 clk_sdram.clk
-			clk_vga_clk                                      => CONNECTED_TO_clk_vga_clk,                                      --                                   clk_vga.clk
 			lcd_reset_n_external_connection_export           => CONNECTED_TO_lcd_reset_n_external_connection_export,           --           lcd_reset_n_external_connection.export
 			lt24_controller_conduit_end_cs                   => CONNECTED_TO_lt24_controller_conduit_end_cs,                   --               lt24_controller_conduit_end.cs
 			lt24_controller_conduit_end_rs                   => CONNECTED_TO_lt24_controller_conduit_end_rs,                   --                                          .rs
@@ -62,6 +68,14 @@
 			touch_panel_spi_external_MISO                    => CONNECTED_TO_touch_panel_spi_external_MISO,                    --                  touch_panel_spi_external.MISO
 			touch_panel_spi_external_MOSI                    => CONNECTED_TO_touch_panel_spi_external_MOSI,                    --                                          .MOSI
 			touch_panel_spi_external_SCLK                    => CONNECTED_TO_touch_panel_spi_external_SCLK,                    --                                          .SCLK
-			touch_panel_spi_external_SS_n                    => CONNECTED_TO_touch_panel_spi_external_SS_n                     --                                          .SS_n
+			touch_panel_spi_external_SS_n                    => CONNECTED_TO_touch_panel_spi_external_SS_n,                    --                                          .SS_n
+			video_vga_controller_0_external_interface_CLK    => CONNECTED_TO_video_vga_controller_0_external_interface_CLK,    -- video_vga_controller_0_external_interface.CLK
+			video_vga_controller_0_external_interface_HS     => CONNECTED_TO_video_vga_controller_0_external_interface_HS,     --                                          .HS
+			video_vga_controller_0_external_interface_VS     => CONNECTED_TO_video_vga_controller_0_external_interface_VS,     --                                          .VS
+			video_vga_controller_0_external_interface_BLANK  => CONNECTED_TO_video_vga_controller_0_external_interface_BLANK,  --                                          .BLANK
+			video_vga_controller_0_external_interface_SYNC   => CONNECTED_TO_video_vga_controller_0_external_interface_SYNC,   --                                          .SYNC
+			video_vga_controller_0_external_interface_R      => CONNECTED_TO_video_vga_controller_0_external_interface_R,      --                                          .R
+			video_vga_controller_0_external_interface_G      => CONNECTED_TO_video_vga_controller_0_external_interface_G,      --                                          .G
+			video_vga_controller_0_external_interface_B      => CONNECTED_TO_video_vga_controller_0_external_interface_B       --                                          .B
 		);
 

@@ -2,7 +2,6 @@
 		port (
 			clk_clk                                          : in    std_logic                     := 'X';             -- clk
 			clk_sdram_clk                                    : out   std_logic;                                        -- clk
-			clk_vga_clk                                      : out   std_logic;                                        -- clk
 			lcd_reset_n_external_connection_export           : out   std_logic;                                        -- export
 			lt24_controller_conduit_end_cs                   : out   std_logic;                                        -- cs
 			lt24_controller_conduit_end_rs                   : out   std_logic;                                        -- rs
@@ -28,7 +27,15 @@
 			touch_panel_spi_external_MISO                    : in    std_logic                     := 'X';             -- MISO
 			touch_panel_spi_external_MOSI                    : out   std_logic;                                        -- MOSI
 			touch_panel_spi_external_SCLK                    : out   std_logic;                                        -- SCLK
-			touch_panel_spi_external_SS_n                    : out   std_logic                                         -- SS_n
+			touch_panel_spi_external_SS_n                    : out   std_logic;                                        -- SS_n
+			video_vga_controller_0_external_interface_CLK    : out   std_logic;                                        -- CLK
+			video_vga_controller_0_external_interface_HS     : out   std_logic;                                        -- HS
+			video_vga_controller_0_external_interface_VS     : out   std_logic;                                        -- VS
+			video_vga_controller_0_external_interface_BLANK  : out   std_logic;                                        -- BLANK
+			video_vga_controller_0_external_interface_SYNC   : out   std_logic;                                        -- SYNC
+			video_vga_controller_0_external_interface_R      : out   std_logic_vector(3 downto 0);                     -- R
+			video_vga_controller_0_external_interface_G      : out   std_logic_vector(3 downto 0);                     -- G
+			video_vga_controller_0_external_interface_B      : out   std_logic_vector(3 downto 0)                      -- B
 		);
 	end component DE10_Lite_SOPC;
 

@@ -5,10 +5,13 @@
   <columns>
    <connections preferredWidth="239" />
    <irq preferredWidth="34" />
-   <inputclock preferredWidth="168" />
+   <inputclock preferredWidth="114" />
+   <name preferredWidth="242" />
+   <export preferredWidth="157" />
   </columns>
  </systemtable>
- <library expandedCategories="Library,Project" />
- <window width="1280" height="984" x="0" y="0" />
+ <library
+   expandedCategories="Library,Library/University Program/Audio &amp; Video/Video,Library/Processors and Peripherals/Peripherals,Library/University Program/Clock,Project,Library/DSP,Library/Processors and Peripherals,Library/University Program/Audio &amp; Video,Library/Interface Protocols,Library/University Program" />
+ <window width="1938" height="1060" x="-9" y="-9" />
  <hdlexample language="VERILOG" />
 </preferences>

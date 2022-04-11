@@ -2,7 +2,6 @@
 module DE10_Lite_SOPC (
 	clk_clk,
 	clk_sdram_clk,
-	clk_vga_clk,
 	lcd_reset_n_external_connection_export,
 	lt24_controller_conduit_end_cs,
 	lt24_controller_conduit_end_rs,
@@ -28,11 +27,18 @@ module DE10_Lite_SOPC (
 	touch_panel_spi_external_MISO,
 	touch_panel_spi_external_MOSI,
 	touch_panel_spi_external_SCLK,
-	touch_panel_spi_external_SS_n);	
+	touch_panel_spi_external_SS_n,
+	video_vga_controller_0_external_interface_CLK,
+	video_vga_controller_0_external_interface_HS,
+	video_vga_controller_0_external_interface_VS,
+	video_vga_controller_0_external_interface_BLANK,
+	video_vga_controller_0_external_interface_SYNC,
+	video_vga_controller_0_external_interface_R,
+	video_vga_controller_0_external_interface_G,
+	video_vga_controller_0_external_interface_B);	
 
 	input		clk_clk;
 	output		clk_sdram_clk;
-	output		clk_vga_clk;
 	output		lcd_reset_n_external_connection_export;
 	output		lt24_controller_conduit_end_cs;
 	output		lt24_controller_conduit_end_rs;
@@ -59,4 +65,12 @@ module DE10_Lite_SOPC (
 	output		touch_panel_spi_external_MOSI;
 	output		touch_panel_spi_external_SCLK;
 	output		touch_panel_spi_external_SS_n;
+	output		video_vga_controller_0_external_interface_CLK;
+	output		video_vga_controller_0_external_interface_HS;
+	output		video_vga_controller_0_external_interface_VS;
+	output		video_vga_controller_0_external_interface_BLANK;
+	output		video_vga_controller_0_external_interface_SYNC;
+	output	[3:0]	video_vga_controller_0_external_interface_R;
+	output	[3:0]	video_vga_controller_0_external_interface_G;
+	output	[3:0]	video_vga_controller_0_external_interface_B;
 endmodule
