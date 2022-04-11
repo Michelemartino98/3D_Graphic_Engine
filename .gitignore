@@ -1,0 +1,16 @@
+
+test_vga/software/.metadata/
+
+test_vga/software/vga_computer/obj/
+
+test_vga/software/vga_computer_bsp/.settings/language.settings.xml
+
+test_vga/software/vga_computer/.cproject
+
+test_vga/software/vga_computer/.settings/language.settings.xml
+
+test_vga/software/vga_computer/vga_computer.map
+
+test_vga/software/vga_computer/vga_computer.objdump
+
+test_vga/software/vga_computer/vga_computer.elf
