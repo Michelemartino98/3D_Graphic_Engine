@@ -2,9 +2,9 @@
 <sch:Settings xmlns:sch="http://www.altera.com/embeddedsw/bsp/schema">
         <BspType>hal</BspType>
         <BspVersion>default</BspVersion>
-        <BspGeneratedTimeStamp>Apr 11, 2022 6:00:49 PM</BspGeneratedTimeStamp>
-        <BspGeneratedUnixTimeStamp>1649692849142</BspGeneratedUnixTimeStamp>
-        <BspGeneratedLocation>C:\Users\39327\Desktop\uni\MAGISTRALE\Sistemi_embedded\Progetto_3D_engine\test_vga\software\vga_computer_bsp</BspGeneratedLocation>
+        <BspGeneratedTimeStamp>12-apr-2022 11.08.46</BspGeneratedTimeStamp>
+        <BspGeneratedUnixTimeStamp>1649754526196</BspGeneratedUnixTimeStamp>
+        <BspGeneratedLocation>C:\Users\vanno\OneDrive\Documents\GitKraken\3D_Graphic_Engine\test_vga\software\vga_computer_bsp</BspGeneratedLocation>
         <BspSettingsFile>settings.bsp</BspSettingsFile>
         <SopcDesignFile>..\..\vga_computer.sopcinfo</SopcDesignFile>
         <JdiFile>default</JdiFile>

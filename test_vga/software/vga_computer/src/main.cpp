@@ -4,7 +4,8 @@
  *  Created on: 11 apr 2022
  *      Author: 39327
  */
-
+#include <unistd.h>
+#include <stdio.h>
 #include "../inc/config.h"
 #include "system.h"
 #include "../../vga_computer_bsp/drivers/inc/altera_up_avalon_video_pixel_buffer_dma.h"
@@ -24,10 +25,16 @@ alt_up_pixel_buffer_dma_dev *pixel_buf_dma_dev;
 
 int main(){
 	pixel_buf_dma_dev = alt_up_pixel_buffer_dma_open_dev("/dev/video_pixel_buffer_dma_0");
+
+	usleep(1000);
+
 	alt_up_pixel_buffer_dma_clear_screen(pixel_buf_dma_dev,0);
 	alt_up_pixel_buffer_dma_clear_screen(pixel_buf_dma_dev,1);
-	alt_up_pixel_buffer_dma_draw(pixel_buf_dma_dev, GREEN, 100, 100);
-	//alt_up_pixel_buffer_dma_draw_line(pixel_buf_dma_dev, 0, 0, 100, 100, GREEN, 1);
-	alt_up_pixel_buffer_dma_swap_buffers(pixel_buf_dma_dev);
+
+
+	for (int i = 0; i < 220; i++)
+	{
+		alt_up_pixel_buffer_dma_draw_line(pixel_buf_dma_dev, i, 0, 100+i, 100, i*1000, 0);
+	}
 	while(1){};
 }
