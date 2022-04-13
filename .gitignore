@@ -60,3 +60,5 @@ test_vga/hardware/VGA_test.qsf
 *.rpt
 
 test_vga/hardware/
+
+test_vga/software/RemoteSystemsTempFiles/
