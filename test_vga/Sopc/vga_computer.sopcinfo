@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <EnsembleReport name="vga_computer" kind="vga_computer" version="1.0" fabric="QSYS">
  <!-- Format version 18.1 625 (Future versions may contain additional information.) -->
- <!-- 2022.04.15.02:09:53 -->
+ <!-- 2022.04.16.18:26:18 -->
  <!-- A collection of modules and connections -->
  <parameter name="AUTO_GENERATION_ID">
   <type>java.lang.Integer</type>
-  <value>1649981393</value>
+  <value>1650126377</value>
   <derived>false</derived>
   <enabled>true</enabled>
   <visible>false</visible>
@@ -132,7 +132,7 @@ the requested settings for a module instance. -->
   </assignment>
   <assignment>
    <name>embeddedsw.CMacro.FREQ</name>
-   <value>50000000</value>
+   <value>100000000</value>
   </assignment>
   <assignment>
    <name>embeddedsw.CMacro.HAS_IN</name>
@@ -268,7 +268,7 @@ the requested settings for a module instance. -->
   </parameter>
   <parameter name="clockRate">
    <type>long</type>
-   <value>50000000</value>
+   <value>100000000</value>
    <derived>false</derived>
    <enabled>true</enabled>
    <visible>false</visible>
@@ -402,7 +402,7 @@ parameters are a RESULT of the module parameters. -->
    </parameter>
    <parameter name="clockRate">
     <type>java.lang.Long</type>
-    <value>50000000</value>
+    <value>100000000</value>
     <derived>true</derived>
     <enabled>true</enabled>
     <visible>false</visible>
@@ -910,7 +910,7 @@ the requested settings for a module instance. -->
   </assignment>
   <assignment>
    <name>embeddedsw.CMacro.FREQ</name>
-   <value>50000000</value>
+   <value>100000000</value>
   </assignment>
   <assignment>
    <name>embeddedsw.CMacro.HAS_IN</name>
@@ -1046,7 +1046,7 @@ the requested settings for a module instance. -->
   </parameter>
   <parameter name="clockRate">
    <type>long</type>
-   <value>50000000</value>
+   <value>100000000</value>
    <derived>false</derived>
    <enabled>true</enabled>
    <visible>false</visible>
@@ -1180,7 +1180,7 @@ parameters are a RESULT of the module parameters. -->
    </parameter>
    <parameter name="clockRate">
     <type>java.lang.Long</type>
-    <value>50000000</value>
+    <value>100000000</value>
     <derived>true</derived>
     <enabled>true</enabled>
     <visible>false</visible>
@@ -1684,7 +1684,7 @@ the requested settings for a module instance. -->
   </assignment>
   <assignment>
    <name>embeddedsw.CMacro.FREQ</name>
-   <value>50000000</value>
+   <value>100000000</value>
   </assignment>
   <assignment>
    <name>embeddedsw.CMacro.HAS_IN</name>
@@ -1820,7 +1820,7 @@ the requested settings for a module instance. -->
   </parameter>
   <parameter name="clockRate">
    <type>long</type>
-   <value>50000000</value>
+   <value>100000000</value>
    <derived>false</derived>
    <enabled>true</enabled>
    <visible>false</visible>
@@ -1954,7 +1954,7 @@ parameters are a RESULT of the module parameters. -->
    </parameter>
    <parameter name="clockRate">
     <type>java.lang.Long</type>
-    <value>50000000</value>
+    <value>100000000</value>
     <derived>true</derived>
     <enabled>true</enabled>
     <visible>false</visible>
@@ -2458,7 +2458,7 @@ the requested settings for a module instance. -->
   </assignment>
   <assignment>
    <name>embeddedsw.CMacro.FREQ</name>
-   <value>50000000</value>
+   <value>100000000</value>
   </assignment>
   <assignment>
    <name>embeddedsw.CMacro.HAS_IN</name>
@@ -2594,7 +2594,7 @@ the requested settings for a module instance. -->
   </parameter>
   <parameter name="clockRate">
    <type>long</type>
-   <value>50000000</value>
+   <value>100000000</value>
    <derived>false</derived>
    <enabled>true</enabled>
    <visible>false</visible>
@@ -2728,7 +2728,7 @@ parameters are a RESULT of the module parameters. -->
    </parameter>
    <parameter name="clockRate">
     <type>java.lang.Long</type>
-    <value>50000000</value>
+    <value>100000000</value>
     <derived>true</derived>
     <enabled>true</enabled>
     <visible>false</visible>
@@ -3232,7 +3232,7 @@ the requested settings for a module instance. -->
   </assignment>
   <assignment>
    <name>embeddedsw.CMacro.FREQ</name>
-   <value>50000000</value>
+   <value>100000000</value>
   </assignment>
   <assignment>
    <name>embeddedsw.CMacro.HAS_IN</name>
@@ -3368,7 +3368,7 @@ the requested settings for a module instance. -->
   </parameter>
   <parameter name="clockRate">
    <type>long</type>
-   <value>50000000</value>
+   <value>100000000</value>
    <derived>false</derived>
    <enabled>true</enabled>
    <visible>false</visible>
@@ -3502,7 +3502,7 @@ parameters are a RESULT of the module parameters. -->
    </parameter>
    <parameter name="clockRate">
     <type>java.lang.Long</type>
-    <value>50000000</value>
+    <value>100000000</value>
     <derived>true</derived>
     <enabled>true</enabled>
     <visible>false</visible>
@@ -4224,7 +4224,7 @@ the requested settings for a module instance. -->
   </parameter>
   <parameter name="CLK1_MULTIPLY_BY">
    <type>java.lang.String</type>
-   <value>1</value>
+   <value>2</value>
    <derived>false</derived>
    <enabled>true</enabled>
    <visible>true</visible>
@@ -4232,7 +4232,7 @@ the requested settings for a module instance. -->
   </parameter>
   <parameter name="CLK2_MULTIPLY_BY">
    <type>java.lang.String</type>
-   <value></value>
+   <value>2</value>
    <derived>false</derived>
    <enabled>true</enabled>
    <visible>true</visible>
@@ -4344,7 +4344,7 @@ the requested settings for a module instance. -->
   </parameter>
   <parameter name="CLK2_DIVIDE_BY">
    <type>java.lang.String</type>
-   <value></value>
+   <value>1</value>
    <derived>false</derived>
    <enabled>true</enabled>
    <visible>true</visible>
@@ -4456,7 +4456,7 @@ the requested settings for a module instance. -->
   </parameter>
   <parameter name="CLK2_PHASE_SHIFT">
    <type>java.lang.String</type>
-   <value></value>
+   <value>0</value>
    <derived>false</derived>
    <enabled>true</enabled>
    <visible>true</visible>
@@ -4568,7 +4568,7 @@ the requested settings for a module instance. -->
   </parameter>
   <parameter name="CLK2_DUTY_CYCLE">
    <type>java.lang.String</type>
-   <value></value>
+   <value>50</value>
    <derived>false</derived>
    <enabled>true</enabled>
    <visible>true</visible>
@@ -4808,7 +4808,7 @@ the requested settings for a module instance. -->
   </parameter>
   <parameter name="PORT_clk2">
    <type>java.lang.String</type>
-   <value>PORT_UNUSED</value>
+   <value>PORT_USED</value>
    <derived>false</derived>
    <enabled>true</enabled>
    <visible>true</visible>
@@ -5208,7 +5208,7 @@ the requested settings for a module instance. -->
   </parameter>
   <parameter name="HIDDEN_CONSTANTS">
    <type>java.lang.String</type>
-   <value>CT#PORT_clk5 PORT_UNUSED CT#PORT_clk4 PORT_UNUSED CT#PORT_clk3 PORT_UNUSED CT#PORT_clk2 PORT_UNUSED CT#PORT_clk1 PORT_USED CT#PORT_clk0 PORT_USED CT#CLK0_MULTIPLY_BY 1 CT#PORT_SCANWRITE PORT_UNUSED CT#PORT_SCANACLR PORT_UNUSED CT#PORT_PFDENA PORT_UNUSED CT#PORT_PLLENA PORT_UNUSED CT#PORT_SCANDATA PORT_UNUSED CT#PORT_SCANCLKENA PORT_UNUSED CT#WIDTH_CLOCK 5 CT#PORT_SCANDATAOUT PORT_UNUSED CT#LPM_TYPE altpll CT#PLL_TYPE AUTO CT#CLK0_PHASE_SHIFT 0 CT#CLK1_DUTY_CYCLE 50 CT#PORT_PHASEDONE PORT_UNUSED CT#OPERATION_MODE NORMAL CT#PORT_CONFIGUPDATE PORT_UNUSED CT#CLK1_MULTIPLY_BY 1 CT#COMPENSATE_CLOCK CLK0 CT#PORT_CLKSWITCH PORT_UNUSED CT#INCLK0_INPUT_FREQUENCY 20000 CT#PORT_SCANDONE PORT_UNUSED CT#PORT_CLKLOSS PORT_UNUSED CT#PORT_INCLK1 PORT_UNUSED CT#AVALON_USE_SEPARATE_SYSCLK NO CT#PORT_INCLK0 PORT_USED CT#PORT_clkena5 PORT_UNUSED CT#PORT_clkena4 PORT_UNUSED CT#PORT_clkena3 PORT_UNUSED CT#PORT_clkena2 PORT_UNUSED CT#PORT_clkena1 PORT_UNUSED CT#PORT_clkena0 PORT_UNUSED CT#CLK1_PHASE_SHIFT -3000 CT#PORT_ARESET PORT_UNUSED CT#BANDWIDTH_TYPE AUTO CT#INTENDED_DEVICE_FAMILY {MAX 10} CT#PORT_SCANREAD PORT_UNUSED CT#PORT_PHASESTEP PORT_UNUSED CT#PORT_SCANCLK PORT_UNUSED CT#PORT_CLKBAD1 PORT_UNUSED CT#PORT_CLKBAD0 PORT_UNUSED CT#PORT_FBIN PORT_UNUSED CT#PORT_PHASEUPDOWN PORT_UNUSED CT#PORT_extclk3 PORT_UNUSED CT#PORT_extclk2 PORT_UNUSED CT#PORT_extclk1 PORT_UNUSED CT#PORT_PHASECOUNTERSELECT PORT_UNUSED CT#PORT_extclk0 PORT_UNUSED CT#PORT_ACTIVECLOCK PORT_UNUSED CT#CLK0_DUTY_CYCLE 50 CT#CLK0_DIVIDE_BY 2 CT#CLK1_DIVIDE_BY 1 CT#PORT_LOCKED PORT_UNUSED</value>
+   <value>CT#CLK2_DIVIDE_BY 1 CT#PORT_clk5 PORT_UNUSED CT#PORT_clk4 PORT_UNUSED CT#PORT_clk3 PORT_UNUSED CT#PORT_clk2 PORT_USED CT#PORT_clk1 PORT_USED CT#PORT_clk0 PORT_USED CT#CLK0_MULTIPLY_BY 1 CT#PORT_SCANWRITE PORT_UNUSED CT#PORT_SCANACLR PORT_UNUSED CT#PORT_PFDENA PORT_UNUSED CT#PORT_PLLENA PORT_UNUSED CT#PORT_SCANDATA PORT_UNUSED CT#PORT_SCANCLKENA PORT_UNUSED CT#WIDTH_CLOCK 5 CT#PORT_SCANDATAOUT PORT_UNUSED CT#LPM_TYPE altpll CT#PLL_TYPE AUTO CT#CLK0_PHASE_SHIFT 0 CT#CLK1_DUTY_CYCLE 50 CT#PORT_PHASEDONE PORT_UNUSED CT#OPERATION_MODE NORMAL CT#PORT_CONFIGUPDATE PORT_UNUSED CT#CLK1_MULTIPLY_BY 2 CT#COMPENSATE_CLOCK CLK0 CT#PORT_CLKSWITCH PORT_UNUSED CT#INCLK0_INPUT_FREQUENCY 20000 CT#PORT_SCANDONE PORT_UNUSED CT#PORT_CLKLOSS PORT_UNUSED CT#PORT_INCLK1 PORT_UNUSED CT#AVALON_USE_SEPARATE_SYSCLK NO CT#PORT_INCLK0 PORT_USED CT#PORT_clkena5 PORT_UNUSED CT#PORT_clkena4 PORT_UNUSED CT#PORT_clkena3 PORT_UNUSED CT#PORT_clkena2 PORT_UNUSED CT#PORT_clkena1 PORT_UNUSED CT#PORT_clkena0 PORT_UNUSED CT#CLK1_PHASE_SHIFT -3000 CT#PORT_ARESET PORT_UNUSED CT#BANDWIDTH_TYPE AUTO CT#CLK2_MULTIPLY_BY 2 CT#INTENDED_DEVICE_FAMILY {MAX 10} CT#PORT_SCANREAD PORT_UNUSED CT#CLK2_DUTY_CYCLE 50 CT#PORT_PHASESTEP PORT_UNUSED CT#PORT_SCANCLK PORT_UNUSED CT#PORT_CLKBAD1 PORT_UNUSED CT#PORT_CLKBAD0 PORT_UNUSED CT#PORT_FBIN PORT_UNUSED CT#PORT_PHASEUPDOWN PORT_UNUSED CT#PORT_extclk3 PORT_UNUSED CT#PORT_extclk2 PORT_UNUSED CT#PORT_extclk1 PORT_UNUSED CT#PORT_PHASECOUNTERSELECT PORT_UNUSED CT#PORT_extclk0 PORT_UNUSED CT#PORT_ACTIVECLOCK PORT_UNUSED CT#CLK2_PHASE_SHIFT 0 CT#CLK0_DUTY_CYCLE 50 CT#CLK0_DIVIDE_BY 2 CT#CLK1_DIVIDE_BY 1 CT#PORT_LOCKED PORT_UNUSED</value>
    <derived>false</derived>
    <enabled>true</enabled>
    <visible>false</visible>
@@ -5216,7 +5216,7 @@ the requested settings for a module instance. -->
   </parameter>
   <parameter name="HIDDEN_PRIVATES">
    <type>java.lang.String</type>
-   <value>PT#GLOCKED_FEATURE_ENABLED 0 PT#SPREAD_FEATURE_ENABLED 0 PT#BANDWIDTH_FREQ_UNIT MHz PT#CUR_DEDICATED_CLK c0 PT#INCLK0_FREQ_EDIT 50.000 PT#BANDWIDTH_PRESET Low PT#PLL_LVDS_PLL_CHECK 0 PT#BANDWIDTH_USE_PRESET 0 PT#AVALON_USE_SEPARATE_SYSCLK NO PT#PLL_ENHPLL_CHECK 0 PT#OUTPUT_FREQ_UNIT1 MHz PT#OUTPUT_FREQ_UNIT0 MHz PT#PHASE_RECONFIG_FEATURE_ENABLED 1 PT#CREATE_CLKBAD_CHECK 0 PT#CLKSWITCH_CHECK 0 PT#INCLK1_FREQ_EDIT 100.000 PT#NORMAL_MODE_RADIO 1 PT#SRC_SYNCH_COMP_RADIO 0 PT#PLL_ARESET_CHECK 0 PT#LONG_SCAN_RADIO 1 PT#SCAN_FEATURE_ENABLED 1 PT#PHASE_RECONFIG_INPUTS_CHECK 0 PT#USE_CLK1 1 PT#USE_CLK0 1 PT#PRIMARY_CLK_COMBO inclk0 PT#BANDWIDTH 1.000 PT#GLOCKED_COUNTER_EDIT_CHANGED 1 PT#PLL_FASTPLL_CHECK 0 PT#SPREAD_FREQ_UNIT KHz PT#PLL_AUTOPLL_CHECK 1 PT#LVDS_PHASE_SHIFT_UNIT1 deg PT#LVDS_PHASE_SHIFT_UNIT0 deg PT#OUTPUT_FREQ_MODE1 1 PT#SWITCHOVER_FEATURE_ENABLED 0 PT#MIG_DEVICE_SPEED_GRADE Any PT#OUTPUT_FREQ_MODE0 1 PT#BANDWIDTH_FEATURE_ENABLED 1 PT#INCLK0_FREQ_UNIT_COMBO MHz PT#ZERO_DELAY_RADIO 0 PT#OUTPUT_FREQ1 50.00000000 PT#OUTPUT_FREQ0 25.00000000 PT#SHORT_SCAN_RADIO 0 PT#LVDS_MODE_DATA_RATE_DIRTY 0 PT#CUR_FBIN_CLK c0 PT#PLL_ADVANCED_PARAM_CHECK 0 PT#CLKBAD_SWITCHOVER_CHECK 0 PT#PHASE_SHIFT_STEP_ENABLED_CHECK 0 PT#DEVICE_SPEED_GRADE Any PT#PLL_FBMIMIC_CHECK 0 PT#LVDS_MODE_DATA_RATE {Not Available} PT#LOCKED_OUTPUT_CHECK 0 PT#SPREAD_PERCENT 0.500 PT#PHASE_SHIFT1 -3.00000000 PT#PHASE_SHIFT0 0.00000000 PT#DIV_FACTOR1 1 PT#DIV_FACTOR0 1 PT#CNX_NO_COMPENSATE_RADIO 0 PT#USE_CLKENA1 0 PT#USE_CLKENA0 0 PT#CREATE_INCLK1_CHECK 0 PT#GLOCK_COUNTER_EDIT 1048575 PT#INCLK1_FREQ_UNIT_COMBO MHz PT#EFF_OUTPUT_FREQ_VALUE1 50.000000 PT#EFF_OUTPUT_FREQ_VALUE0 25.000000 PT#SPREAD_FREQ 50.000 PT#USE_MIL_SPEED_GRADE 0 PT#EXPLICIT_SWITCHOVER_COUNTER 0 PT#STICKY_CLK4 0 PT#STICKY_CLK3 0 PT#STICKY_CLK2 0 PT#STICKY_CLK1 1 PT#STICKY_CLK0 1 PT#EXT_FEEDBACK_RADIO 0 PT#MIRROR_CLK1 0 PT#MIRROR_CLK0 0 PT#SWITCHOVER_COUNT_EDIT 1 PT#SELF_RESET_LOCK_LOSS 0 PT#PLL_PFDENA_CHECK 0 PT#INT_FEEDBACK__MODE_RADIO 1 PT#INCLK1_FREQ_EDIT_CHANGED 1 PT#CLKLOSS_CHECK 0 PT#SYNTH_WRAPPER_GEN_POSTFIX 0 PT#PHASE_SHIFT_UNIT1 ns PT#PHASE_SHIFT_UNIT0 deg PT#BANDWIDTH_USE_AUTO 1 PT#HAS_MANUAL_SWITCHOVER 1 PT#MULT_FACTOR1 1 PT#MULT_FACTOR0 1 PT#SPREAD_USE 0 PT#GLOCKED_MODE_CHECK 0 PT#SACN_INPUTS_CHECK 0 PT#DUTY_CYCLE1 50.00000000 PT#INTENDED_DEVICE_FAMILY {MAX 10} PT#DUTY_CYCLE0 50.00000000 PT#PLL_TARGET_HARCOPY_CHECK 0 PT#INCLK1_FREQ_UNIT_CHANGED 1 PT#RECONFIG_FILE ALTPLL1649665174217080.mif PT#ACTIVECLK_CHECK 0</value>
+   <value>PT#GLOCKED_FEATURE_ENABLED 0 PT#SPREAD_FEATURE_ENABLED 0 PT#BANDWIDTH_FREQ_UNIT MHz PT#CUR_DEDICATED_CLK c0 PT#INCLK0_FREQ_EDIT 50.000 PT#BANDWIDTH_PRESET Low PT#PLL_LVDS_PLL_CHECK 0 PT#BANDWIDTH_USE_PRESET 0 PT#AVALON_USE_SEPARATE_SYSCLK NO PT#PLL_ENHPLL_CHECK 0 PT#OUTPUT_FREQ_UNIT2 MHz PT#OUTPUT_FREQ_UNIT1 MHz PT#OUTPUT_FREQ_UNIT0 MHz PT#PHASE_RECONFIG_FEATURE_ENABLED 1 PT#CREATE_CLKBAD_CHECK 0 PT#CLKSWITCH_CHECK 0 PT#INCLK1_FREQ_EDIT 100.000 PT#NORMAL_MODE_RADIO 1 PT#SRC_SYNCH_COMP_RADIO 0 PT#PLL_ARESET_CHECK 0 PT#LONG_SCAN_RADIO 1 PT#SCAN_FEATURE_ENABLED 1 PT#USE_CLK2 1 PT#PHASE_RECONFIG_INPUTS_CHECK 0 PT#USE_CLK1 1 PT#USE_CLK0 1 PT#PRIMARY_CLK_COMBO inclk0 PT#BANDWIDTH 1.000 PT#GLOCKED_COUNTER_EDIT_CHANGED 1 PT#PLL_FASTPLL_CHECK 0 PT#SPREAD_FREQ_UNIT KHz PT#PLL_AUTOPLL_CHECK 1 PT#LVDS_PHASE_SHIFT_UNIT2 deg PT#LVDS_PHASE_SHIFT_UNIT1 deg PT#OUTPUT_FREQ_MODE2 1 PT#LVDS_PHASE_SHIFT_UNIT0 deg PT#OUTPUT_FREQ_MODE1 1 PT#SWITCHOVER_FEATURE_ENABLED 0 PT#MIG_DEVICE_SPEED_GRADE Any PT#OUTPUT_FREQ_MODE0 1 PT#BANDWIDTH_FEATURE_ENABLED 1 PT#INCLK0_FREQ_UNIT_COMBO MHz PT#ZERO_DELAY_RADIO 0 PT#OUTPUT_FREQ2 100.00000000 PT#OUTPUT_FREQ1 100.00000000 PT#OUTPUT_FREQ0 25.00000000 PT#SHORT_SCAN_RADIO 0 PT#LVDS_MODE_DATA_RATE_DIRTY 0 PT#CUR_FBIN_CLK c0 PT#PLL_ADVANCED_PARAM_CHECK 0 PT#CLKBAD_SWITCHOVER_CHECK 0 PT#PHASE_SHIFT_STEP_ENABLED_CHECK 0 PT#DEVICE_SPEED_GRADE Any PT#PLL_FBMIMIC_CHECK 0 PT#LVDS_MODE_DATA_RATE {Not Available} PT#LOCKED_OUTPUT_CHECK 0 PT#SPREAD_PERCENT 0.500 PT#PHASE_SHIFT2 0.00000000 PT#PHASE_SHIFT1 -3.00000000 PT#DIV_FACTOR2 1 PT#PHASE_SHIFT0 0.00000000 PT#DIV_FACTOR1 1 PT#DIV_FACTOR0 1 PT#CNX_NO_COMPENSATE_RADIO 0 PT#USE_CLKENA2 0 PT#USE_CLKENA1 0 PT#USE_CLKENA0 0 PT#CREATE_INCLK1_CHECK 0 PT#GLOCK_COUNTER_EDIT 1048575 PT#INCLK1_FREQ_UNIT_COMBO MHz PT#EFF_OUTPUT_FREQ_VALUE2 100.000000 PT#EFF_OUTPUT_FREQ_VALUE1 100.000000 PT#EFF_OUTPUT_FREQ_VALUE0 25.000000 PT#SPREAD_FREQ 50.000 PT#USE_MIL_SPEED_GRADE 0 PT#EXPLICIT_SWITCHOVER_COUNTER 0 PT#STICKY_CLK4 0 PT#STICKY_CLK3 0 PT#STICKY_CLK2 1 PT#STICKY_CLK1 1 PT#STICKY_CLK0 1 PT#EXT_FEEDBACK_RADIO 0 PT#MIRROR_CLK2 0 PT#MIRROR_CLK1 0 PT#SWITCHOVER_COUNT_EDIT 1 PT#MIRROR_CLK0 0 PT#SELF_RESET_LOCK_LOSS 0 PT#PLL_PFDENA_CHECK 0 PT#INT_FEEDBACK__MODE_RADIO 1 PT#INCLK1_FREQ_EDIT_CHANGED 1 PT#SYNTH_WRAPPER_GEN_POSTFIX 0 PT#CLKLOSS_CHECK 0 PT#PHASE_SHIFT_UNIT2 deg PT#PHASE_SHIFT_UNIT1 ns PT#PHASE_SHIFT_UNIT0 deg PT#BANDWIDTH_USE_AUTO 1 PT#HAS_MANUAL_SWITCHOVER 1 PT#MULT_FACTOR2 1 PT#MULT_FACTOR1 1 PT#MULT_FACTOR0 1 PT#SPREAD_USE 0 PT#GLOCKED_MODE_CHECK 0 PT#DUTY_CYCLE2 50.00000000 PT#SACN_INPUTS_CHECK 0 PT#DUTY_CYCLE1 50.00000000 PT#INTENDED_DEVICE_FAMILY {MAX 10} PT#DUTY_CYCLE0 50.00000000 PT#PLL_TARGET_HARCOPY_CHECK 0 PT#INCLK1_FREQ_UNIT_CHANGED 1 PT#RECONFIG_FILE ALTPLL1649665174217080.mif PT#ACTIVECLK_CHECK 0</value>
    <derived>false</derived>
    <enabled>true</enabled>
    <visible>false</visible>
@@ -5224,7 +5224,7 @@ the requested settings for a module instance. -->
   </parameter>
   <parameter name="HIDDEN_USED_PORTS">
    <type>java.lang.String</type>
-   <value>UP#locked used UP#c1 used UP#c0 used UP#areset used UP#inclk0 used</value>
+   <value>UP#locked used UP#c2 used UP#c1 used UP#c0 used UP#areset used UP#inclk0 used</value>
    <derived>false</derived>
    <enabled>true</enabled>
    <visible>false</visible>
@@ -5232,7 +5232,7 @@ the requested settings for a module instance. -->
   </parameter>
   <parameter name="HIDDEN_IS_NUMERIC">
    <type>java.lang.String</type>
-   <value>IN#WIDTH_CLOCK 1 IN#CLK0_DUTY_CYCLE 1 IN#PLL_TARGET_HARCOPY_CHECK 1 IN#CLK1_MULTIPLY_BY 1 IN#SWITCHOVER_COUNT_EDIT 1 IN#INCLK0_INPUT_FREQUENCY 1 IN#PLL_LVDS_PLL_CHECK 1 IN#PLL_AUTOPLL_CHECK 1 IN#PLL_FASTPLL_CHECK 1 IN#CLK1_DUTY_CYCLE 1 IN#PLL_ENHPLL_CHECK 1 IN#DIV_FACTOR1 1 IN#DIV_FACTOR0 1 IN#LVDS_MODE_DATA_RATE_DIRTY 1 IN#GLOCK_COUNTER_EDIT 1 IN#CLK0_DIVIDE_BY 1 IN#MULT_FACTOR1 1 IN#MULT_FACTOR0 1 IN#CLK0_MULTIPLY_BY 1 IN#USE_MIL_SPEED_GRADE 1 IN#CLK1_DIVIDE_BY 1</value>
+   <value>IN#WIDTH_CLOCK 1 IN#CLK0_DUTY_CYCLE 1 IN#CLK2_DIVIDE_BY 1 IN#PLL_TARGET_HARCOPY_CHECK 1 IN#CLK1_MULTIPLY_BY 1 IN#SWITCHOVER_COUNT_EDIT 1 IN#INCLK0_INPUT_FREQUENCY 1 IN#PLL_LVDS_PLL_CHECK 1 IN#PLL_AUTOPLL_CHECK 1 IN#PLL_FASTPLL_CHECK 1 IN#CLK1_DUTY_CYCLE 1 IN#PLL_ENHPLL_CHECK 1 IN#CLK2_MULTIPLY_BY 1 IN#DIV_FACTOR2 1 IN#DIV_FACTOR1 1 IN#DIV_FACTOR0 1 IN#LVDS_MODE_DATA_RATE_DIRTY 1 IN#GLOCK_COUNTER_EDIT 1 IN#CLK2_DUTY_CYCLE 1 IN#CLK0_DIVIDE_BY 1 IN#MULT_FACTOR2 1 IN#MULT_FACTOR1 1 IN#MULT_FACTOR0 1 IN#CLK0_MULTIPLY_BY 1 IN#USE_MIL_SPEED_GRADE 1 IN#CLK1_DIVIDE_BY 1</value>
    <derived>false</derived>
    <enabled>true</enabled>
    <visible>false</visible>
@@ -5860,7 +5860,7 @@ parameters are a RESULT of the module parameters. -->
    </parameter>
    <parameter name="clockRate">
     <type>long</type>
-    <value>50000000</value>
+    <value>100000000</value>
     <derived>false</derived>
     <enabled>true</enabled>
     <visible>true</visible>
@@ -5914,6 +5914,165 @@ parameters are a RESULT of the module parameters. -->
     <width>1</width>
     <role>clk</role>
    </port>
+  </interface>
+  <interface name="c2" kind="clock_source" version="18.1">
+   <!-- The connection points exposed by a module instance for the
+particular module parameters. Connection points and their
+parameters are a RESULT of the module parameters. -->
+   <parameter name="associatedDirectClock">
+    <type>java.lang.String</type>
+    <value></value>
+    <derived>false</derived>
+    <enabled>true</enabled>
+    <visible>true</visible>
+    <valid>true</valid>
+   </parameter>
+   <parameter name="clockRate">
+    <type>long</type>
+    <value>100000000</value>
+    <derived>false</derived>
+    <enabled>true</enabled>
+    <visible>true</visible>
+    <valid>true</valid>
+   </parameter>
+   <parameter name="clockRateKnown">
+    <type>boolean</type>
+    <value>true</value>
+    <derived>false</derived>
+    <enabled>true</enabled>
+    <visible>true</visible>
+    <valid>true</valid>
+   </parameter>
+   <parameter name="externallyDriven">
+    <type>boolean</type>
+    <value>false</value>
+    <derived>false</derived>
+    <enabled>true</enabled>
+    <visible>false</visible>
+    <valid>true</valid>
+   </parameter>
+   <parameter name="ptfSchematicName">
+    <type>java.lang.String</type>
+    <value></value>
+    <derived>false</derived>
+    <enabled>true</enabled>
+    <visible>false</visible>
+    <valid>true</valid>
+   </parameter>
+   <parameter name="deviceFamily">
+    <type>java.lang.String</type>
+    <value>UNKNOWN</value>
+    <derived>false</derived>
+    <enabled>true</enabled>
+    <visible>true</visible>
+    <valid>true</valid>
+   </parameter>
+   <parameter name="generateLegacySim">
+    <type>boolean</type>
+    <value>false</value>
+    <derived>false</derived>
+    <enabled>true</enabled>
+    <visible>true</visible>
+    <valid>true</valid>
+   </parameter>
+   <type>clock</type>
+   <isStart>true</isStart>
+   <port>
+    <name>c2</name>
+    <direction>Output</direction>
+    <width>1</width>
+    <role>clk</role>
+   </port>
+   <clockDomainMember>
+    <isBridge>false</isBridge>
+    <moduleName>nios2_gen2_0</moduleName>
+    <slaveName>clk</slaveName>
+    <name>nios2_gen2_0.clk</name>
+   </clockDomainMember>
+   <clockDomainMember>
+    <isBridge>false</isBridge>
+    <moduleName>jtag_uart_0</moduleName>
+    <slaveName>clk</slaveName>
+    <name>jtag_uart_0.clk</name>
+   </clockDomainMember>
+   <clockDomainMember>
+    <isBridge>false</isBridge>
+    <moduleName>sysid_qsys_0</moduleName>
+    <slaveName>clk</slaveName>
+    <name>sysid_qsys_0.clk</name>
+   </clockDomainMember>
+   <clockDomainMember>
+    <isBridge>false</isBridge>
+    <moduleName>timer_0</moduleName>
+    <slaveName>clk</slaveName>
+    <name>timer_0.clk</name>
+   </clockDomainMember>
+   <clockDomainMember>
+    <isBridge>false</isBridge>
+    <moduleName>new_sdram_controller_0</moduleName>
+    <slaveName>clk</slaveName>
+    <name>new_sdram_controller_0.clk</name>
+   </clockDomainMember>
+   <clockDomainMember>
+    <isBridge>false</isBridge>
+    <moduleName>video_pixel_buffer_dma_0</moduleName>
+    <slaveName>clk</slaveName>
+    <name>video_pixel_buffer_dma_0.clk</name>
+   </clockDomainMember>
+   <clockDomainMember>
+    <isBridge>false</isBridge>
+    <moduleName>video_rgb_resampler_0</moduleName>
+    <slaveName>clk</slaveName>
+    <name>video_rgb_resampler_0.clk</name>
+   </clockDomainMember>
+   <clockDomainMember>
+    <isBridge>false</isBridge>
+    <moduleName>video_scaler_0</moduleName>
+    <slaveName>clk</slaveName>
+    <name>video_scaler_0.clk</name>
+   </clockDomainMember>
+   <clockDomainMember>
+    <isBridge>false</isBridge>
+    <moduleName>KEY</moduleName>
+    <slaveName>clk</slaveName>
+    <name>KEY.clk</name>
+   </clockDomainMember>
+   <clockDomainMember>
+    <isBridge>false</isBridge>
+    <moduleName>SLIDERS</moduleName>
+    <slaveName>clk</slaveName>
+    <name>SLIDERS.clk</name>
+   </clockDomainMember>
+   <clockDomainMember>
+    <isBridge>false</isBridge>
+    <moduleName>HEX3_HEX0</moduleName>
+    <slaveName>clk</slaveName>
+    <name>HEX3_HEX0.clk</name>
+   </clockDomainMember>
+   <clockDomainMember>
+    <isBridge>false</isBridge>
+    <moduleName>HEX5_HEX4</moduleName>
+    <slaveName>clk</slaveName>
+    <name>HEX5_HEX4.clk</name>
+   </clockDomainMember>
+   <clockDomainMember>
+    <isBridge>false</isBridge>
+    <moduleName>LEDS</moduleName>
+    <slaveName>clk</slaveName>
+    <name>LEDS.clk</name>
+   </clockDomainMember>
+   <clockDomainMember>
+    <isBridge>false</isBridge>
+    <moduleName>onchip_memory2_0</moduleName>
+    <slaveName>clk1</slaveName>
+    <name>onchip_memory2_0.clk1</name>
+   </clockDomainMember>
+   <clockDomainMember>
+    <isBridge>false</isBridge>
+    <moduleName>video_dual_clock_buffer_0</moduleName>
+    <slaveName>clock_stream_in</slaveName>
+    <name>video_dual_clock_buffer_0.clock_stream_in</name>
+   </clockDomainMember>
   </interface>
  </module>
  <module name="clk_0" kind="clock_source" version="18.1" path="clk_0">
@@ -6153,96 +6312,6 @@ parameters are a RESULT of the module parameters. -->
    </port>
    <clockDomainMember>
     <isBridge>false</isBridge>
-    <moduleName>nios2_gen2_0</moduleName>
-    <slaveName>clk</slaveName>
-    <name>nios2_gen2_0.clk</name>
-   </clockDomainMember>
-   <clockDomainMember>
-    <isBridge>false</isBridge>
-    <moduleName>jtag_uart_0</moduleName>
-    <slaveName>clk</slaveName>
-    <name>jtag_uart_0.clk</name>
-   </clockDomainMember>
-   <clockDomainMember>
-    <isBridge>false</isBridge>
-    <moduleName>sysid_qsys_0</moduleName>
-    <slaveName>clk</slaveName>
-    <name>sysid_qsys_0.clk</name>
-   </clockDomainMember>
-   <clockDomainMember>
-    <isBridge>false</isBridge>
-    <moduleName>timer_0</moduleName>
-    <slaveName>clk</slaveName>
-    <name>timer_0.clk</name>
-   </clockDomainMember>
-   <clockDomainMember>
-    <isBridge>false</isBridge>
-    <moduleName>video_pixel_buffer_dma_0</moduleName>
-    <slaveName>clk</slaveName>
-    <name>video_pixel_buffer_dma_0.clk</name>
-   </clockDomainMember>
-   <clockDomainMember>
-    <isBridge>false</isBridge>
-    <moduleName>video_rgb_resampler_0</moduleName>
-    <slaveName>clk</slaveName>
-    <name>video_rgb_resampler_0.clk</name>
-   </clockDomainMember>
-   <clockDomainMember>
-    <isBridge>false</isBridge>
-    <moduleName>video_scaler_0</moduleName>
-    <slaveName>clk</slaveName>
-    <name>video_scaler_0.clk</name>
-   </clockDomainMember>
-   <clockDomainMember>
-    <isBridge>false</isBridge>
-    <moduleName>new_sdram_controller_0</moduleName>
-    <slaveName>clk</slaveName>
-    <name>new_sdram_controller_0.clk</name>
-   </clockDomainMember>
-   <clockDomainMember>
-    <isBridge>false</isBridge>
-    <moduleName>KEY</moduleName>
-    <slaveName>clk</slaveName>
-    <name>KEY.clk</name>
-   </clockDomainMember>
-   <clockDomainMember>
-    <isBridge>false</isBridge>
-    <moduleName>SLIDERS</moduleName>
-    <slaveName>clk</slaveName>
-    <name>SLIDERS.clk</name>
-   </clockDomainMember>
-   <clockDomainMember>
-    <isBridge>false</isBridge>
-    <moduleName>HEX3_HEX0</moduleName>
-    <slaveName>clk</slaveName>
-    <name>HEX3_HEX0.clk</name>
-   </clockDomainMember>
-   <clockDomainMember>
-    <isBridge>false</isBridge>
-    <moduleName>HEX5_HEX4</moduleName>
-    <slaveName>clk</slaveName>
-    <name>HEX5_HEX4.clk</name>
-   </clockDomainMember>
-   <clockDomainMember>
-    <isBridge>false</isBridge>
-    <moduleName>LEDS</moduleName>
-    <slaveName>clk</slaveName>
-    <name>LEDS.clk</name>
-   </clockDomainMember>
-   <clockDomainMember>
-    <isBridge>false</isBridge>
-    <moduleName>onchip_memory2_0</moduleName>
-    <slaveName>clk1</slaveName>
-    <name>onchip_memory2_0.clk1</name>
-   </clockDomainMember>
-   <clockDomainMember>
-    <isBridge>false</isBridge>
-    <moduleName>video_dual_clock_buffer_0</moduleName>
-    <slaveName>clock_stream_in</slaveName>
-    <name>video_dual_clock_buffer_0.clock_stream_in</name>
-   </clockDomainMember>
-   <clockDomainMember>
-    <isBridge>false</isBridge>
     <moduleName>altpll_0</moduleName>
     <slaveName>inclk_interface</slaveName>
     <name>altpll_0.inclk_interface</name>
@@ -6439,7 +6508,7 @@ the requested settings for a module instance. -->
   </parameter>
   <parameter name="clkFreq">
    <type>long</type>
-   <value>50000000</value>
+   <value>100000000</value>
    <derived>false</derived>
    <enabled>true</enabled>
    <visible>false</visible>
@@ -6542,7 +6611,7 @@ parameters are a RESULT of the module parameters. -->
    </parameter>
    <parameter name="clockRate">
     <type>java.lang.Long</type>
-    <value>50000000</value>
+    <value>100000000</value>
     <derived>true</derived>
     <enabled>true</enabled>
     <visible>false</visible>
@@ -7346,7 +7415,7 @@ the requested settings for a module instance. -->
   </parameter>
   <parameter name="clockRate">
    <type>long</type>
-   <value>50000000</value>
+   <value>100000000</value>
    <derived>false</derived>
    <enabled>true</enabled>
    <visible>false</visible>
@@ -7449,7 +7518,7 @@ parameters are a RESULT of the module parameters. -->
    </parameter>
    <parameter name="clockRate">
     <type>java.lang.Long</type>
-    <value>50000000</value>
+    <value>100000000</value>
     <derived>true</derived>
     <enabled>true</enabled>
     <visible>false</visible>
@@ -8017,7 +8086,7 @@ the requested settings for a module instance. -->
   </assignment>
   <assignment>
    <name>embeddedsw.CMacro.CPU_FREQ</name>
-   <value>50000000u</value>
+   <value>100000000u</value>
   </assignment>
   <assignment>
    <name>embeddedsw.CMacro.CPU_ID_SIZE</name>
@@ -8201,7 +8270,7 @@ the requested settings for a module instance. -->
   </assignment>
   <assignment>
    <name>embeddedsw.dts.params.clock-frequency</name>
-   <value>50000000u</value>
+   <value>100000000u</value>
   </assignment>
   <assignment>
    <name>embeddedsw.dts.params.dcache-line-size</name>
@@ -9741,7 +9810,7 @@ the requested settings for a module instance. -->
   </parameter>
   <parameter name="clockFrequency">
    <type>long</type>
-   <value>50000000</value>
+   <value>100000000</value>
    <derived>false</derived>
    <enabled>true</enabled>
    <visible>false</visible>
@@ -9917,7 +9986,7 @@ parameters are a RESULT of the module parameters. -->
    </parameter>
    <parameter name="clockRate">
     <type>java.lang.Long</type>
-    <value>50000000</value>
+    <value>100000000</value>
     <derived>true</derived>
     <enabled>true</enabled>
     <visible>false</visible>
@@ -12214,7 +12283,7 @@ the requested settings for a module instance. -->
   </assignment>
   <assignment>
    <name>embeddedsw.CMacro.TIMESTAMP</name>
-   <value>1649981393</value>
+   <value>1650126377</value>
   </assignment>
   <assignment>
    <name>embeddedsw.dts.compatible</name>
@@ -12234,7 +12303,7 @@ the requested settings for a module instance. -->
   </assignment>
   <assignment>
    <name>embeddedsw.dts.params.timestamp</name>
-   <value>1649981393</value>
+   <value>1650126377</value>
   </assignment>
   <assignment>
    <name>embeddedsw.dts.vendor</name>
@@ -12250,7 +12319,7 @@ the requested settings for a module instance. -->
   </parameter>
   <parameter name="timestamp">
    <type>int</type>
-   <value>1649981393</value>
+   <value>1650126377</value>
    <derived>true</derived>
    <enabled>false</enabled>
    <visible>false</visible>
@@ -12728,11 +12797,11 @@ the requested settings for a module instance. -->
   </assignment>
   <assignment>
    <name>embeddedsw.CMacro.FREQ</name>
-   <value>50000000</value>
+   <value>100000000</value>
   </assignment>
   <assignment>
    <name>embeddedsw.CMacro.LOAD_VALUE</name>
-   <value>49999</value>
+   <value>99999</value>
   </assignment>
   <assignment>
    <name>embeddedsw.CMacro.MULT</name>
@@ -12776,7 +12845,7 @@ the requested settings for a module instance. -->
   </assignment>
   <assignment>
    <name>embeddedsw.dts.params.clock-frequency</name>
-   <value>50000000</value>
+   <value>100000000</value>
   </assignment>
   <assignment>
    <name>embeddedsw.dts.vendor</name>
@@ -12848,7 +12917,7 @@ the requested settings for a module instance. -->
   </parameter>
   <parameter name="systemFrequency">
    <type>long</type>
-   <value>50000000</value>
+   <value>100000000</value>
    <derived>false</derived>
    <enabled>true</enabled>
    <visible>false</visible>
@@ -12890,7 +12959,7 @@ the requested settings for a module instance. -->
   </parameter>
   <parameter name="loadValue">
    <type>java.lang.String</type>
-   <value>49999</value>
+   <value>99999</value>
    <derived>true</derived>
    <enabled>true</enabled>
    <visible>false</visible>
@@ -12982,7 +13051,7 @@ parameters are a RESULT of the module parameters. -->
    </parameter>
    <parameter name="clockRate">
     <type>java.lang.Long</type>
-    <value>50000000</value>
+    <value>100000000</value>
     <derived>true</derived>
     <enabled>true</enabled>
     <visible>false</visible>
@@ -13523,7 +13592,7 @@ the requested settings for a module instance. -->
   </parameter>
   <parameter name="AUTO_CLOCK_STREAM_IN_CLOCK_RATE">
    <type>java.lang.Long</type>
-   <value>50000000</value>
+   <value>100000000</value>
    <derived>false</derived>
    <enabled>true</enabled>
    <visible>false</visible>
@@ -13604,7 +13673,7 @@ parameters are a RESULT of the module parameters. -->
    </parameter>
    <parameter name="clockRate">
     <type>java.lang.Long</type>
-    <value>50000000</value>
+    <value>100000000</value>
     <derived>true</derived>
     <enabled>true</enabled>
     <visible>false</visible>
@@ -14141,7 +14210,7 @@ the requested settings for a module instance. -->
   </parameter>
   <parameter name="AUTO_CLK_CLOCK_RATE">
    <type>java.lang.Long</type>
-   <value>50000000</value>
+   <value>100000000</value>
    <derived>false</derived>
    <enabled>true</enabled>
    <visible>false</visible>
@@ -14212,7 +14281,7 @@ parameters are a RESULT of the module parameters. -->
    </parameter>
    <parameter name="clockRate">
     <type>java.lang.Long</type>
-    <value>50000000</value>
+    <value>100000000</value>
     <derived>true</derived>
     <enabled>true</enabled>
     <visible>false</visible>
@@ -15177,7 +15246,7 @@ the requested settings for a module instance. -->
   </parameter>
   <parameter name="AUTO_CLK_CLOCK_RATE">
    <type>java.lang.Long</type>
-   <value>50000000</value>
+   <value>100000000</value>
    <derived>false</derived>
    <enabled>true</enabled>
    <visible>false</visible>
@@ -15248,7 +15317,7 @@ parameters are a RESULT of the module parameters. -->
    </parameter>
    <parameter name="clockRate">
     <type>java.lang.Long</type>
-    <value>50000000</value>
+    <value>100000000</value>
     <derived>true</derived>
     <enabled>true</enabled>
     <visible>false</visible>
@@ -16055,7 +16124,7 @@ the requested settings for a module instance. -->
   </parameter>
   <parameter name="AUTO_CLK_CLOCK_RATE">
    <type>java.lang.Long</type>
-   <value>50000000</value>
+   <value>100000000</value>
    <derived>false</derived>
    <enabled>true</enabled>
    <visible>false</visible>
@@ -16126,7 +16195,7 @@ parameters are a RESULT of the module parameters. -->
    </parameter>
    <parameter name="clockRate">
     <type>java.lang.Long</type>
-    <value>50000000</value>
+    <value>100000000</value>
     <derived>true</derived>
     <enabled>true</enabled>
     <visible>false</visible>
@@ -17942,10 +18011,10 @@ parameters are a RESULT of the module parameters. -->
   <endConnectionPoint>clock_stream_out</endConnectionPoint>
  </connection>
  <connection
-   name="clk_0.clk/nios2_gen2_0.clk"
+   name="altpll_0.c2/nios2_gen2_0.clk"
    kind="clock"
    version="18.1"
-   start="clk_0.clk"
+   start="altpll_0.c2"
    end="nios2_gen2_0.clk">
   <parameter name="deviceFamily">
    <type>java.lang.String</type>
@@ -17963,16 +18032,16 @@ parameters are a RESULT of the module parameters. -->
    <visible>true</visible>
    <valid>true</valid>
   </parameter>
-  <startModule>clk_0</startModule>
-  <startConnectionPoint>clk</startConnectionPoint>
+  <startModule>altpll_0</startModule>
+  <startConnectionPoint>c2</startConnectionPoint>
   <endModule>nios2_gen2_0</endModule>
   <endConnectionPoint>clk</endConnectionPoint>
  </connection>
  <connection
-   name="clk_0.clk/jtag_uart_0.clk"
+   name="altpll_0.c2/jtag_uart_0.clk"
    kind="clock"
    version="18.1"
-   start="clk_0.clk"
+   start="altpll_0.c2"
    end="jtag_uart_0.clk">
   <parameter name="deviceFamily">
    <type>java.lang.String</type>
@@ -17990,16 +18059,16 @@ parameters are a RESULT of the module parameters. -->
    <visible>true</visible>
    <valid>true</valid>
   </parameter>
-  <startModule>clk_0</startModule>
-  <startConnectionPoint>clk</startConnectionPoint>
+  <startModule>altpll_0</startModule>
+  <startConnectionPoint>c2</startConnectionPoint>
   <endModule>jtag_uart_0</endModule>
   <endConnectionPoint>clk</endConnectionPoint>
  </connection>
  <connection
-   name="clk_0.clk/sysid_qsys_0.clk"
+   name="altpll_0.c2/sysid_qsys_0.clk"
    kind="clock"
    version="18.1"
-   start="clk_0.clk"
+   start="altpll_0.c2"
    end="sysid_qsys_0.clk">
   <parameter name="deviceFamily">
    <type>java.lang.String</type>
@@ -18017,16 +18086,16 @@ parameters are a RESULT of the module parameters. -->
    <visible>true</visible>
    <valid>true</valid>
   </parameter>
-  <startModule>clk_0</startModule>
-  <startConnectionPoint>clk</startConnectionPoint>
+  <startModule>altpll_0</startModule>
+  <startConnectionPoint>c2</startConnectionPoint>
   <endModule>sysid_qsys_0</endModule>
   <endConnectionPoint>clk</endConnectionPoint>
  </connection>
  <connection
-   name="clk_0.clk/timer_0.clk"
+   name="altpll_0.c2/timer_0.clk"
    kind="clock"
    version="18.1"
-   start="clk_0.clk"
+   start="altpll_0.c2"
    end="timer_0.clk">
   <parameter name="deviceFamily">
    <type>java.lang.String</type>
@@ -18044,97 +18113,16 @@ parameters are a RESULT of the module parameters. -->
    <visible>true</visible>
    <valid>true</valid>
   </parameter>
-  <startModule>clk_0</startModule>
-  <startConnectionPoint>clk</startConnectionPoint>
+  <startModule>altpll_0</startModule>
+  <startConnectionPoint>c2</startConnectionPoint>
   <endModule>timer_0</endModule>
   <endConnectionPoint>clk</endConnectionPoint>
  </connection>
  <connection
-   name="clk_0.clk/video_pixel_buffer_dma_0.clk"
+   name="altpll_0.c2/new_sdram_controller_0.clk"
    kind="clock"
    version="18.1"
-   start="clk_0.clk"
-   end="video_pixel_buffer_dma_0.clk">
-  <parameter name="deviceFamily">
-   <type>java.lang.String</type>
-   <value>UNKNOWN</value>
-   <derived>false</derived>
-   <enabled>true</enabled>
-   <visible>true</visible>
-   <valid>true</valid>
-  </parameter>
-  <parameter name="generateLegacySim">
-   <type>boolean</type>
-   <value>false</value>
-   <derived>false</derived>
-   <enabled>true</enabled>
-   <visible>true</visible>
-   <valid>true</valid>
-  </parameter>
-  <startModule>clk_0</startModule>
-  <startConnectionPoint>clk</startConnectionPoint>
-  <endModule>video_pixel_buffer_dma_0</endModule>
-  <endConnectionPoint>clk</endConnectionPoint>
- </connection>
- <connection
-   name="clk_0.clk/video_rgb_resampler_0.clk"
-   kind="clock"
-   version="18.1"
-   start="clk_0.clk"
-   end="video_rgb_resampler_0.clk">
-  <parameter name="deviceFamily">
-   <type>java.lang.String</type>
-   <value>UNKNOWN</value>
-   <derived>false</derived>
-   <enabled>true</enabled>
-   <visible>true</visible>
-   <valid>true</valid>
-  </parameter>
-  <parameter name="generateLegacySim">
-   <type>boolean</type>
-   <value>false</value>
-   <derived>false</derived>
-   <enabled>true</enabled>
-   <visible>true</visible>
-   <valid>true</valid>
-  </parameter>
-  <startModule>clk_0</startModule>
-  <startConnectionPoint>clk</startConnectionPoint>
-  <endModule>video_rgb_resampler_0</endModule>
-  <endConnectionPoint>clk</endConnectionPoint>
- </connection>
- <connection
-   name="clk_0.clk/video_scaler_0.clk"
-   kind="clock"
-   version="18.1"
-   start="clk_0.clk"
-   end="video_scaler_0.clk">
-  <parameter name="deviceFamily">
-   <type>java.lang.String</type>
-   <value>UNKNOWN</value>
-   <derived>false</derived>
-   <enabled>true</enabled>
-   <visible>true</visible>
-   <valid>true</valid>
-  </parameter>
-  <parameter name="generateLegacySim">
-   <type>boolean</type>
-   <value>false</value>
-   <derived>false</derived>
-   <enabled>true</enabled>
-   <visible>true</visible>
-   <valid>true</valid>
-  </parameter>
-  <startModule>clk_0</startModule>
-  <startConnectionPoint>clk</startConnectionPoint>
-  <endModule>video_scaler_0</endModule>
-  <endConnectionPoint>clk</endConnectionPoint>
- </connection>
- <connection
-   name="clk_0.clk/new_sdram_controller_0.clk"
-   kind="clock"
-   version="18.1"
-   start="clk_0.clk"
+   start="altpll_0.c2"
    end="new_sdram_controller_0.clk">
   <parameter name="deviceFamily">
    <type>java.lang.String</type>
@@ -18152,16 +18140,97 @@ parameters are a RESULT of the module parameters. -->
    <visible>true</visible>
    <valid>true</valid>
   </parameter>
-  <startModule>clk_0</startModule>
-  <startConnectionPoint>clk</startConnectionPoint>
+  <startModule>altpll_0</startModule>
+  <startConnectionPoint>c2</startConnectionPoint>
   <endModule>new_sdram_controller_0</endModule>
   <endConnectionPoint>clk</endConnectionPoint>
  </connection>
  <connection
-   name="clk_0.clk/KEY.clk"
+   name="altpll_0.c2/video_pixel_buffer_dma_0.clk"
    kind="clock"
    version="18.1"
-   start="clk_0.clk"
+   start="altpll_0.c2"
+   end="video_pixel_buffer_dma_0.clk">
+  <parameter name="deviceFamily">
+   <type>java.lang.String</type>
+   <value>UNKNOWN</value>
+   <derived>false</derived>
+   <enabled>true</enabled>
+   <visible>true</visible>
+   <valid>true</valid>
+  </parameter>
+  <parameter name="generateLegacySim">
+   <type>boolean</type>
+   <value>false</value>
+   <derived>false</derived>
+   <enabled>true</enabled>
+   <visible>true</visible>
+   <valid>true</valid>
+  </parameter>
+  <startModule>altpll_0</startModule>
+  <startConnectionPoint>c2</startConnectionPoint>
+  <endModule>video_pixel_buffer_dma_0</endModule>
+  <endConnectionPoint>clk</endConnectionPoint>
+ </connection>
+ <connection
+   name="altpll_0.c2/video_rgb_resampler_0.clk"
+   kind="clock"
+   version="18.1"
+   start="altpll_0.c2"
+   end="video_rgb_resampler_0.clk">
+  <parameter name="deviceFamily">
+   <type>java.lang.String</type>
+   <value>UNKNOWN</value>
+   <derived>false</derived>
+   <enabled>true</enabled>
+   <visible>true</visible>
+   <valid>true</valid>
+  </parameter>
+  <parameter name="generateLegacySim">
+   <type>boolean</type>
+   <value>false</value>
+   <derived>false</derived>
+   <enabled>true</enabled>
+   <visible>true</visible>
+   <valid>true</valid>
+  </parameter>
+  <startModule>altpll_0</startModule>
+  <startConnectionPoint>c2</startConnectionPoint>
+  <endModule>video_rgb_resampler_0</endModule>
+  <endConnectionPoint>clk</endConnectionPoint>
+ </connection>
+ <connection
+   name="altpll_0.c2/video_scaler_0.clk"
+   kind="clock"
+   version="18.1"
+   start="altpll_0.c2"
+   end="video_scaler_0.clk">
+  <parameter name="deviceFamily">
+   <type>java.lang.String</type>
+   <value>UNKNOWN</value>
+   <derived>false</derived>
+   <enabled>true</enabled>
+   <visible>true</visible>
+   <valid>true</valid>
+  </parameter>
+  <parameter name="generateLegacySim">
+   <type>boolean</type>
+   <value>false</value>
+   <derived>false</derived>
+   <enabled>true</enabled>
+   <visible>true</visible>
+   <valid>true</valid>
+  </parameter>
+  <startModule>altpll_0</startModule>
+  <startConnectionPoint>c2</startConnectionPoint>
+  <endModule>video_scaler_0</endModule>
+  <endConnectionPoint>clk</endConnectionPoint>
+ </connection>
+ <connection
+   name="altpll_0.c2/KEY.clk"
+   kind="clock"
+   version="18.1"
+   start="altpll_0.c2"
    end="KEY.clk">
   <parameter name="deviceFamily">
    <type>java.lang.String</type>
@@ -18179,16 +18248,16 @@ parameters are a RESULT of the module parameters. -->
    <visible>true</visible>
    <valid>true</valid>
   </parameter>
-  <startModule>clk_0</startModule>
-  <startConnectionPoint>clk</startConnectionPoint>
+  <startModule>altpll_0</startModule>
+  <startConnectionPoint>c2</startConnectionPoint>
   <endModule>KEY</endModule>
   <endConnectionPoint>clk</endConnectionPoint>
  </connection>
  <connection
-   name="clk_0.clk/SLIDERS.clk"
+   name="altpll_0.c2/SLIDERS.clk"
    kind="clock"
    version="18.1"
-   start="clk_0.clk"
+   start="altpll_0.c2"
    end="SLIDERS.clk">
   <parameter name="deviceFamily">
    <type>java.lang.String</type>
@@ -18206,16 +18275,16 @@ parameters are a RESULT of the module parameters. -->
    <visible>true</visible>
    <valid>true</valid>
   </parameter>
-  <startModule>clk_0</startModule>
-  <startConnectionPoint>clk</startConnectionPoint>
+  <startModule>altpll_0</startModule>
+  <startConnectionPoint>c2</startConnectionPoint>
   <endModule>SLIDERS</endModule>
   <endConnectionPoint>clk</endConnectionPoint>
  </connection>
  <connection
-   name="clk_0.clk/HEX3_HEX0.clk"
+   name="altpll_0.c2/HEX3_HEX0.clk"
    kind="clock"
    version="18.1"
-   start="clk_0.clk"
+   start="altpll_0.c2"
    end="HEX3_HEX0.clk">
   <parameter name="deviceFamily">
    <type>java.lang.String</type>
@@ -18233,16 +18302,16 @@ parameters are a RESULT of the module parameters. -->
    <visible>true</visible>
    <valid>true</valid>
   </parameter>
-  <startModule>clk_0</startModule>
-  <startConnectionPoint>clk</startConnectionPoint>
+  <startModule>altpll_0</startModule>
+  <startConnectionPoint>c2</startConnectionPoint>
   <endModule>HEX3_HEX0</endModule>
   <endConnectionPoint>clk</endConnectionPoint>
  </connection>
  <connection
-   name="clk_0.clk/HEX5_HEX4.clk"
+   name="altpll_0.c2/HEX5_HEX4.clk"
    kind="clock"
    version="18.1"
-   start="clk_0.clk"
+   start="altpll_0.c2"
    end="HEX5_HEX4.clk">
   <parameter name="deviceFamily">
    <type>java.lang.String</type>
@@ -18260,16 +18329,16 @@ parameters are a RESULT of the module parameters. -->
    <visible>true</visible>
    <valid>true</valid>
   </parameter>
-  <startModule>clk_0</startModule>
-  <startConnectionPoint>clk</startConnectionPoint>
+  <startModule>altpll_0</startModule>
+  <startConnectionPoint>c2</startConnectionPoint>
   <endModule>HEX5_HEX4</endModule>
   <endConnectionPoint>clk</endConnectionPoint>
  </connection>
  <connection
-   name="clk_0.clk/LEDS.clk"
+   name="altpll_0.c2/LEDS.clk"
    kind="clock"
    version="18.1"
-   start="clk_0.clk"
+   start="altpll_0.c2"
    end="LEDS.clk">
   <parameter name="deviceFamily">
    <type>java.lang.String</type>
@@ -18287,16 +18356,16 @@ parameters are a RESULT of the module parameters. -->
    <visible>true</visible>
    <valid>true</valid>
   </parameter>
-  <startModule>clk_0</startModule>
-  <startConnectionPoint>clk</startConnectionPoint>
+  <startModule>altpll_0</startModule>
+  <startConnectionPoint>c2</startConnectionPoint>
   <endModule>LEDS</endModule>
   <endConnectionPoint>clk</endConnectionPoint>
  </connection>
  <connection
-   name="clk_0.clk/onchip_memory2_0.clk1"
+   name="altpll_0.c2/onchip_memory2_0.clk1"
    kind="clock"
    version="18.1"
-   start="clk_0.clk"
+   start="altpll_0.c2"
    end="onchip_memory2_0.clk1">
   <parameter name="deviceFamily">
    <type>java.lang.String</type>
@@ -18314,16 +18383,16 @@ parameters are a RESULT of the module parameters. -->
    <visible>true</visible>
    <valid>true</valid>
   </parameter>
-  <startModule>clk_0</startModule>
-  <startConnectionPoint>clk</startConnectionPoint>
+  <startModule>altpll_0</startModule>
+  <startConnectionPoint>c2</startConnectionPoint>
   <endModule>onchip_memory2_0</endModule>
   <endConnectionPoint>clk1</endConnectionPoint>
  </connection>
  <connection
-   name="clk_0.clk/video_dual_clock_buffer_0.clock_stream_in"
+   name="altpll_0.c2/video_dual_clock_buffer_0.clock_stream_in"
    kind="clock"
    version="18.1"
-   start="clk_0.clk"
+   start="altpll_0.c2"
    end="video_dual_clock_buffer_0.clock_stream_in">
   <parameter name="deviceFamily">
    <type>java.lang.String</type>
@@ -18341,8 +18410,8 @@ parameters are a RESULT of the module parameters. -->
    <visible>true</visible>
    <valid>true</valid>
   </parameter>
-  <startModule>clk_0</startModule>
-  <startConnectionPoint>clk</startConnectionPoint>
+  <startModule>altpll_0</startModule>
+  <startConnectionPoint>c2</startConnectionPoint>
   <endModule>video_dual_clock_buffer_0</endModule>
   <endConnectionPoint>clock_stream_in</endConnectionPoint>
  </connection>
@@ -18978,7 +19047,7 @@ parameters are a RESULT of the module parameters. -->
   <version>18.1</version>
  </plugin>
  <plugin>
-  <instanceCount>2</instanceCount>
+  <instanceCount>3</instanceCount>
   <name>clock_source</name>
   <type>com.altera.entityinterfaces.IElementClass</type>
   <subtype>com.altera.entityinterfaces.IMutableConnectionPoint</subtype>
