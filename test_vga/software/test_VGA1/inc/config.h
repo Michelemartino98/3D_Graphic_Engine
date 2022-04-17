@@ -1,8 +1,8 @@
 /*
  * config.h
  *
- *  Created on: 11 apr 2022
- *      Author: 39327
+ *  Created on: 17 apr 2022
+ *      Author: vanno
  */
 
 #ifndef CONFIG_H_
@@ -16,6 +16,5 @@
 #define YELLOW      0xFFE0
 #define MAGENTA     0xF81F
 #define CYAN        0x07FF
-
 
 #endif /* CONFIG_H_ */
