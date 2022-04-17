@@ -137,10 +137,10 @@ int main()
     	alt_up_pixel_buffer_dma_clear_screen_delayed(pixel_buf_dma_dev,1);
 
     	arg = (theta * PI) / 180;
-    	point[0][0] = center[0] + (radius*cos(arg);
-    	point[0][1] = center[1] + (radius*sin(arg);
-    	point[1][0] = center[0] - (radius*cos(arg);
-    	point[1][1] = center[1] - (radius*sin(arg);
+    	point[0][0] = center[0] + radius*cos(arg);
+    	point[0][1] = center[1] + radius*sin(arg);
+    	point[1][0] = center[0] - radius*cos(arg);
+    	point[1][1] = center[1] - radius*sin(arg);
     	theta++;
     	if (theta>=360){ theta = 0;}
 
