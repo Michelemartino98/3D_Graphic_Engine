@@ -151,6 +151,7 @@ int main()
     	printf("fps : %d\n",fps);
     	alt_timestamp_start();
 
+		//commentare il while per togliere limite di 60 FPS
     	while (alt_up_pixel_buffer_dma_check_swap_buffers_status(pixel_buf_dma_dev)){;}
 
     }
