@@ -4,9 +4,23 @@
  *  Created on: 17 apr 2022
  *      Author: vanno
  */
-
 #ifndef CONFIG_H_
 #define CONFIG_H_
+//C standard library
+#include <unistd.h>
+#include <stdint.h>
+#include <stdio.h>
+#include <math.h>
+
+//NIOS driver library
+#include "system.h"
+#include "drivers/inc/altera_up_avalon_video_pixel_buffer_dma.h"
+#include "sys/alt_timestamp.h"
+#include <io.h>
+
+//user header file
+#include "../inc/functions.h"
+#include "../inc/graphic_object.h"
 
 #define RED         0xF800
 #define GREEN       0x07E0
