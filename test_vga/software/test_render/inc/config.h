@@ -22,6 +22,9 @@
 #include "../inc/functions.h"
 #include "../inc/graphic_object.h"
 
+#define X_RES       320
+#define Y_RES       240
+
 #define RED         0xF800
 #define GREEN       0x07E0
 #define BLUE        0x001F
@@ -30,5 +33,10 @@
 #define YELLOW      0xFFE0
 #define MAGENTA     0xF81F
 #define CYAN        0x07FF
+
+#define X 0
+#define Y 1
+#define Z 2
+#define W 3
 
 #endif /* CONFIG_H_ */
