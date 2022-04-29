@@ -1,18 +1,57 @@
 #ifndef GRAPHIC_OBJECT_H_
 #define GRAPHIC_OBJECT_H_
 
+#include "./config.h"
+
 #define N_VERTEX 8
 //user type definition
 typedef float matrix4_t[16];
 
+/*
+ * viene impiegato un sistema destrogiro,
+ * la camera punta verso l'asse Z negativo, 
+ * il piano di proiezione è su Z=0,
+ * i vettori tridimensionali sono su riga, ovvero [X Y Z W]
+ */
 
+
+/*
+ * COORDINATE CUBO
+ *
+ *        4------ 5
+ * 		 /|      /|
+ * 		0-------1 |
+ *      | |     | |
+ *      | 3-----|-7
+ *      |/      |/
+ *      2-------6
+ *
+ *
+ */
+
+/*
+ * SISTEMA DI RIFERIMENTO
+ *
+ *      Y+
+ *      |
+ * 		|
+ * 		|
+ * 		O-----X+
+ * 	   /
+ * 	  /
+ * 	 Z+
+ *
+ */
 
 class Cube_3D{
 
-        float position[3];      //x,y,z
+        float translation[3];      //x,y,z
         float rotation[3];      //rx,ry,rz
         float scaling[3];
-        float projection_matrix[4][4];
+
+
+
+
 
         float n = 0.1; 
         float f = 100; 
@@ -21,14 +60,7 @@ class Cube_3D{
         float scale = 0.1; // tan(angleOfView * 0.5 * M_PI / 180) * n;  
         float r, l, t, b;  
         //struttura dati che contiene i vertici originali del solido sui quali applico le traslazioni
-        float vertex[N_VERTEX][4]={ {-0.5,  0.5,   0.5, 0},
-                       {  0.5,   0.5,   0.5, 0},
-                       {- 0.5, - 0.5,   0.5, 0},
-                       {- 0.5, - 0.5, - 0.5, 0},
-                       {- 0.5,   0.5, - 0.5, 0},
-                       {  0.5,   0.5, - 0.5, 0},
-                       {  0.5, - 0.5,   0.5, 0},
-                       {  0.5, - 0.5, - 0.5, 0}};
+
 
         // float vertex[N_VERTEX][4]={ {-1,  1,  1, 0},
         //                { 1,  1,  1, 0},
@@ -47,9 +79,32 @@ class Cube_3D{
         
     public:
         Cube_3D();
-        void update_position(float, float, float);
+
+        //per l'amor di dio poi rimetterle private appena possibile
+        float projection_matrix[4][4];
+        float rotation_matrix[4][4];
+        float translation_matrix[4][4];
+        float scaling_matrix[4][4];
+        float complete_matrix[4][4];
+
+        float vertex[N_VERTEX][4]={ { -1,   1,   1, 0},
+                                    {  1,   1,   1, 0},
+                                    {- 1, - 1,   1, 0},
+                                    {- 1, - 1, - 1, 0},
+                                    {- 1,   1, - 1, 0},
+                                    {  1,   1, - 1, 0},
+                                    {  1, - 1,   1, 0},
+                                    {  1, - 1, - 1, 0}};
+
+        void update_translation(float, float, float);
+        void update_translation(float, int);
+
         void update_rotation(float, float, float);
+        //void update_rotation(float, int);
+
         void update_scaling(float, float, float);
+
+        void Matrix4x4MultiplyBy4x4(float src1[4][4], float src2[4][4], float dest[4][4]);
         void vector_matrix_multiply();
         void from_3D_to_2D();
         int calculate_world();

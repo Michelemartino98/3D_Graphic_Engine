@@ -15,8 +15,8 @@
 //NIOS driver library
 #include "system.h"
 #include "drivers/inc/altera_up_avalon_video_pixel_buffer_dma.h"
-#include "sys/alt_timestamp.h"
-#include <io.h>
+#include "HAL/inc/sys/alt_timestamp.h"
+#include "HAL/inc/io.h"
 
 //user header file
 #include "../inc/functions.h"
@@ -25,6 +25,8 @@
 #define X_RES       320
 #define Y_RES       240
 
+
+//palette colori a 16 bit
 #define RED         0xF800
 #define GREEN       0x07E0
 #define BLUE        0x001F
@@ -34,9 +36,15 @@
 #define MAGENTA     0xF81F
 #define CYAN        0x07FF
 
+/*  controlla se mandare a terminale le coordinate x,y,z,w dei singoli vettori,
+ *  oltre che le coordinate x,y dello schermo finali
+ */
+//#define DEBUG_VECTORS
+
 #define X 0
 #define Y 1
 #define Z 2
 #define W 3
+
 
 #endif /* CONFIG_H_ */
