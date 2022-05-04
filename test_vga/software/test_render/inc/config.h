@@ -7,7 +7,8 @@
 #ifndef CONFIG_H_
 #define CONFIG_H_
 
-//#define DEBUG_1 
+#define DEBUG_1
+#define DEBUG_VECTORS
 
 //C standard library
 
@@ -54,6 +55,7 @@
 #define W 3
 
 // user macros
-#define M(x,y) (x*4+y)
+#define M4(x,y) (x*4+y)
+#define M8(x,y) (x*8+y)
 
 #endif /* CONFIG_H_ */

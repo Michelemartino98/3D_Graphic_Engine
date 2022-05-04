@@ -11,7 +11,10 @@ typedef float matrix4_t[16];
  * viene impiegato un sistema destrogiro,
  * la camera punta verso l'asse Z negativo, 
  * il piano di proiezione è su Z=0,
- * i vettori tridimensionali sono su riga, ovvero [X Y Z W]
+ * i vettori tridimensionali sono su colonna, ovvero |X|
+ *                                                   |Y|
+ *                                                   |Z|
+ *                                                   |W|
  */
 
 
@@ -19,8 +22,8 @@ typedef float matrix4_t[16];
  * COORDINATE CUBO
  *
  *       4--------5
- * 		  /|       /|
- * 		  0-------1 |
+ * 		/|       /|
+ * 		0-------1 |
  *      | |     | |
  *      | 3-----|-7
  *      |/      |/
@@ -32,14 +35,14 @@ typedef float matrix4_t[16];
 /*
  * SISTEMA DI RIFERIMENTO
  *
- *      Y+
- *      |
+ *        Y+
+ *        |
  * 		  |
  * 		  |
  * 		  O-----X+
+ * 	    /
  * 	   /
- * 	  /
- * 	 Z+
+ * 	  Z+
  *
  */
 
@@ -49,14 +52,10 @@ class Cube_3D{
         float rotation[3];      //rx,ry,rz
         float scaling[3];
 
-
-
-
-
         float n = 0.1; 
         float f = 100; 
         float angleOfView = 90;
-        float imageAspectRatio = 4/3;
+        float imageAspectRatio = (float)4/3;
         float scale = 0.1; // tan(angleOfView * 0.5 * M_PI / 180) * n;  
         float r, l, t, b;  
         //struttura dati che contiene i vertici originali del solido sui quali applico le traslazioni
@@ -78,11 +77,12 @@ class Cube_3D{
         uint16_t vertex_on_2D[N_VERTEX][2];
         //prova per usare matrici multidimensionali come array
         float identity_matrix[4*4]={1,0,0,0,
-                                    0,1,0,0,
-                                    0,0,1,0,
-                                    0,0,0,1};
+                            0,1,0,0,
+                            0,0,1,0,
+                            0,0,0,1};    
         
     public:
+
         Cube_3D();
 
         //per l'amor di dio poi rimetterle private appena possibile
@@ -90,6 +90,8 @@ class Cube_3D{
         float rotation_matrix[4*4];
         float translation_matrix[4*4];
         float scaling_matrix[4*4];
+
+
 
         float scal_rot[4*4];
         float scal_rot_trasl[4*4];
@@ -123,7 +125,6 @@ class Cube_3D{
 
         void vector_matrix_multiply();
         void from_3D_to_2D();
-        int calculate_world();
         // parte dalla matrice trasformed_vertex e lo spiattella in 2D          può aver senso farla privata...
         int apply_projection();
         //ritorna 0 quando ha effettivamente fatto lo swap del buffer
@@ -133,6 +134,7 @@ class Cube_3D{
 
 #endif //GRAPHIC_OBJECT_H_
 
+/*
 //     float n = 0.1; 
 //     float f = 100; 
 //     float angleOfView = 90;
@@ -165,3 +167,4 @@ class Cube_3D{
     // M[3][1] = 0; 
     // M[3][2] = -2 * f * n / (f - n); 
     // M[3][3] = 0; 
+*/
