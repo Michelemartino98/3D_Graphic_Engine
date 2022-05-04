@@ -6,10 +6,17 @@
  */
 #ifndef CONFIG_H_
 #define CONFIG_H_
+
+//#define DEBUG_1 
+
 //C standard library
+
 #include <unistd.h>
 #include <stdint.h>
+
+#ifdef DEBUG_1
 #include <stdio.h>
+#endif
 #include <math.h>
 
 //NIOS driver library
@@ -46,5 +53,7 @@
 #define Z 2
 #define W 3
 
+// user macros
+#define M(x,y) (x*4+y)
 
 #endif /* CONFIG_H_ */

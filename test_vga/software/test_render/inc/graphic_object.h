@@ -18,9 +18,9 @@ typedef float matrix4_t[16];
 /*
  * COORDINATE CUBO
  *
- *        4------ 5
- * 		 /|      /|
- * 		0-------1 |
+ *       4--------5
+ * 		  /|       /|
+ * 		  0-------1 |
  *      | |     | |
  *      | 3-----|-7
  *      |/      |/
@@ -34,9 +34,9 @@ typedef float matrix4_t[16];
  *
  *      Y+
  *      |
- * 		|
- * 		|
- * 		O-----X+
+ * 		  |
+ * 		  |
+ * 		  O-----X+
  * 	   /
  * 	  /
  * 	 Z+
@@ -72,30 +72,44 @@ class Cube_3D{
         //                { 1, -1, -1, 0}};
 
         //contiene i vertici trasformati, ma sempre 3D
-        float transformed_vertex[N_VERTEX][4];
+        float transformed_vertex[N_VERTEX*4];
         //struttura dati che contiene le coordinate dei vertici del solido proiettati in 2D, da mandare direttamente a schermo. 
         //Viene inizializzata quando viene costruita la classe moltiplicando vertex per le matrici di rotazione, proiezione, etc...
         uint16_t vertex_on_2D[N_VERTEX][2];
+        //prova per usare matrici multidimensionali come array
+        float identity_matrix[4*4]={1,0,0,0,
+                                    0,1,0,0,
+                                    0,0,1,0,
+                                    0,0,0,1};
         
     public:
         Cube_3D();
 
         //per l'amor di dio poi rimetterle private appena possibile
-        float projection_matrix[4][4];
-        float rotation_matrix[4][4];
-        float translation_matrix[4][4];
-        float scaling_matrix[4][4];
-        float complete_matrix[4][4];
+        float projection_matrix[4*4];
+        float rotation_matrix[4*4];
+        float translation_matrix[4*4];
+        float scaling_matrix[4*4];
 
-        float vertex[N_VERTEX][4]={ { -1,   1,   1, 0},
-                                    {  1,   1,   1, 0},
-                                    {- 1, - 1,   1, 0},
-                                    {- 1, - 1, - 1, 0},
-                                    {- 1,   1, - 1, 0},
-                                    {  1,   1, - 1, 0},
-                                    {  1, - 1,   1, 0},
-                                    {  1, - 1, - 1, 0}};
+        float scal_rot[4*4];
+        float scal_rot_trasl[4*4];
+        float complete_matrix[4*4];
 
+        float empty_matrix[4*4]={0};
+
+        //float vertex[N_VERTEX*4]= {  -0.5,   0.5,   0.5, 1,
+        //                              0.5,   0.5,   0.5, 1,
+        //                            - 0.5, - 0.5,   0.5, 1,
+        //                            - 0.5, - 0.5, - 0.5, 1,
+        //                            - 0.5,   0.5, - 0.5, 1,
+        //                              0.5,   0.5, - 0.5, 1,
+        //                              0.5, - 0.5,   0.5, 1,
+        //                              0.5, - 0.5, - 0.5, 1};
+
+        float vertex[N_VERTEX*4] = {   -0.5,  0.5,  -0.5, -0.5, -0.5,  0.5,  0.5,  0.5,
+                                        0.5,  0.5,  -0.5, -0.5,  0.5,  0.5, -0.5, -0.5,
+                                        0.5,  0.5,   0.5, -0.5, -0.5, -0.5,  0.5, -0.5,
+                                          1,    1,     1,     1,   1,    1,    1,    1 };
         void update_translation(float, float, float);
         void update_translation(float, int);
 
@@ -104,7 +118,9 @@ class Cube_3D{
 
         void update_scaling(float, float, float);
 
-        void Matrix4x4MultiplyBy4x4(float src1[4][4], float src2[4][4], float dest[4][4]);
+        //void Matrix4x4MultiplyBy4x4(float src1[4*4], float src2[4*4], float dest[4*4]);
+        void Matrix4x4MultiplyBy4x4(float *, float *, float *);
+
         void vector_matrix_multiply();
         void from_3D_to_2D();
         int calculate_world();
