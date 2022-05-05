@@ -4,7 +4,7 @@ extern alt_up_pixel_buffer_dma_dev *pixel_buf_dma_dev;
 
 Cube_3D::Cube_3D(){
 
-    update_translation(0, 0, 0);
+    update_translation(-1.5, -1.5, 0);
     update_rotation(0, 0, 0);
     update_scaling(1, 1, 1);
 
@@ -305,7 +305,7 @@ void Cube_3D::from_3D_to_2D(){
 }
  
 
-void Cube_3D::Matrix4x4MultiplyBy4x4 (float src1[M4(4,4)], float src2[M4(4,4)], float dest[M4(4,4)])
+void Cube_3D::Matrix4x4MultiplyBy4x4 (float src1[4*4], float src2[4*4], float dest[4*4])
 { 
     dest[M4(0,0)] = src1[M4(0,0)] * src2[M4(0,0)] + src1[M4(0,1)] * src2[M4(1,0)] + src1[M4(0,2)] * src2[M4(2,0)] + src1[M4(0,3)] * src2[M4(3,0)]; 
     dest[M4(0,1)] = src1[M4(0,0)] * src2[M4(0,1)] + src1[M4(0,1)] * src2[M4(1,1)] + src1[M4(0,2)] * src2[M4(2,1)] + src1[M4(0,3)] * src2[M4(3,1)]; 

@@ -20,7 +20,9 @@ int main(){
     float z_inc = 0;
     	
         		for(int i=0; i<8; i++){
-        			Cube.vertex[M8(Z,i)]-=2.5;
+        			// Cube.vertex[M8(X,i)]-=0.4;
+        			// Cube.vertex[M8(Y,i)]-=0.4;
+        			Cube.vertex[M8(Z,i)]-=3;
         			k++;
         			printf("z(%d) = %f\n", i, Cube.vertex[M8(Z,i)]);
         		}
@@ -36,12 +38,12 @@ int main(){
 		//Cube.Matrix4x4MultiplyBy4x4(Cube.scal_rot, Cube.translation_matrix, Cube.scal_rot_trasl);
 		//Cube.Matrix4x4MultiplyBy4x4(Cube.scal_rot_trasl, Cube.projection_matrix, Cube.complete_matrix);
 
-            /*if (k<2000){
-        			z_inc+=0.08;
-                    Cube.update_translation(0,0,z_inc);
-        			k++;    		
+            if (k<800){
+        			z_inc+=0.0005;
+                    Cube.update_translation(z_inc,z_inc,0);
+        			k++;
         	}
-			*/
+
             
         	//test spostamento grezzo
         	// if (k<2000){
@@ -52,7 +54,7 @@ int main(){
         	// 	}
         	// }
 
-            Cube.Matrix4x4MultiplyBy4x4(Cube.identity_matrix, Cube.projection_matrix, Cube.complete_matrix);
+            Cube.Matrix4x4MultiplyBy4x4(Cube.projection_matrix, Cube.translation_matrix, Cube.complete_matrix);
 
             // for (int i = 0; i < 4*4; i++)
             // {
