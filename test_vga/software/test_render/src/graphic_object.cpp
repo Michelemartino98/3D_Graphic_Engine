@@ -13,32 +13,7 @@ Cube_3D::Cube_3D(){
     l = -r;
     t = scale;
     b = -t;
-
-
     // set OpenGL perspective projection matrix
-    //projection_matrix[M4(0,0)] = 2 * n / (r - l); 
-    //projection_matrix[M4(0,1)] = 0; 
-    //projection_matrix[M4(0,2)] = 0; 
-    //projection_matrix[M4(0,3)] = 0; 
- 
-    //projection_matrix[M4(1,0)] = 0; 
-    //projection_matrix[M4(1,1)] = 2 * n / (t - b); 
-    //projection_matrix[M4(1,2)] = 0; 
-    //projection_matrix[M4(1,3)] = 0; 
- 
-    //projection_matrix[M4(2,0)] = 0; 
-    //projection_matrix[M4(2,1)] = 0; 
-    //projection_matrix[M4(2,2)] = -(f + n) / (f - n); 
-    //projection_matrix[M4(2,3)] = -1; 
- 
-    //projection_matrix[M4(3,0)] = 0; 
-    //projection_matrix[M4(3,1)] = 0; 
-    //projection_matrix[M4(3,2)] = -2 * f * n / (f - n); 
-    //projection_matrix[M4(3,3)] = 0; 
-
-
-
-   
     projection_matrix[M4(0,0)] = (float)(2 * n) / (r - l); 
     projection_matrix[M4(1,0)] = (float)0; 
     projection_matrix[M4(2,0)] = (float)0; 
@@ -59,119 +34,32 @@ Cube_3D::Cube_3D(){
     projection_matrix[M4(2,3)] = (float) -2 * f * n / (f - n);
     projection_matrix[M4(3,3)] = (float)0; 
 
-
-
-    //parametri per calcolo matrice di rotazione
-    /*
-                        |  CE      -CF       D   0|
-    rotation_matrix  =  |  BDE+AF  -BDF+AE  -BC  0|
-                        | -ADE+BF   ADF+BE   AC  0|
-                        |  0        0        0   1|
-
-    A       = cos(angle_x));
-    B       = sin(angle_x);
-    C       = cos(angle_y);
-    D       = sin(angle_y);
-    E       = cos(angle_z);
-    F       = sin(angle_z);
-     
-    nel nostro codice si ha::
-    rotation[X]=angle_x;
-    rotation[Y]=angle_y;
-    rotation[Z]=angle_z;
-    
-
-//    rotation_matrix[0][0] = cos(rotation[Y])*cos(rotation[Z]); 
-//    rotation_matrix[0][1] = -cos(rotation[Y])*sin(rotation[Z]);
-//    rotation_matrix[0][2] = sin(rotation[Y]);
-//    rotation_matrix[0][3] = 0; 
-//
-//    rotation_matrix[1][0] = sin(rotation[X])*sin(rotation[Y])*cos(rotation[Z]) + cos(rotation[X])*sin(rotation[X]); 
-//    rotation_matrix[1][1] = -sin(rotation[X])*sin(rotation[Y])*sin(rotation[Z])+cos(rotation[X])*cos(rotation[Z]); 
-//    rotation_matrix[1][2] = -sin(rotation[Y])*cos(rotation[Y]);  
-//    rotation_matrix[1][3] = 0; 
-//
-//    rotation_matrix[2][0] = -cos(rotation[X])*sin(rotation[Y])*cos(rotation[Z])+sin(rotation[X])*sin(rotation[Z]); 
-//    rotation_matrix[2][1] = cos(rotation[X])*sin(rotation[Y])*sin(rotation[Z])+sin(rotation[X])*cos(rotation[Z]);
-//    rotation_matrix[2][2] = cos(rotation[X])*cos(rotation[Y]); 
-//    rotation_matrix[2][3] = 0; 
-//
-//    rotation_matrix[3][0] = 0; 
-//    rotation_matrix[3][1] = 0; 
-//    rotation_matrix[3][2] = 0; 
-//    rotation_matrix[3][3] = 1; 
-*/
-
-//////////////////////////
-    // translation_matrix[M4(0,0)] = 1; 
-    // translation_matrix[M4(0,1)] = 0; 
-    // translation_matrix[M4(0,2)] = 0; 
-    // translation_matrix[M4(0,3)] = translation[X];
- 
-    // translation_matrix[M4(1,0)] = 0; 
-    // translation_matrix[M4(1,1)] = 1; 
-    // translation_matrix[M4(1,2)] = 0; 
-    // translation_matrix[M4(1,3)] = translation[Y];
- 
-    // translation_matrix[M4(2,0)] = 0; 
-    // translation_matrix[M4(2,1)] = 0; 
-    // translation_matrix[M4(2,2)] = 1; 
-    // translation_matrix[M4(2,3)] = translation[Z];
- 
-    // translation_matrix[M4(3,0)] = 0; 
-    // translation_matrix[M4(3,1)] = 0; 
-    // translation_matrix[M4(3,2)] = 0; 
-    // translation_matrix[M4(3,3)] = 1;
-    translation_matrix[M4(0,0)] = 1; 
-    translation_matrix[M4(0,1)] = 0; 
-    translation_matrix[M4(0,2)] = 0; 
-    translation_matrix[M4(0,3)] = 0;
- 
-    translation_matrix[M4(1,0)] = 0; 
-    translation_matrix[M4(1,1)] = 1; 
-    translation_matrix[M4(1,2)] = 0; 
-    translation_matrix[M4(1,3)] = 0;
- 
-    translation_matrix[M4(2,0)] = 0; 
-    translation_matrix[M4(2,1)] = 0; 
-    translation_matrix[M4(2,2)] = 1; 
-    translation_matrix[M4(2,3)] = 0;
- 
-    translation_matrix[M4(3,0)] = translation[X]; 
-    translation_matrix[M4(3,1)] = translation[Y]; 
-    translation_matrix[M4(3,2)] = translation[Z]; 
-    translation_matrix[M4(3,3)] = 1;
-
-/////////////////////////////////
-
-    scaling_matrix[M4(0,0)] = scaling[X]; 
-    scaling_matrix[M4(0,1)] = 0; 
-    scaling_matrix[M4(0,2)] = 0; 
-    scaling_matrix[M4(0,3)] = 0; 
- 
-    scaling_matrix[M4(1,0)] = 0; 
-    scaling_matrix[M4(1,1)] = scaling[Y]; 
-    scaling_matrix[M4(1,2)] = 0; 
-    scaling_matrix[M4(1,3)] = 0; 
- 
-    scaling_matrix[M4(2,0)] = 0; 
-    scaling_matrix[M4(2,1)] = 0; 
-    scaling_matrix[M4(2,2)] = scaling[Z]; 
-    scaling_matrix[M4(2,3)] = 0; 
- 
-    scaling_matrix[M4(3,0)] = 0; 
-    scaling_matrix[M4(3,1)] = 0; 
-    scaling_matrix[M4(3,2)] = 0; 
-    scaling_matrix[M4(3,3)] = 1; 
 }
 
 void Cube_3D::update_translation(float x, float y,float z){
     translation[X] = x;
     translation[Y] = y;
     translation[Z] = z;
+
+    translation_matrix[M4(0,0)] = 1; 
+    translation_matrix[M4(0,1)] = 0; 
+    translation_matrix[M4(0,2)] = 0; 
     translation_matrix[M4(0,3)] = translation[X];
-    translation_matrix[M4(1,3)] = translation[Y];
-    translation_matrix[M4(2,3)] = translation[Z];
+ 
+    translation_matrix[M4(1,0)] = 0; 
+    translation_matrix[M4(1,1)] = 1; 
+    translation_matrix[M4(1,2)] = 0; 
+    translation_matrix[M4(1,3)] = translation[Y]; 
+ 
+    translation_matrix[M4(2,0)] = 0; 
+    translation_matrix[M4(2,1)] = 0; 
+    translation_matrix[M4(2,2)] = 1; 
+    translation_matrix[M4(2,3)] = translation[Z]; 
+ 
+    translation_matrix[M4(3,0)] = 0; 
+    translation_matrix[M4(3,1)] = 0;
+    translation_matrix[M4(3,2)] = 0;
+    translation_matrix[M4(3,3)] = 1;
 }
 
 void Cube_3D::update_translation(float new_value, int coordinate){
@@ -271,6 +159,26 @@ void Cube_3D::update_scaling(float sx, float sy, float sz){
     scaling[X] = sx;
     scaling[Y] = sy;
     scaling[Z] = sz;
+
+    scaling_matrix[M4(0,0)] = scaling[X]; 
+    scaling_matrix[M4(0,1)] = 0; 
+    scaling_matrix[M4(0,2)] = 0; 
+    scaling_matrix[M4(0,3)] = 0; 
+ 
+    scaling_matrix[M4(1,0)] = 0; 
+    scaling_matrix[M4(1,1)] = scaling[Y]; 
+    scaling_matrix[M4(1,2)] = 0; 
+    scaling_matrix[M4(1,3)] = 0; 
+ 
+    scaling_matrix[M4(2,0)] = 0; 
+    scaling_matrix[M4(2,1)] = 0; 
+    scaling_matrix[M4(2,2)] = scaling[Z]; 
+    scaling_matrix[M4(2,3)] = 0; 
+ 
+    scaling_matrix[M4(3,0)] = 0; 
+    scaling_matrix[M4(3,1)] = 0; 
+    scaling_matrix[M4(3,2)] = 0; 
+    scaling_matrix[M4(3,3)] = 1; 
 }
 
 int Cube_3D::display_frame(){
@@ -294,7 +202,6 @@ int Cube_3D::display_frame(){
     alt_up_pixel_buffer_dma_draw_line(pixel_buf_dma_dev,vertex_on_2D[4][X],vertex_on_2D[4][Y],vertex_on_2D[5][X],vertex_on_2D[5][Y], YELLOW, 1);
     alt_up_pixel_buffer_dma_draw_line(pixel_buf_dma_dev,vertex_on_2D[5][X],vertex_on_2D[5][Y],vertex_on_2D[7][X],vertex_on_2D[7][Y], YELLOW, 1);
     alt_up_pixel_buffer_dma_draw_line(pixel_buf_dma_dev,vertex_on_2D[6][X],vertex_on_2D[6][Y],vertex_on_2D[7][X],vertex_on_2D[7][Y], WHITE, 1);
-
 
     //disegna linea giusto per vedere se effettivamente programma
     //alt_up_pixel_buffer_dma_draw_line(pixel_buf_dma_dev,25, 70,100,100, WHITE, 1);
@@ -419,17 +326,3 @@ void Cube_3D::Matrix4x4MultiplyBy4x4 (float src1[M4(4,4)], float src2[M4(4,4)], 
 
 };
 
-/*
-void Cube_3D::chiama_le_mul(){
-    test_mul4x4(test_matrix, identity_matrix, empty_matrix );
-    
-    printf("RISULTATO MOLTIPLICAZIONE \n");
-    for(int i=0; i<4; i++){
-        for(int j=0; j<4; j++){
-
-        printf("%f ,", empty_matrix[i*4+j]);
-        }
-        printf("\n");
-    }
-}
-*/

@@ -76,10 +76,7 @@ class Cube_3D{
         //Viene inizializzata quando viene costruita la classe moltiplicando vertex per le matrici di rotazione, proiezione, etc...
         uint16_t vertex_on_2D[N_VERTEX][2];
         //prova per usare matrici multidimensionali come array
-        float identity_matrix[4*4]={1,0,0,0,
-                            0,1,0,0,
-                            0,0,1,0,
-                            0,0,0,1};    
+           
         
     public:
 
@@ -98,7 +95,10 @@ class Cube_3D{
         float complete_matrix[4*4];
 
         float empty_matrix[4*4]={0};
-
+        float identity_matrix[4*4]={1,0,0,0,
+                                    0,1,0,0,
+                                    0,0,1,0,
+                                    0,0,0,1}; 
         //float vertex[N_VERTEX*4]= {  -0.5,   0.5,   0.5, 1,
         //                              0.5,   0.5,   0.5, 1,
         //                            - 0.5, - 0.5,   0.5, 1,
