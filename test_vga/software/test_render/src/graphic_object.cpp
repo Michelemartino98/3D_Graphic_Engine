@@ -6,7 +6,7 @@ Cube_3D::Cube_3D(){
 
     update_translation(0, 0, 3);
     update_rotation(0, 0, 0);
-    update_scaling(1, 1, 1);
+    update_scaling(0.5, 0.5, 0.5);
 
     
     r = imageAspectRatio * scale;

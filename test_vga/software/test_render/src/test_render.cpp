@@ -17,15 +17,7 @@ int main(){
     int k = 0;
  
     int current_frame = 0;
-    float z_inc = 0;
-    
-    	        //traslazione dello spazio oggetto
-        		// for(int i=0; i<8; i++){
-        		// 	Cube.vertex[M8(Z,i)]-=3;
-        		// 	k++;
-        		// 	printf("z(%d) = %f\n", i, Cube.vertex[M8(Z,i)]);
-        		// }
-        
+    float z_inc = 0;        
 
     for(;;){
 
@@ -38,16 +30,19 @@ int main(){
             if (k<800){
         			z_inc+= M_PI/400 ;
                     Cube.update_rotation(z_inc,0,0);
+                    Cube.update_scaling(0.3,0.5,0.5);
         			k++;
         	}
             else if (k<1600){
         			z_inc+= M_PI/400 ;
                     Cube.update_rotation(0,z_inc,0);
+                    Cube.update_scaling(0.5,0.2,0.5);
         			k++;
         	}
             else if (k<2400){
         			z_inc+= M_PI/400 ;
                     Cube.update_rotation(0,0,z_inc);
+                    Cube.update_scaling(0.5,0.2,0.7);
         			k++;
         	}
             
@@ -60,8 +55,9 @@ int main(){
         	// 	}
         	// }
             Cube.Matrix4x4MultiplyBy4x4(Cube.projection_matrix, Cube.translation_matrix, Cube.proj_trasl);
-            Cube.Matrix4x4MultiplyBy4x4(Cube.proj_trasl, Cube.rotation_matrix, Cube.complete_matrix);
-            //Cube.Matrix4x4MultiplyBy4x4(Cube.proj_trasl_rot, Cube.scaling_matrix, Cube.complete_matrix);
+            Cube.Matrix4x4MultiplyBy4x4(Cube.proj_trasl, Cube.rotation_matrix, Cube.proj_trasl_rot);
+            Cube.Matrix4x4MultiplyBy4x4(Cube.proj_trasl_rot, Cube.scaling_matrix, Cube.complete_matrix);
+            
             // for (int i = 0; i < 4*4; i++)
             // {
             //     printf("M(%d) = %f\n", i, Cube.projection_matrix[i]);
