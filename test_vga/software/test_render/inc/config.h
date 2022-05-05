@@ -27,6 +27,8 @@
 #include "HAL/inc/sys/alt_timestamp.h"
 #include "HAL/inc/io.h"
 
+#include "./drivers/inc/altera_avalon_pio_regs.h"
+
 //aggiunte per la funziona di samu del clipping
 	#include <errno.h>
 	#include "HAL/inc/priv/alt_file.h"
@@ -50,17 +52,7 @@
 #define MAGENTA     0xF81F
 #define CYAN        0x07FF
 
-//MACRO per maschere controllo slider
-#define SLIDER0     0b0000000001;
-#define SLIDER1     0b0000000010;
-#define SLIDER2     0b0000000100;
-#define SLIDER3     0b0000001000;
-#define SLIDER4     0b0000010000;
-#define SLIDER5     0b0000100000;
-#define SLIDER6     0b0001000000;
-#define SLIDER7     0b0010000000;
-#define SLIDER8     0b0100000000;
-#define SLIDER9     0b1000000000;
+
 
 /*  controlla se mandare a terminale le coordinate x,y,z,w dei singoli vettori,
  *  oltre che le coordinate x,y dello schermo finali
@@ -75,5 +67,6 @@
 // user macros
 #define M4(x,y) (x*4+y)     //indirizza l'lemento (x,y) di una matrice a 4 colonne, (rappresentato sotto forma di array lineare)
 #define M8(x,y) (x*8+y)     //indirizza l'lemento (x,y) di una matrice a 8 colonne,(rappresentato sotto forma di array lineare)
+#define BIT(x)	(1<<x)
 
 #endif /* CONFIG_H_ */
