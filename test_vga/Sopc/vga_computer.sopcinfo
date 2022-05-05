@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <EnsembleReport name="vga_computer" kind="vga_computer" version="1.0" fabric="QSYS">
  <!-- Format version 18.1 625 (Future versions may contain additional information.) -->
- <!-- 2022.05.04.12:40:54 -->
+ <!-- 2022.05.05.11:09:25 -->
  <!-- A collection of modules and connections -->
  <parameter name="AUTO_GENERATION_ID">
   <type>java.lang.Integer</type>
-  <value>1651660853</value>
+  <value>1651741765</value>
   <derived>false</derived>
   <enabled>true</enabled>
   <visible>false</visible>
@@ -12283,7 +12283,7 @@ the requested settings for a module instance. -->
   </assignment>
   <assignment>
    <name>embeddedsw.CMacro.TIMESTAMP</name>
-   <value>1651660853</value>
+   <value>1651741765</value>
   </assignment>
   <assignment>
    <name>embeddedsw.dts.compatible</name>
@@ -12303,7 +12303,7 @@ the requested settings for a module instance. -->
   </assignment>
   <assignment>
    <name>embeddedsw.dts.params.timestamp</name>
-   <value>1651660853</value>
+   <value>1651741765</value>
   </assignment>
   <assignment>
    <name>embeddedsw.dts.vendor</name>
@@ -12319,7 +12319,7 @@ the requested settings for a module instance. -->
   </parameter>
   <parameter name="timestamp">
    <type>int</type>
-   <value>1651660853</value>
+   <value>1651741765</value>
    <derived>true</derived>
    <enabled>false</enabled>
    <visible>false</visible>
