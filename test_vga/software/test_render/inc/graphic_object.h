@@ -90,8 +90,8 @@ class Cube_3D{
 
 
 
-        float scal_rot[4*4];
-        float scal_rot_trasl[4*4];
+        float proj_trasl[4*4];
+        float proj_trasl_rot[4*4];
         float complete_matrix[4*4];
 
         float empty_matrix[4*4]={0};

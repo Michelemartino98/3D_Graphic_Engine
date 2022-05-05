@@ -4,7 +4,7 @@ extern alt_up_pixel_buffer_dma_dev *pixel_buf_dma_dev;
 
 Cube_3D::Cube_3D(){
 
-    update_translation(-1.5, -1.5, 0);
+    update_translation(0, 0, 3);
     update_rotation(0, 0, 0);
     update_scaling(1, 1, 1);
 

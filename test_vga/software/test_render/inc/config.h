@@ -7,7 +7,7 @@
 #ifndef CONFIG_H_
 #define CONFIG_H_
 
-#define DEBUG_1
+//#define DEBUG_1
 //#define DEBUG_VECTORS
 
 //C standard library
