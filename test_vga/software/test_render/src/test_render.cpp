@@ -4,67 +4,111 @@
 
 alt_up_pixel_buffer_dma_dev *pixel_buf_dma_dev;
 
-
-
 int main(){
     
     pixel_buf_dma_dev = alt_up_pixel_buffer_dma_open_dev("/dev/video_pixel_buffer_dma_0");
 
     Cube_3D Cube;
 
+    //variabili per uso degli slider
+    float sx = 0.5;
+    float sy = 0.5;
+    float sz = 0.5;
     
-    //per test movimento
-    int k = 0;
+    float x = 0;
+    float y = 0;
+    float z = 3;
+
+    float rx = 0;
+    float ry = 0;
+    float rz = 0;
+
+    uint16_t slider_data_reg;
+    uint16_t inc_pos; //segno dell'incremento
+
+    float inc_s = 0.005;
+    float inc_t = 0.005;
+    float inc_r = M_PI/800;
+    
  
     int current_frame = 0;
-    float z_inc = 0;        
-
+ 
     for(;;){
+
+        
+        slider_data_reg = IORD_ALTERA_AVALON_PIO_DATA(SLIDERS_BASE);
+
+
+        if(slider_data_reg & BIT(9)){                        //se 1 incremento positivo
+
+            if(slider_data_reg & BIT(0)){ //scala x
+                sx+=inc_s;
+            }
+            if(slider_data_reg & BIT(1)){ //scala y
+                sy+=inc_s;
+            }
+            if(slider_data_reg & BIT(2)){ //scala y
+                sz+=inc_s;
+            }
+            if(slider_data_reg & BIT(3)){ //trasla x
+                x+=inc_t;
+            }
+            if(slider_data_reg & BIT(4)){ //trasla y
+                y+=inc_t;
+            }
+            if(slider_data_reg & BIT(5)){ //trasla z
+                z+=inc_t;
+            }
+            if(slider_data_reg & BIT(6)){ //ruota x
+                rx+=inc_r;
+            }
+            if(slider_data_reg & BIT(7)){ //ruota y
+                ry+=inc_r;
+            }
+            if(slider_data_reg & BIT(8)){ //ruota z
+                rz+=inc_r;
+            }
+        }
+
+        else {                              //incremento negativo
+            if(slider_data_reg & BIT(0)){ //scala x
+                sx-=inc_s;
+            }
+            if(slider_data_reg & BIT(1)){ //scala y
+                sy-=inc_s;
+            }
+            if(slider_data_reg & BIT(2)){ //scala y
+                sz-=inc_s;
+            }
+            if(slider_data_reg & BIT(3)){ //trasla x
+                x-=inc_t;
+            }
+            if(slider_data_reg & BIT(4)){ //trasla y
+                y-=inc_t;
+            }
+            if(slider_data_reg & BIT(5)){ //trasla z
+                z-=inc_t;
+            }
+            if(slider_data_reg & BIT(6)){ //ruota x
+                rx-=inc_r;
+            }
+            if(slider_data_reg & BIT(7)){ //ruota y
+                ry-=inc_r;
+            }
+            if(slider_data_reg & BIT(8)){ //ruota z
+                rz-=inc_r;
+            }
+        }
+        Cube.update_scaling( sx , sy , sz);
+        Cube.update_translation( x , y , z);
+        Cube.update_rotation( rx , ry , rz );
 
         #ifdef DEBUG_1
     	printf("FRAME %d\n", current_frame++);
         #endif /*DEBUG_1*/
-
-
-
-            if (k<800){
-        			z_inc+= M_PI/400 ;
-                    Cube.update_rotation(z_inc,0,0);
-                    Cube.update_scaling(0.3,0.5,0.5);
-        			k++;
-        	}
-            else if (k<1600){
-        			z_inc+= M_PI/400 ;
-                    Cube.update_rotation(0,z_inc,0);
-                    Cube.update_scaling(0.5,0.2,0.5);
-        			k++;
-        	}
-            else if (k<2400){
-        			z_inc+= M_PI/400 ;
-                    Cube.update_rotation(0,0,z_inc);
-                    Cube.update_scaling(0.5,0.2,0.7);
-        			k++;
-        	}
             
-        	//test spostamento grezzo
-        	// if (k<2000){
-        	// 	for(int i=0; i<8; i++){
-        	// 		Cube.vertex[M8(Z,i)]-=0.08;
-        	// 		k++;
-        	// 		printf("z(%d) = %f\n", i, Cube.vertex[M8(Z,i)]);
-        	// 	}
-        	// }
-            Cube.Matrix4x4MultiplyBy4x4(Cube.projection_matrix, Cube.translation_matrix, Cube.proj_trasl);
-            Cube.Matrix4x4MultiplyBy4x4(Cube.proj_trasl, Cube.rotation_matrix, Cube.proj_trasl_rot);
-            Cube.Matrix4x4MultiplyBy4x4(Cube.proj_trasl_rot, Cube.scaling_matrix, Cube.complete_matrix);
-            
-            // for (int i = 0; i < 4*4; i++)
-            // {
-            //     printf("M(%d) = %f\n", i, Cube.projection_matrix[i]);
-            // }
-            Cube.vector_matrix_multiply();
-            Cube.from_3D_to_2D();
-            Cube.display_frame(); 
+        Cube.calculate_rendering();
+        Cube.display_frame(); 
 
     }
 }

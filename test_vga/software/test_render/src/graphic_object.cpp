@@ -3,10 +3,10 @@
 extern alt_up_pixel_buffer_dma_dev *pixel_buf_dma_dev;
 
 Cube_3D::Cube_3D(){
-
+    //la traslazione inziale sull'asse z serve a spostare indietro la camera(lasciando l'oggetto fermo), altrimenti la camera si troverebbe nell'origine e sarebbe "dentro" il cubo(e si vede la croce delle diagonali)
     update_translation(0, 0, 3);
     update_rotation(0, 0, 0);
-    update_scaling(0.5, 0.5, 0.5);
+    update_scaling(0.4, 0.4, 0.4);
 
     
     r = imageAspectRatio * scale;
@@ -190,18 +190,18 @@ int Cube_3D::display_frame(){
     //    alt_up_pixel_buffer_dma_draw(pixel_buf_dma_dev, WHITE, vertex_on_2D[i][X], vertex_on_2D[i][Y]);
     //}
     //disegno i lati del cubo
-    alt_up_pixel_buffer_dma_draw_line(pixel_buf_dma_dev,vertex_on_2D[0][X],vertex_on_2D[0][Y],vertex_on_2D[1][X],vertex_on_2D[1][Y], GREEN, 1);
-    alt_up_pixel_buffer_dma_draw_line(pixel_buf_dma_dev,vertex_on_2D[0][X],vertex_on_2D[0][Y],vertex_on_2D[2][X],vertex_on_2D[2][Y], GREEN, 1);
-    alt_up_pixel_buffer_dma_draw_line(pixel_buf_dma_dev,vertex_on_2D[0][X],vertex_on_2D[0][Y],vertex_on_2D[4][X],vertex_on_2D[4][Y], RED, 1);
-    alt_up_pixel_buffer_dma_draw_line(pixel_buf_dma_dev,vertex_on_2D[1][X],vertex_on_2D[1][Y],vertex_on_2D[6][X],vertex_on_2D[6][Y], GREEN, 1);
-    alt_up_pixel_buffer_dma_draw_line(pixel_buf_dma_dev,vertex_on_2D[1][X],vertex_on_2D[1][Y],vertex_on_2D[5][X],vertex_on_2D[5][Y], RED, 1);
-    alt_up_pixel_buffer_dma_draw_line(pixel_buf_dma_dev,vertex_on_2D[2][X],vertex_on_2D[2][Y],vertex_on_2D[3][X],vertex_on_2D[3][Y], WHITE, 1);
-    alt_up_pixel_buffer_dma_draw_line(pixel_buf_dma_dev,vertex_on_2D[2][X],vertex_on_2D[2][Y],vertex_on_2D[6][X],vertex_on_2D[6][Y], GREEN, 1);
-    alt_up_pixel_buffer_dma_draw_line(pixel_buf_dma_dev,vertex_on_2D[3][X],vertex_on_2D[3][Y],vertex_on_2D[4][X],vertex_on_2D[4][Y], YELLOW, 1);
-    alt_up_pixel_buffer_dma_draw_line(pixel_buf_dma_dev,vertex_on_2D[3][X],vertex_on_2D[3][Y],vertex_on_2D[7][X],vertex_on_2D[7][Y], YELLOW, 1);
-    alt_up_pixel_buffer_dma_draw_line(pixel_buf_dma_dev,vertex_on_2D[4][X],vertex_on_2D[4][Y],vertex_on_2D[5][X],vertex_on_2D[5][Y], YELLOW, 1);
-    alt_up_pixel_buffer_dma_draw_line(pixel_buf_dma_dev,vertex_on_2D[5][X],vertex_on_2D[5][Y],vertex_on_2D[7][X],vertex_on_2D[7][Y], YELLOW, 1);
-    alt_up_pixel_buffer_dma_draw_line(pixel_buf_dma_dev,vertex_on_2D[6][X],vertex_on_2D[6][Y],vertex_on_2D[7][X],vertex_on_2D[7][Y], WHITE, 1);
+    alt_up_pixel_buffer_dma_draw_line_enhanced_clipping(pixel_buf_dma_dev,vertex_on_2D[0][X],vertex_on_2D[0][Y],vertex_on_2D[1][X],vertex_on_2D[1][Y], GREEN, 1);
+    alt_up_pixel_buffer_dma_draw_line_enhanced_clipping(pixel_buf_dma_dev,vertex_on_2D[0][X],vertex_on_2D[0][Y],vertex_on_2D[2][X],vertex_on_2D[2][Y], GREEN, 1);
+    alt_up_pixel_buffer_dma_draw_line_enhanced_clipping(pixel_buf_dma_dev,vertex_on_2D[0][X],vertex_on_2D[0][Y],vertex_on_2D[4][X],vertex_on_2D[4][Y], RED, 1);
+    alt_up_pixel_buffer_dma_draw_line_enhanced_clipping(pixel_buf_dma_dev,vertex_on_2D[1][X],vertex_on_2D[1][Y],vertex_on_2D[6][X],vertex_on_2D[6][Y], GREEN, 1);
+    alt_up_pixel_buffer_dma_draw_line_enhanced_clipping(pixel_buf_dma_dev,vertex_on_2D[1][X],vertex_on_2D[1][Y],vertex_on_2D[5][X],vertex_on_2D[5][Y], RED, 1);
+    alt_up_pixel_buffer_dma_draw_line_enhanced_clipping(pixel_buf_dma_dev,vertex_on_2D[2][X],vertex_on_2D[2][Y],vertex_on_2D[3][X],vertex_on_2D[3][Y], WHITE, 1);
+    alt_up_pixel_buffer_dma_draw_line_enhanced_clipping(pixel_buf_dma_dev,vertex_on_2D[2][X],vertex_on_2D[2][Y],vertex_on_2D[6][X],vertex_on_2D[6][Y], GREEN, 1);
+    alt_up_pixel_buffer_dma_draw_line_enhanced_clipping(pixel_buf_dma_dev,vertex_on_2D[3][X],vertex_on_2D[3][Y],vertex_on_2D[4][X],vertex_on_2D[4][Y], YELLOW, 1);
+    alt_up_pixel_buffer_dma_draw_line_enhanced_clipping(pixel_buf_dma_dev,vertex_on_2D[3][X],vertex_on_2D[3][Y],vertex_on_2D[7][X],vertex_on_2D[7][Y], YELLOW, 1);
+    alt_up_pixel_buffer_dma_draw_line_enhanced_clipping(pixel_buf_dma_dev,vertex_on_2D[4][X],vertex_on_2D[4][Y],vertex_on_2D[5][X],vertex_on_2D[5][Y], YELLOW, 1);
+    alt_up_pixel_buffer_dma_draw_line_enhanced_clipping(pixel_buf_dma_dev,vertex_on_2D[5][X],vertex_on_2D[5][Y],vertex_on_2D[7][X],vertex_on_2D[7][Y], YELLOW, 1);
+    alt_up_pixel_buffer_dma_draw_line_enhanced_clipping(pixel_buf_dma_dev,vertex_on_2D[6][X],vertex_on_2D[6][Y],vertex_on_2D[7][X],vertex_on_2D[7][Y], WHITE, 1);
 
     //disegna linea giusto per vedere se effettivamente programma
     //alt_up_pixel_buffer_dma_draw_line(pixel_buf_dma_dev,25, 70,100,100, WHITE, 1);
@@ -242,7 +242,7 @@ void Cube_3D::vector_matrix_multiply(){
     for (int c = 0; c < 8; c++)
     {
 
-        /* Per debug, controllare se tutti i punti calcolati abbiano la stessa z*/
+       
 		#ifdef DEBUG_VECTORS
 		printf("PRIMA DI NORMALIZZAZIONE Z\n");
 		printf("p%d : x%f\n", c, transformed_vertex[M8(X,c)]);
@@ -269,7 +269,8 @@ void Cube_3D::vector_matrix_multiply(){
 	#endif
 }
 
-void Cube_3D::from_3D_to_2D(){
+/*
+ void Cube_3D::from_3D_to_2D(){
 	#ifdef DEBUG_VECTOR
 	printf("START PRINT 2D COORDINATES\n");
 	#endif
@@ -303,7 +304,33 @@ void Cube_3D::from_3D_to_2D(){
     printf("END PRINT 2D COORDINATES\n");
     #endif
 }
+*/
  
+void Cube_3D::from_3D_to_2D(){
+	#ifdef DEBUG_VECTOR
+	printf("START PRINT 2D COORDINATES\n");
+	#endif
+    for(int i = 0; i < N_VERTEX; i++){
+    		vertex_on_2D[i][X] = ((transformed_vertex[M8(X,i)]*(X_RES/2))+(X_RES/2));
+            vertex_on_2D[i][Y] = ((transformed_vertex[M8(Y,i)]*(Y_RES/2))+(Y_RES/2));
+
+
+        #ifdef DEBUG_VECTORS
+        printf("p%d : x%f\n", i, transformed_vertex[M8(X,i)]);
+        printf("p%d : y%f\n", i, transformed_vertex[M8(Y,i)]);
+        printf("p%d : z%f\n", i, transformed_vertex[M8(Z,i)]);
+        printf("p%d : w%f\n", i, transformed_vertex[M8(W,i)]);
+        #endif
+
+        #ifdef DEBUG_1
+        printf("p%d - x:%d / y:%d\n",i, vertex_on_2D[i][X], vertex_on_2D[i][Y]);
+        #endif
+    }
+    #ifdef DEBUG_1
+    printf("END PRINT 2D COORDINATES\n");
+    #endif
+}
+
 
 void Cube_3D::Matrix4x4MultiplyBy4x4 (float src1[4*4], float src2[4*4], float dest[4*4])
 { 
@@ -325,4 +352,5 @@ void Cube_3D::Matrix4x4MultiplyBy4x4 (float src1[4*4], float src2[4*4], float de
     dest[M4(3,3)] = src1[M4(3,0)] * src2[M4(0,3)] + src1[M4(3,1)] * src2[M4(1,3)] + src1[M4(3,2)] * src2[M4(2,3)] + src1[M4(3,3)] * src2[M4(3,3)];
 
 };
+
 

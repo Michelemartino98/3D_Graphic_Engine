@@ -52,66 +52,54 @@ class Cube_3D{
         float rotation[3];      //rx,ry,rz
         float scaling[3];
 
+        //parametri per la matrice di proiezione
         float n = 0.1; 
-        float f = 100; 
+        float f = 100;
+        float r, l, t, b; 
         float angleOfView = 90;
         float imageAspectRatio = (float)4/3;
-        float scale = 0.1; // tan(angleOfView * 0.5 * M_PI / 180) * n;  
-        float r, l, t, b;  
+        float scale = 0.1;          //tan(angleOfView * 0.5 * M_PI / 180) * n;  
+          
+
         //struttura dati che contiene i vertici originali del solido sui quali applico le traslazioni
-
-
-        // float vertex[N_VERTEX][4]={ {-1,  1,  1, 0},
-        //                { 1,  1,  1, 0},
-        //                {-1, -1,  1, 0},
-        //                {-1, -1, -1, 0},
-        //                {-1,  1, -1, 0},
-        //                { 1,  1, -1, 0},
-        //                { 1, -1,  1, 0},
-        //                { 1, -1, -1, 0}};
+        float vertex[N_VERTEX*4] = {   -1,  1,  -1, -1, -1,  1,  1,  1,
+                                        1,  1,  -1, -1,  1,  1, -1, -1,
+                                        1,  1,   1, -1, -1, -1,  1, -1,
+                                        1,  1,   1,  1,  1,  1,  1,  1 };
 
         //contiene i vertici trasformati, ma sempre 3D
         float transformed_vertex[N_VERTEX*4];
         //struttura dati che contiene le coordinate dei vertici del solido proiettati in 2D, da mandare direttamente a schermo. 
         //Viene inizializzata quando viene costruita la classe moltiplicando vertex per le matrici di rotazione, proiezione, etc...
-        uint16_t vertex_on_2D[N_VERTEX][2];
-        //prova per usare matrici multidimensionali come array
-           
-        
-    public:
+        int vertex_on_2D[N_VERTEX][2];
 
-        Cube_3D();
-
-        //per l'amor di dio poi rimetterle private appena possibile
         float projection_matrix[4*4];
         float rotation_matrix[4*4];
         float translation_matrix[4*4];
         float scaling_matrix[4*4];
-
-
-
+         //matrici di appoggio per le varie moltiplicazioni
         float proj_trasl[4*4];
         float proj_trasl_rot[4*4];
+        //matrice finale che rappresenta l'intera trasformazione
         float complete_matrix[4*4];
 
+        //useful matrix for debug
         float empty_matrix[4*4]={0};
         float identity_matrix[4*4]={1,0,0,0,
                                     0,1,0,0,
                                     0,0,1,0,
                                     0,0,0,1}; 
-        //float vertex[N_VERTEX*4]= {  -0.5,   0.5,   0.5, 1,
-        //                              0.5,   0.5,   0.5, 1,
-        //                            - 0.5, - 0.5,   0.5, 1,
-        //                            - 0.5, - 0.5, - 0.5, 1,
-        //                            - 0.5,   0.5, - 0.5, 1,
-        //                              0.5,   0.5, - 0.5, 1,
-        //                              0.5, - 0.5,   0.5, 1,
-        //                              0.5, - 0.5, - 0.5, 1};
 
-        float vertex[N_VERTEX*4] = {   -1,  1,  -1, -1, -1,  1,  1,  1,
-                                        1,  1,  -1, -1,  1,  1, -1, -1,
-                                        1,  1,   1, -1, -1, -1,  1, -1,
-                                        1,  1,   1,  1,  1,  1,  1,  1 };
+        //void Matrix4x4MultiplyBy4x4(float src1[4*4], float src2[4*4], float dest[4*4]);
+        void Matrix4x4MultiplyBy4x4(float *, float *, float *);
+        //motliplicazione della matrice finale per ciascun vertice
+        void vector_matrix_multiply();
+        // parte dalla matrice trasformed_vertex e lo spiattella in 2D   
+        void from_3D_to_2D();
+    public:
+
+        Cube_3D();
+
         void update_translation(float, float, float);
         void update_translation(float, int);
 
@@ -119,14 +107,15 @@ class Cube_3D{
         //void update_rotation(float, int);
 
         void update_scaling(float, float, float);
-
-        //void Matrix4x4MultiplyBy4x4(float src1[4*4], float src2[4*4], float dest[4*4]);
-        void Matrix4x4MultiplyBy4x4(float *, float *, float *);
-
-        void vector_matrix_multiply();
-        void from_3D_to_2D();
-        // parte dalla matrice trasformed_vertex e lo spiattella in 2D          può aver senso farla privata...
-        int apply_projection();
+        
+        //una funzione inline pare non possa avere prototipo e definizione su file diversi, quindi la definisco qui
+        inline void calculate_rendering(){
+            Matrix4x4MultiplyBy4x4(projection_matrix, translation_matrix, proj_trasl);
+            Matrix4x4MultiplyBy4x4(proj_trasl, rotation_matrix, proj_trasl_rot);
+            Matrix4x4MultiplyBy4x4(proj_trasl_rot, scaling_matrix, complete_matrix);
+            vector_matrix_multiply();
+            from_3D_to_2D();
+        }
         //ritorna 0 quando ha effettivamente fatto lo swap del buffer
         int display_frame();
 };
@@ -134,37 +123,3 @@ class Cube_3D{
 
 #endif //GRAPHIC_OBJECT_H_
 
-/*
-//     float n = 0.1; 
-//     float f = 100; 
-//     float angleOfView = 90;
-//     float imageAspectRatio = 4/3;
-//     float scale = tan(angleOfView * 0.5 * M_PI / 180) * n;      ->0.1
-//     r = imageAspectRatio * scale;       
-//     l = -r; 
-//     t = scale;
-//     b = -t; 
-
-   
-
-    //      // set OpenGL perspective projection matrix
-    // M[0][0] = 2 * n / (r - l); 
-    // M[0][1] = 0; 
-    // M[0][2] = 0; 
-    // M[0][3] = 0; 
- 
-    // M[1][0] = 0; 
-    // M[1][1] = 2 * n / (t - b); 
-    // M[1][2] = 0; 
-    // M[1][3] = 0; 
- 
-    // M[2][0] = 0; 
-    // M[2][1] = 0; 
-    // M[2][2] = -(f + n) / (f - n); 
-    // M[2][3] = -1; 
- 
-    // M[3][0] = 0; 
-    // M[3][1] = 0; 
-    // M[3][2] = -2 * f * n / (f - n); 
-    // M[3][3] = 0; 
-*/
