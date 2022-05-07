@@ -106,23 +106,31 @@ class Cube_3D{
                                     0,0,1,0,
                                     0,0,0,1}; 
 
-        //void Matrix4x4MultiplyBy4x4(float src1[4*4], float src2[4*4], float dest[4*4]);
         void Matrix4x4MultiplyBy4x4(float *, float *, float *);
         //motliplicazione della matrice finale per ciascun vertice
         void vector_matrix_multiply();
         // parte dalla matrice trasformed_vertex e lo spiattella in 2D   
         void from_3D_to_2D();
+
+        //void update_translation_matrix();
+        void update_rotation_matrix();
+        void update_scaling_matrix();
     public:
 
         Cube_3D();
-
+        //funzioni overloaded per modificare tutti i parametri oppure solamente quelli di un asse
         void update_translation(float, float, float);
         void update_translation(float, int);
 
         void update_rotation(float, float, float);
-        //void update_rotation(float, int);
+        void update_rotation(float, int);
 
         void update_scaling(float, float, float);
+        void update_scaling(float, int);
+
+        void update_translation_relative(float, int);
+        void update_rotation_relative(float, int);
+        void update_scaling_relative(float, int);
         
         //una funzione inline pare non possa avere prototipo e definizione su file diversi, quindi la definisco qui
         inline void calculate_rendering(){

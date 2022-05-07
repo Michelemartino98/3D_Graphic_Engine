@@ -9,6 +9,7 @@
 
 //#define DEBUG_1
 //#define DEBUG_VECTORS
+//#define DEBUG_ACC
 
 //C standard library
 
@@ -25,16 +26,19 @@
 //NIOS driver library
 #include "system.h"
 #include "drivers/inc/altera_up_avalon_video_pixel_buffer_dma.h"
-#include "altera_up_avalon_accelerometer_spi.h"
 #include "HAL/inc/sys/alt_timestamp.h"
 #include "HAL/inc/io.h"
 
+//header per gestione PIO
 #include "./drivers/inc/altera_avalon_pio_regs.h"
+//header per gestione accelerometro
+#include "./drivers/inc/altera_up_avalon_accelerometer_spi.h"
 
 //aggiunte per la funziona di samu del clipping
 	#include <errno.h>
 	#include "HAL/inc/priv/alt_file.h"
 ////////
+
 
 //user header file
 #include "../inc/functions.h"
@@ -43,7 +47,9 @@
 #define X_RES       320
 #define Y_RES       240
 
-
+#define MAX_INC_S  (float)0.01 //massimo incremento che può avere la scala
+#define MAX_INC_T  (float)0.01 //massimo incremento che può avere la traslazione
+#define MAX_INC_R  (float)(M_PI/10) //massimo incremento che può avere la rotazione
 //palette colori a 16 bit
 #define RED         0xF800
 #define GREEN       0x07E0
@@ -54,7 +60,9 @@
 #define MAGENTA     0xF81F
 #define CYAN        0x07FF
 
-
+//macro per gestione accelerometro
+#define MAX_ACC 240 //corrisponde a 1g ( 240 * sensitivity = 9.8 ) quindi nell'ipotesi che
+					// la scheda venga usata da ferma è l'accelerazione massima che si può avere lungo un asse
 
 /*  controlla se mandare a terminale le coordinate x,y,z,w dei singoli vettori,
  *  oltre che le coordinate x,y dello schermo finali

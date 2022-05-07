@@ -3,17 +3,67 @@
 extern alt_up_pixel_buffer_dma_dev *pixel_buf_dma_dev;
 
 Cube_3D::Cube_3D(){
-    //la traslazione inziale sull'asse z serve a spostare indietro la camera(lasciando l'oggetto fermo), altrimenti la camera si troverebbe nell'origine e sarebbe "dentro" il cubo(e si vede la croce delle diagonali)
+    //la traslazione inziale sull'asse z serve a spostare indietro l'oggetto nel mondo, altrimenti la camera si troverebbe nell'origine e sarebbe "dentro" il cubo(e si vede la croce delle diagonali)
+    //NB: se l'oggetto finisce alle spalle della camera viene visto "all'indietro" (front e back del cubo sono invertiti)
+    
+    //inizializzo matrice di traslazione
+    translation_matrix[M4(0,0)] = 1; 
+    translation_matrix[M4(0,1)] = 0; 
+    translation_matrix[M4(0,2)] = 0; 
+
+    translation_matrix[M4(1,0)] = 0; 
+    translation_matrix[M4(1,1)] = 1; 
+    translation_matrix[M4(1,2)] = 0; 
+
+    translation_matrix[M4(2,0)] = 0; 
+    translation_matrix[M4(2,1)] = 0; 
+    translation_matrix[M4(2,2)] = 1; 
+
+    translation_matrix[M4(3,0)] = 0; 
+    translation_matrix[M4(3,1)] = 0;
+    translation_matrix[M4(3,2)] = 0;
+    translation_matrix[M4(3,3)] = 1;
+
     update_translation(0, 0, -3);
+
+    //inizializzo matrice di rotazione
+    
+    rotation_matrix[M4(0,3)] = 0;
+    rotation_matrix[M4(1,3)] = 0; 
+    rotation_matrix[M4(2,3)] = 0;
+    rotation_matrix[M4(3,0)] = 0;
+    rotation_matrix[M4(3,1)] = 0;
+    rotation_matrix[M4(3,2)] = 0;
+    rotation_matrix[M4(3,3)] = 1;
     update_rotation(0, 0, 0);
+
+    //inizializzo matrice di scala
+    scaling_matrix[M4(0,1)] = 0; 
+    scaling_matrix[M4(0,2)] = 0; 
+    scaling_matrix[M4(0,3)] = 0; 
+
+    scaling_matrix[M4(1,0)] = 0; 
+    scaling_matrix[M4(1,2)] = 0; 
+    scaling_matrix[M4(1,3)] = 0; 
+
+    scaling_matrix[M4(2,0)] = 0; 
+    scaling_matrix[M4(2,1)] = 0; 
+    scaling_matrix[M4(2,3)] = 0; 
+
+    scaling_matrix[M4(3,0)] = 0; 
+    scaling_matrix[M4(3,1)] = 0; 
+    scaling_matrix[M4(3,2)] = 0; 
+    scaling_matrix[M4(3,3)] = 1; 
     update_scaling(0.4, 0.4, 0.4);
 
     
+    
+    // set OpenGL perspective projection matrix
     r = imageAspectRatio * scale;
     l = -r;
     t = scale;
     b = -t;
-    // set OpenGL perspective projection matrix
+
     projection_matrix[M4(0,0)] = (float)(2 * n) / (r - l); 
     projection_matrix[M4(1,0)] = (float)0; 
     projection_matrix[M4(2,0)] = (float)0; 
@@ -34,51 +84,53 @@ Cube_3D::Cube_3D(){
     projection_matrix[M4(2,3)] = (float) -2 * f * n / (f - n);
     projection_matrix[M4(3,3)] = (float)0; 
 
+    
+
+   
 }
 
 void Cube_3D::update_translation(float x, float y,float z){
+    translation_matrix[M4(0,3)] = x;
     translation[X] = x;
-    translation[Y] = y;
-    translation[Z] = z;
 
-    translation_matrix[M4(0,0)] = 1; 
-    translation_matrix[M4(0,1)] = 0; 
-    translation_matrix[M4(0,2)] = 0; 
-    translation_matrix[M4(0,3)] = translation[X];
- 
-    translation_matrix[M4(1,0)] = 0; 
-    translation_matrix[M4(1,1)] = 1; 
-    translation_matrix[M4(1,2)] = 0; 
-    translation_matrix[M4(1,3)] = translation[Y]; 
- 
-    translation_matrix[M4(2,0)] = 0; 
-    translation_matrix[M4(2,1)] = 0; 
-    translation_matrix[M4(2,2)] = 1; 
-    translation_matrix[M4(2,3)] = translation[Z]; 
- 
-    translation_matrix[M4(3,0)] = 0; 
-    translation_matrix[M4(3,1)] = 0;
-    translation_matrix[M4(3,2)] = 0;
-    translation_matrix[M4(3,3)] = 1;
+    translation_matrix[M4(1,3)] = y;
+    translation[Y] = y;
+
+    translation_matrix[M4(2,3)] = z;
+    translation[Z] = z;
 }
 
-void Cube_3D::update_translation(float new_value, int coordinate){
-    switch(coordinate)
+void Cube_3D::update_translation(float new_value, int axis){
+    switch(axis)
     {
         case X:
             translation[X] = new_value;
-            translation_matrix[M4(0,3)] = translation[X];
             break;
         case Y:
             translation[Y] = new_value;
-            translation_matrix[M4(1,3)] = translation[Y];
             break;
         case Z:
             translation[Z] = new_value;
-            translation_matrix[M4(2,3)] = translation[Z];
             break;
     }
+    update_translation(translation[X], translation[Y], translation[Z]);
 }
+void Cube_3D::update_translation_relative(float relative_value, int axis ){
+    switch(axis)
+    {
+        case X:
+            translation[X] += relative_value;
+            break;
+        case Y:
+            translation[Y] += relative_value;
+            break;
+        case Z:
+            translation[Z] += relative_value;
+            break;
+    }
+    update_translation(translation[X], translation[Y], translation[Z]);
+}
+
 
 void Cube_3D::update_rotation(float rx, float ry, float rz){
     //reference: http://www.opengl-tutorial.org/assets/faq_quaternions/index.html#Q36
@@ -102,24 +154,54 @@ void Cube_3D::update_rotation(float rx, float ry, float rz){
     rotation_matrix[M4(0,0)] = c*e; 
     rotation_matrix[M4(0,1)] = -c*f;
     rotation_matrix[M4(0,2)] = d;
-    rotation_matrix[M4(0,3)] = 0; 
+
 
     rotation_matrix[M4(1,0)] = bd*e + a*f; 
     rotation_matrix[M4(1,1)] = -bd*f + a*e; 
     rotation_matrix[M4(1,2)] = - b*c;  
-    rotation_matrix[M4(1,3)] = 0; 
 
     rotation_matrix[M4(2,0)] = -ad*e + b*f; 
     rotation_matrix[M4(2,1)] = ad*f + b*e;
     rotation_matrix[M4(2,2)] = a*c;
-    rotation_matrix[M4(2,3)] = 0; 
 
-    rotation_matrix[M4(3,0)] = 0; 
-    rotation_matrix[M4(3,1)] = 0; 
-    rotation_matrix[M4(3,2)] = 0; 
-    rotation_matrix[M4(3,3)] = 1; 
+
+
+
+
+     
 }
 
+void Cube_3D::update_rotation(float new_value, int axis){
+    switch(axis)
+    {
+        case X:
+            rotation[X] = new_value;
+            break;
+        case Y:
+            rotation[Y] = new_value;
+            break;
+        case Z:
+            rotation[Z] = new_value;
+            break;
+    }
+    update_rotation(rotation[X], rotation[Y], rotation[Z]);
+}
+
+void Cube_3D::update_rotation_relative(float new_value, int axis){
+    switch(axis)
+    {
+        case X:
+            rotation[X] += new_value;
+            break;
+        case Y:
+            rotation[Y] += new_value;
+            break;
+        case Z:
+            rotation[Z] += new_value;
+            break;
+    }
+    update_rotation(rotation[X], rotation[Y], rotation[Z]);
+}
 /* void Cube_3D::update_rotation(float new_value, int coordinate){
     switch(coordinate)
     {
@@ -157,28 +239,44 @@ void Cube_3D::update_rotation(float rx, float ry, float rz){
 
 void Cube_3D::update_scaling(float sx, float sy, float sz){
     scaling[X] = sx;
-    scaling[Y] = sy;
-    scaling[Z] = sz;
+    scaling_matrix[M4(0,0)] = sx;
 
-    scaling_matrix[M4(0,0)] = scaling[X]; 
-    scaling_matrix[M4(0,1)] = 0; 
-    scaling_matrix[M4(0,2)] = 0; 
-    scaling_matrix[M4(0,3)] = 0; 
- 
-    scaling_matrix[M4(1,0)] = 0; 
-    scaling_matrix[M4(1,1)] = scaling[Y]; 
-    scaling_matrix[M4(1,2)] = 0; 
-    scaling_matrix[M4(1,3)] = 0; 
- 
-    scaling_matrix[M4(2,0)] = 0; 
-    scaling_matrix[M4(2,1)] = 0; 
-    scaling_matrix[M4(2,2)] = scaling[Z]; 
-    scaling_matrix[M4(2,3)] = 0; 
- 
-    scaling_matrix[M4(3,0)] = 0; 
-    scaling_matrix[M4(3,1)] = 0; 
-    scaling_matrix[M4(3,2)] = 0; 
-    scaling_matrix[M4(3,3)] = 1; 
+    scaling[Y] = sy;
+    scaling_matrix[M4(1,1)] = sy;
+
+    scaling[Z] = sz;
+    scaling_matrix[M4(2,2)] = sz;
+}
+
+void Cube_3D::update_scaling(float new_value, int axis){
+    switch(axis)
+    {
+        case X:
+            scaling[X] = new_value;
+            break;
+        case Y:
+            scaling[Y] = new_value;
+            break;
+        case Z:
+            scaling[Z] = new_value;
+            break;
+    }
+    update_scaling(scaling[X], scaling[Y], scaling[Z]);
+}
+void Cube_3D::update_scaling_relative(float new_value, int axis){
+    switch(axis)
+    {
+        case X:
+            scaling[X] += new_value;
+            break;
+        case Y:
+            scaling[Y] += new_value;
+            break;
+        case Z:
+            scaling[Z] += new_value;
+            break;
+    }
+    update_scaling(scaling[X], scaling[Y], scaling[Z]);
 }
 
 int Cube_3D::display_frame(){
@@ -219,25 +317,25 @@ void Cube_3D::vector_matrix_multiply(){
     #endif
 
     for(int i = 0; i < N_VERTEX; i++){
-        transformed_vertex[M8(X,i)] =   vertex[M8(X,i)]*complete_matrix[M4(0,0)] + \
-                                        vertex[M8(Y,i)]*complete_matrix[M4(0,1)] + \
-                                        vertex[M8(Z,i)]*complete_matrix[M4(0,2)] + \
-                                        vertex[M8(W,i)]*complete_matrix[M4(0,3)];
+        transformed_vertex[M8(X,i)] =   complete_matrix[M4(0,0)] * vertex[M8(X,i)] + \
+                                        complete_matrix[M4(0,1)] * vertex[M8(Y,i)] + \
+                                        complete_matrix[M4(0,2)] * vertex[M8(Z,i)] + \
+                                        complete_matrix[M4(0,3)] * vertex[M8(W,i)];
 
-        transformed_vertex[M8(Y,i)] =   vertex[M8(X,i)]*complete_matrix[M4(1,0)] + \
-                                        vertex[M8(Y,i)]*complete_matrix[M4(1,1)] + \
-                                        vertex[M8(Z,i)]*complete_matrix[M4(1,2)] + \
-                                        vertex[M8(W,i)]*complete_matrix[M4(1,3)];
+        transformed_vertex[M8(Y,i)] =   complete_matrix[M4(1,0)] * vertex[M8(X,i)] + \
+                                        complete_matrix[M4(1,1)] * vertex[M8(Y,i)] + \
+                                        complete_matrix[M4(1,2)] * vertex[M8(Z,i)] + \
+                                        complete_matrix[M4(1,3)] * vertex[M8(W,i)];
 
-        transformed_vertex[M8(Z,i)] =   vertex[M8(X,i)]*complete_matrix[M4(2,0)] +\
-                                        vertex[M8(Y,i)]*complete_matrix[M4(2,1)] +\
-                                        vertex[M8(Z,i)]*complete_matrix[M4(2,2)] +\
-                                        vertex[M8(W,i)]*complete_matrix[M4(2,3)];
+        transformed_vertex[M8(Z,i)] =   complete_matrix[M4(2,0)] * vertex[M8(X,i)] +\
+                                        complete_matrix[M4(2,1)] * vertex[M8(Y,i)] +\
+                                        complete_matrix[M4(2,2)] * vertex[M8(Z,i)] +\
+                                        complete_matrix[M4(2,3)] * vertex[M8(W,i)];
 
-        transformed_vertex[M8(W,i)] =   vertex[M8(X,i)]*complete_matrix[M4(3,0)] +\
-                                        vertex[M8(Y,i)]*complete_matrix[M4(3,1)] +\
-                                        vertex[M8(Z,i)]*complete_matrix[M4(3,2)] +\
-                                        vertex[M8(W,i)]*complete_matrix[M4(3,3)];
+        transformed_vertex[M8(W,i)] =   complete_matrix[M4(3,0)] * vertex[M8(X,i)] +\
+                                        complete_matrix[M4(3,1)] * vertex[M8(Y,i)] +\
+                                        complete_matrix[M4(3,2)] * vertex[M8(Z,i)] +\
+                                        complete_matrix[M4(3,3)] * vertex[M8(W,i)];
     }
     for (int c = 0; c < 8; c++)
     {
@@ -311,11 +409,11 @@ void Cube_3D::from_3D_to_2D(){
 	printf("START PRINT 2D COORDINATES\n");
 	#endif
     /*
-    *   (0,0)  ---------(320,0)     (-1,1)  ------   (1,1)    
+    *   (0,0)-----------(320,0)     (-1,1)-----------(1,1)    
     *   |                   |       |                   |
     *   |       VGA         |       |       CUBO        |    
     *   |                   |       |    normalizzato   |
-    *   (0,240)-------  (320,240)   (-1,-1)-------  (1,-1)
+    *   (0,240)---------(320,240)   (-1,-1)----------(1,-1)
     */
     for(int i = 0; i < N_VERTEX; i++){
     		vertex_on_2D[i][X] = ((transformed_vertex[M8(X,i)]*(X_RES/2))+(X_RES/2));

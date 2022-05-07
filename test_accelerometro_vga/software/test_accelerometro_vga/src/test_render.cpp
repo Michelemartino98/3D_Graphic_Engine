@@ -6,7 +6,7 @@ alt_up_pixel_buffer_dma_dev *pixel_buf_dma_dev;
 alt_up_accelerometer_spi_dev * accelerometer_dev;
 
 int main(){
-    
+
     pixel_buf_dma_dev = alt_up_pixel_buffer_dma_open_dev("/dev/video_pixel_buffer_dma_0");
     accelerometer_dev = alt_up_accelerometer_spi_open_dev ("/dev/accelerometer_spi_0");
 
@@ -15,12 +15,11 @@ int main(){
     else
         printf ("Opened acc device \n");
 
-    int32_t xAccel = 0;
-    int32_t yAccel = 0;
-    int32_t zAccel = 0;
-
     Cube_3D Cube;
-
+    //variabili per uso dell'accelerometro
+    int32_t x_acc = 0;
+    int32_t y_acc = 0;
+    int32_t z_acc = 0;
     //variabili per uso degli slider
     float sx = 0.5;
     float sy = 0.5;
@@ -36,11 +35,10 @@ int main(){
 
     uint16_t slider_data_reg;
     uint16_t inc_pos; //segno dell'incremento
-
-    float inc_s = 0.005;
-    float inc_t = 0.005;
-    float inc_r = M_PI/800;
     
+    float inc_s;
+    float inc_t;
+    float inc_r;
  
     int current_frame = 0;
  
@@ -48,7 +46,12 @@ int main(){
 
         
         slider_data_reg = IORD_ALTERA_AVALON_PIO_DATA(SLIDERS_BASE);
-
+        alt_up_accelerometer_spi_read_x_axis(accelerometer_dev, &x_acc);
+        alt_up_accelerometer_spi_read_y_axis(accelerometer_dev, &y_acc);
+        alt_up_accelerometer_spi_read_z_axis(accelerometer_dev, &z_acc);
+        inc_s= (float)x_acc / MAX_ACC * MAX_INC_S;
+        inc_t= (float)x_acc / MAX_ACC * MAX_INC_T;
+        inc_r= (float)x_acc / MAX_ACC * MAX_INC_R;
 
         if(slider_data_reg & BIT(9)){                        //se 1 incremento positivo
 
@@ -110,6 +113,11 @@ int main(){
                 rz-=inc_r;
             }
         }
+
+        #ifdef DEBUG_ACC
+        printf("%li %li %li\n", x_acc, y_acc, z_acc);
+        #endif //Debug accelerometro
+
         Cube.update_scaling( sx , sy , sz);
         Cube.update_translation( x , y , z);
         Cube.update_rotation( rx , ry , rz );
@@ -120,11 +128,6 @@ int main(){
             
         Cube.calculate_rendering();
         Cube.display_frame(); 
-
-        alt_up_accelerometer_spi_read_x_axis(accelerometer_dev, &xAccel);
-        alt_up_accelerometer_spi_read_y_axis(accelerometer_dev, &yAccel);
-        alt_up_accelerometer_spi_read_z_axis(accelerometer_dev, &zAccel);
-        printf("%li %li %li\n", xAccel, yAccel, zAccel);
 
     }
 }

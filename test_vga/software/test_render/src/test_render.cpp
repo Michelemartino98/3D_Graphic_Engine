@@ -34,7 +34,7 @@ int main(){
     int current_frame = 0;
  
     for(;;){
-
+ww
         
         slider_data_reg = IORD_ALTERA_AVALON_PIO_DATA(SLIDERS_BASE);
 
