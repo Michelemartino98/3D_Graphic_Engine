@@ -1,11 +1,14 @@
 
 #include "../inc/config.h"
 
-
 alt_up_pixel_buffer_dma_dev *pixel_buf_dma_dev;
 alt_up_accelerometer_spi_dev * accelerometer_dev;
 
 int main(){
+
+
+    Cube_3D Cube;
+    int current_frame = 0;
 
     pixel_buf_dma_dev = alt_up_pixel_buffer_dma_open_dev("/dev/video_pixel_buffer_dma_0");
     accelerometer_dev = alt_up_accelerometer_spi_open_dev ("/dev/accelerometer_spi_0");
@@ -14,118 +17,83 @@ int main(){
         printf ("Error: could not open acc device \n");
     else
         printf ("Opened acc device \n");
-
-    Cube_3D Cube;
-    //variabili per uso dell'accelerometro
+            
+    //parametri per uso dell'accelerometro+slider
     int32_t x_acc = 0;
     int32_t y_acc = 0;
-    int32_t z_acc = 0;
-    //variabili per uso degli slider
-    float sx = 0.5;
-    float sy = 0.5;
-    float sz = 0.5;
-    
-    float x = 0;
-    float y = 0;
-    float z = -3;
-
-    float rx = 0;
-    float ry = 0;
-    float rz = 0;
+    int32_t z_acc = 0; 
 
     uint16_t slider_data_reg;
-    uint16_t inc_pos; //segno dell'incremento
-    
-    float inc_s;
-    float inc_t;
-    float inc_r;
- 
-    int current_frame = 0;
- 
-    for(;;){
+    uint16_t edge_capture_k1;
+    bool command_sw=true; 
 
-        
+    float inc_tx=0;
+    float inc_ty=0;
+
+    float inc_rx=0;
+    float inc_ry=0;
+
+    for(;;){
         slider_data_reg = IORD_ALTERA_AVALON_PIO_DATA(SLIDERS_BASE);
         alt_up_accelerometer_spi_read_x_axis(accelerometer_dev, &x_acc);
         alt_up_accelerometer_spi_read_y_axis(accelerometer_dev, &y_acc);
         alt_up_accelerometer_spi_read_z_axis(accelerometer_dev, &z_acc);
-        inc_s= (float)x_acc / MAX_ACC * MAX_INC_S;
-        inc_t= (float)x_acc / MAX_ACC * MAX_INC_T;
-        inc_r= (float)x_acc / MAX_ACC * MAX_INC_R;
 
-        if(slider_data_reg & BIT(9)){                        //se 1 incremento positivo
-
+        #ifdef C1
+        //uso key1 per passare dal controllo della rotazione a quello della traslazione tramite accelerometro
+        edge_capture_k1 = IORD_ALTERA_AVALON_PIO_EDGE_CAP(KEY_BASE);
+        if( edge_capture_k1 & BIT(1) ) command_sw=!command_sw;
+        IOWR_ALTERA_AVALON_PIO_EDGE_CAP(KEY_BASE, BIT(1));
+        #else
+        //trasla e ruota contemporaneamente
+        command_sw=!command_sw; 
+        #endif
+        //ROTAZIONE
+        if(command_sw){
+            inc_rx= (float)y_acc / G_ACC * MAX_INC_R;
+            Cube.update_rotation_relative( -inc_rx, X);
+            inc_ry= (float)x_acc / G_ACC * MAX_INC_R;
+            Cube.update_rotation_relative( inc_ry, Z);
+        }
+        //TRASLAZIONE
+        else{
+            inc_tx= (float)x_acc / G_ACC * MAX_INC_T;
+            Cube.update_translation_relative(inc_tx , X);
+            inc_ty= (float)y_acc / G_ACC * MAX_INC_T;
+            Cube.update_translation_relative(inc_ty , Y);
+        }
+        //SCALA
+        if(slider_data_reg & BIT(9)){   //il segno dell'incremento della scala sta su slider9    
             if(slider_data_reg & BIT(0)){ //scala x
-                sx+=inc_s;
+                Cube.update_scaling_relative( INC_S , X );
             }
             if(slider_data_reg & BIT(1)){ //scala y
-                sy+=inc_s;
+                Cube.update_scaling_relative( INC_S , Y );
             }
             if(slider_data_reg & BIT(2)){ //scala y
-                sz+=inc_s;
-            }
-            if(slider_data_reg & BIT(3)){ //trasla x
-                x+=inc_t;
-            }
-            if(slider_data_reg & BIT(4)){ //trasla y
-                y+=inc_t;
-            }
-            if(slider_data_reg & BIT(5)){ //trasla z
-                z+=inc_t;
-            }
-            if(slider_data_reg & BIT(6)){ //ruota x
-                rx+=inc_r;
-            }
-            if(slider_data_reg & BIT(7)){ //ruota y
-                ry+=inc_r;
-            }
-            if(slider_data_reg & BIT(8)){ //ruota z
-                rz+=inc_r;
+                Cube.update_scaling_relative( INC_S , Z );
             }
         }
-
-        else {                              //incremento negativo
+        else {                            //incremento negativo
             if(slider_data_reg & BIT(0)){ //scala x
-                sx-=inc_s;
+                Cube.update_scaling_relative( -INC_S , X );
             }
             if(slider_data_reg & BIT(1)){ //scala y
-                sy-=inc_s;
+                Cube.update_scaling_relative( -INC_S , Y );
             }
             if(slider_data_reg & BIT(2)){ //scala y
-                sz-=inc_s;
-            }
-            if(slider_data_reg & BIT(3)){ //trasla x
-                x-=inc_t;
-            }
-            if(slider_data_reg & BIT(4)){ //trasla y
-                y-=inc_t;
-            }
-            if(slider_data_reg & BIT(5)){ //trasla z
-                z-=inc_t;
-            }
-            if(slider_data_reg & BIT(6)){ //ruota x
-                rx-=inc_r;
-            }
-            if(slider_data_reg & BIT(7)){ //ruota y
-                ry-=inc_r;
-            }
-            if(slider_data_reg & BIT(8)){ //ruota z
-                rz-=inc_r;
+                Cube.update_scaling_relative( -INC_S , Z );
             }
         }
-
         #ifdef DEBUG_ACC
-        printf("%li %li %li\n", x_acc, y_acc, z_acc);
-        #endif //Debug accelerometro
+        printf("%f %f \n", inc_rx, inc_rz );
+        #endif
 
-        Cube.update_scaling( sx , sy , sz);
-        Cube.update_translation( x , y , z);
-        Cube.update_rotation( rx , ry , rz );
 
         #ifdef DEBUG_1
     	printf("FRAME %d\n", current_frame++);
         #endif /*DEBUG_1*/
-            
+
         Cube.calculate_rendering();
         Cube.display_frame(); 
 

@@ -2,6 +2,7 @@
 
 extern alt_up_pixel_buffer_dma_dev *pixel_buf_dma_dev;
 
+
 Cube_3D::Cube_3D(){
     //la traslazione inziale sull'asse z serve a spostare indietro l'oggetto nel mondo, altrimenti la camera si troverebbe nell'origine e sarebbe "dentro" il cubo(e si vede la croce delle diagonali)
     //NB: se l'oggetto finisce alle spalle della camera viene visto "all'indietro" (front e back del cubo sono invertiti)
@@ -192,15 +193,24 @@ void Cube_3D::update_rotation_relative(float new_value, int axis){
     {
         case X:
             rotation[X] += new_value;
+            if(rotation[X]>2*M_PI)
+                rotation[X]-=2*M_PI;
             break;
         case Y:
             rotation[Y] += new_value;
+            if(rotation[Y]>2*M_PI)
+                rotation[Y]-=2*M_PI;
             break;
         case Z:
             rotation[Z] += new_value;
+            if(rotation[Z]>2*M_PI)
+                rotation[Z]-=2*M_PI;
             break;
     }
     update_rotation(rotation[X], rotation[Y], rotation[Z]);
+    #ifdef DEBUG_ACC
+    printf("rx=%f,ry=%f,rz=%f /n",rotation[X],rotation[Y],rotation[Z]);
+    #endif
 }
 /* void Cube_3D::update_rotation(float new_value, int coordinate){
     switch(coordinate)
@@ -279,6 +289,7 @@ void Cube_3D::update_scaling_relative(float new_value, int axis){
     update_scaling(scaling[X], scaling[Y], scaling[Z]);
 }
 
+
 int Cube_3D::display_frame(){
     //pulisco il back buffer
     alt_up_pixel_buffer_dma_clear_screen_delayed(pixel_buf_dma_dev,1);
@@ -292,8 +303,8 @@ int Cube_3D::display_frame(){
     alt_up_pixel_buffer_dma_draw_line_enhanced_clipping(pixel_buf_dma_dev,vertex_on_2D[0][X],vertex_on_2D[0][Y],vertex_on_2D[2][X],vertex_on_2D[2][Y], GREEN, 1);
     alt_up_pixel_buffer_dma_draw_line_enhanced_clipping(pixel_buf_dma_dev,vertex_on_2D[0][X],vertex_on_2D[0][Y],vertex_on_2D[4][X],vertex_on_2D[4][Y], RED, 1);
     alt_up_pixel_buffer_dma_draw_line_enhanced_clipping(pixel_buf_dma_dev,vertex_on_2D[1][X],vertex_on_2D[1][Y],vertex_on_2D[6][X],vertex_on_2D[6][Y], GREEN, 1);
-    alt_up_pixel_buffer_dma_draw_line_enhanced_clipping(pixel_buf_dma_dev,vertex_on_2D[1][X],vertex_on_2D[1][Y],vertex_on_2D[5][X],vertex_on_2D[5][Y], RED, 1);
-    alt_up_pixel_buffer_dma_draw_line_enhanced_clipping(pixel_buf_dma_dev,vertex_on_2D[2][X],vertex_on_2D[2][Y],vertex_on_2D[3][X],vertex_on_2D[3][Y], WHITE, 1);
+    alt_up_pixel_buffer_dma_draw_line_enhanced_clipping(pixel_buf_dma_dev,vertex_on_2D[1][X],vertex_on_2D[1][Y],vertex_on_2D[5][X],vertex_on_2D[5][Y], WHITE, 1);
+    alt_up_pixel_buffer_dma_draw_line_enhanced_clipping(pixel_buf_dma_dev,vertex_on_2D[2][X],vertex_on_2D[2][Y],vertex_on_2D[3][X],vertex_on_2D[3][Y], RED, 1);
     alt_up_pixel_buffer_dma_draw_line_enhanced_clipping(pixel_buf_dma_dev,vertex_on_2D[2][X],vertex_on_2D[2][Y],vertex_on_2D[6][X],vertex_on_2D[6][Y], GREEN, 1);
     alt_up_pixel_buffer_dma_draw_line_enhanced_clipping(pixel_buf_dma_dev,vertex_on_2D[3][X],vertex_on_2D[3][Y],vertex_on_2D[4][X],vertex_on_2D[4][Y], YELLOW, 1);
     alt_up_pixel_buffer_dma_draw_line_enhanced_clipping(pixel_buf_dma_dev,vertex_on_2D[3][X],vertex_on_2D[3][Y],vertex_on_2D[7][X],vertex_on_2D[7][Y], YELLOW, 1);

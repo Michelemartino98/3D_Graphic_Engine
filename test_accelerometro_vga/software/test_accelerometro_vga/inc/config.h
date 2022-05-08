@@ -10,7 +10,11 @@
 //#define DEBUG_1
 //#define DEBUG_VECTORS
 //#define DEBUG_ACC
+//#define DEBUG_TRASLATION
 
+#define C1 	//se definita si ha che premendo key1 si passa dal ruotare 
+			//l'oggetto al traslarlo mediante accelerometro e viceversa
+			//se non definito ho entrambe le trasformazioni in contemporanea
 //C standard library
 
 #include <unistd.h>
@@ -45,11 +49,16 @@
 #include "../inc/graphic_object.h"
 
 #define X_RES       320
-#define Y_RES       240
+#define Y_RES       260
 
-#define MAX_INC_S  (float)0.01 //massimo incremento che può avere la scala
-#define MAX_INC_T  (float)0.01 //massimo incremento che può avere la traslazione
-#define MAX_INC_R  (float)(M_PI/10) //massimo incremento che può avere la rotazione
+
+//MACRO per controllo comandi asseganti all'accelerometro
+#define INC_S  		(float)	0.005 		//incremento scala
+#define MAX_INC_T  	(float)	0.02		//massimo incremento che può avere la traslazione
+#define MAX_INC_R  	(float)	(M_PI/100) 	//massimo incremento che può avere la rotazione
+#define G_ACC				254 		//corrisponde a 1g ( 254 * sensitivity = 9.8 ) quindi nell'ipotesi che
+										// la scheda venga usata da ferma è l'accelerazione massima che si può avere lungo un asse
+
 //palette colori a 16 bit
 #define RED         0xF800
 #define GREEN       0x07E0
@@ -60,9 +69,6 @@
 #define MAGENTA     0xF81F
 #define CYAN        0x07FF
 
-//macro per gestione accelerometro
-#define MAX_ACC 240 //corrisponde a 1g ( 240 * sensitivity = 9.8 ) quindi nell'ipotesi che
-					// la scheda venga usata da ferma è l'accelerazione massima che si può avere lungo un asse
 
 /*  controlla se mandare a terminale le coordinate x,y,z,w dei singoli vettori,
  *  oltre che le coordinate x,y dello schermo finali

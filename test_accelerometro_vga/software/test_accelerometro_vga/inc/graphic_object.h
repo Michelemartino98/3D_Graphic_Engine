@@ -64,6 +64,7 @@ typedef float matrix4_t[16];
 
 class Cube_3D{
 
+        //parametri per controllo matrici
         float translation[3];      //x,y,z
         float rotation[3];      //rx,ry,rz
         float scaling[3];
@@ -104,7 +105,7 @@ class Cube_3D{
         float identity_matrix[4*4]={1,0,0,0,
                                     0,1,0,0,
                                     0,0,1,0,
-                                    0,0,0,1}; 
+                                    0,0,0,1};
 
         void Matrix4x4MultiplyBy4x4(float *, float *, float *);
         //motliplicazione della matrice finale per ciascun vertice
@@ -131,6 +132,9 @@ class Cube_3D{
         void update_translation_relative(float, int);
         void update_rotation_relative(float, int);
         void update_scaling_relative(float, int);
+
+        //funzione per calcolo trasformazioni controllate dall'accelerometro
+        void update_acc_trsformation();
         
         //una funzione inline pare non possa avere prototipo e definizione su file diversi, quindi la definisco qui
         inline void calculate_rendering(){

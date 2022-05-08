@@ -179,3 +179,4 @@ void alt_up_pixel_buffer_dma_draw_line_enhanced_clipping(alt_up_pixel_buffer_dma
 	}
 }
 
+
