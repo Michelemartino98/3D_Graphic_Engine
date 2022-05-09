@@ -77,7 +77,6 @@ class Cube_3D{
         float imageAspectRatio = (float)4/3;
         float scale = 0.1;          //tan(angleOfView * 0.5 * M_PI / 180) * n;  
           
-
         //struttura dati che contiene i vertici originali del solido sui quali applico le traslazioni
         float vertex[N_VERTEX*4] = {   -1,  1,  -1, -1, -1,  1,  1,  1,
                                         1,  1,  -1, -1,  1,  1, -1, -1,

@@ -12,9 +12,6 @@
 //#define DEBUG_ACC
 //#define DEBUG_TRASLATION
 
-#define C1 	//se definita si ha che premendo key1 si passa dal ruotare 
-			//l'oggetto al traslarlo mediante accelerometro e viceversa
-			//se non definito ho entrambe le trasformazioni in contemporanea
 //C standard library
 
 #include <unistd.h>
@@ -53,11 +50,12 @@
 
 
 //MACRO per controllo comandi asseganti all'accelerometro
-#define INC_S  		(float)	0.005 		//incremento scala
-#define MAX_INC_T  	(float)	0.02		//massimo incremento che può avere la traslazione
-#define MAX_INC_R  	(float)	(M_PI/100) 	//massimo incremento che può avere la rotazione
+#define INC_S  		(float)	0.001 		//incremento scala
+#define MAX_INC_T  	(float)	0.04		//massimo incremento che può avere la traslazione
+#define MAX_INC_R  	(float)	(M_PI/50) 	//massimo incremento che può avere la rotazione
 #define G_ACC				254 		//corrisponde a 1g ( 254 * sensitivity = 9.8 ) quindi nell'ipotesi che
 										// la scheda venga usata da ferma è l'accelerazione massima che si può avere lungo un asse
+#define KEY1 		0					//????????perchè key1 lo trovo in 0??????????
 
 //palette colori a 16 bit
 #define RED         0xF800
