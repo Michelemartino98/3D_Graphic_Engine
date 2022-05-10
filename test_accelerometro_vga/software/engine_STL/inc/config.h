@@ -45,18 +45,19 @@
 //user header file
 #include "../inc/functions.h"
 #include "../inc/graphic_object.h"
+#include "../inc/accelerometer.h"
 
 #define X_RES       320
 #define Y_RES       260
 #define TIMER_FREQ 80000000 
 
-//MACRO per controllo comandi asseganti all'accelerometro
+//controllo accelerometro
 #define INC_S  		(float)	0.001 		//incremento scala
 #define MAX_INC_T  	(float)	0.04		//massimo incremento che può avere la traslazione
 #define MAX_INC_R  	(float)	(M_PI/50) 	//massimo incremento che può avere la rotazione
 #define G_ACC				254 		//corrisponde a 1g ( 254 * sensitivity = 9.8 ) quindi nell'ipotesi che
 										// la scheda venga usata da ferma è l'accelerazione massima che si può avere lungo un asse
-#define KEY1 		0					//key1 si trova in posizione zero nei registri della pio perchè 
+#define KEY1 		0					//key1 si trova in posizione zero nei registri della pio perchè key0 è usato come reset globale
 #define ACC_TH		4 					//soglia di accelerazione per evitare che il cubo si muova anche con board in orizzontale
 
 //define for showing fps
@@ -88,8 +89,7 @@
 
 // user macros
 #define M4(x,y) (x*4+y)     //indirizza l'lemento (x,y) di una matrice a 4 colonne, (rappresentato sotto forma di array lineare)
-#define M8(x,y) (x*8+y)     //indirizza l'lemento (x,y) di una matrice a 8 colonne,(rappresentato sotto forma di array lineare)
-//#define M8(x,y) (x*N_VERTEX+y)
+#define M8(x,y) (x*N_VERTEX+y) //TODO - rinominare M8 in V per avere più senso
 #define ABS(x)	((x >= 0) ? (x) : (-(x)))
 #define BIT(x)	(1<<x)
 #define HEX3_HEX0_DATA_REG	(*(volatile uint32_t*) 	(HEX3_HEX0_BASE))		// HEX3_HEX0_DATA_REG � il nome del registro

@@ -24,13 +24,13 @@ typedef float matrix4_t[16];
 /*
  * COORDINATE CUBO
  *
- *       4--------5
+ *       7--------6
  * 		/|       /|
- * 		0-------1 |
+ * 		3-------2 |
  *      | |     | |
- *      | 3-----|-7
+ *      | 4-----|-5
  *      |/      |/
- *      2-------6
+ *      0-------1
  *
  *
  */
@@ -79,9 +79,9 @@ class Cube_3D{
         float scale = tan(angleOfView * 0.5 * M_PI / 180) * n; //= 0.1;          //tan(angleOfView * 0.5 * M_PI / 180) * n;  
           
         //struttura dati che contiene i vertici originali del solido sui quali applico le traslazioni
-        float vertex[N_VERTEX*4] = {   -1,  1,  -1, -1, -1,  1,  1,  1,
-                                        1,  1,  -1, -1,  1,  1, -1, -1,
-                                        1,  1,   1, -1, -1, -1,  1, -1,
+        float vertex[N_VERTEX*4] = {   -1,  1,   1, -1, -1,  1,  1, -1,
+                                       -1, -1,   1,  1, -1, -1,  1,  1,
+                                        1,  1,   1,  1, -1, -1, -1, -1,
                                         1,  1,   1,  1,  1,  1,  1,  1 };
 
         //contiene i vertici trasformati, ma sempre 3D
@@ -112,7 +112,19 @@ class Cube_3D{
         void vector_matrix_multiply();
         // parte dalla matrice trasformed_vertex e lo spiattella in 2D   
         void from_3D_to_2D();
-
+        uint16_t faces[N_FACES][3] = {  {0,  2, 3},
+                                        {0, 1, 2},
+                                        {1, 5, 6},
+                                        { 1,2 ,6 },
+                                        { 3,2 ,7 },
+                                        { 2,7 ,6 },
+                                        { 0,3 ,7 },
+                                        { 0, 4,7 },
+                                        { 0, 1,5 },
+                                        {0,4 ,5},                                        
+                                        {4,5 ,6},
+                                        {4,7 ,6}                                        
+        };
 
     public:
 
