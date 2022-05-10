@@ -47,8 +47,11 @@
 #include "../inc/graphic_object.h"
 #include "../inc/accelerometer.h"
 
-#define X_RES       320
-#define Y_RES       260
+
+extern alt_up_pixel_buffer_dma_dev *pixel_buf_dma_dev;
+#define X_RES       pixel_buf_dma_dev->x_resolution
+#define Y_RES       pixel_buf_dma_dev->y_resolution
+
 #define TIMER_FREQ 80000000 
 
 //controllo accelerometro

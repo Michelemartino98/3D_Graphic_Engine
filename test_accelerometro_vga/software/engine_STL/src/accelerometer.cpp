@@ -48,7 +48,7 @@ void accelerometer_controller(){
     }
     //ROTAZIONE
     if(command_sw){
-        if( ABS(x_acc) > ACC_TH && ABS(y_acc) > ACC_TH){
+        if( ABS(x_acc) > ACC_TH || ABS(y_acc) > ACC_TH){    // ACC_TH è una soglia per filtrare un po' l'accelerometro e evitare che anche in piano il cubo si muova
             inc_rx= (float)y_acc / G_ACC * MAX_INC_R;
             Cube.update_rotation_relative( inc_rx, X);
             inc_ry= (float)x_acc / G_ACC * MAX_INC_R;
@@ -57,7 +57,7 @@ void accelerometer_controller(){
     }
     //TRASLAZIONE
     else{
-        if( ABS(x_acc) > ACC_TH && ABS(y_acc) > ACC_TH){
+        if( ABS(x_acc) > ACC_TH || ABS(y_acc) > ACC_TH){
             inc_tx= (float)-x_acc / G_ACC * MAX_INC_T;
             Cube.update_translation_relative(inc_tx , X);
             inc_ty= (float)y_acc / G_ACC * MAX_INC_T;

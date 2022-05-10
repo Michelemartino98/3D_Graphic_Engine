@@ -152,7 +152,7 @@ class Cube_3D{
             Matrix4x4MultiplyBy4x4(proj_trasl, rotation_matrix, proj_trasl_rot);
             Matrix4x4MultiplyBy4x4(proj_trasl_rot, scaling_matrix, complete_matrix);
             vector_matrix_multiply();
-            from_3D_to_2D();
+            //from_3D_to_2D();
         }
         //ritorna 0 quando ha effettivamente fatto lo swap del buffer
         int display_frame();

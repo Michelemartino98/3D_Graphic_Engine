@@ -2,7 +2,6 @@
 
 extern alt_up_pixel_buffer_dma_dev *pixel_buf_dma_dev;
 
-
 Cube_3D::Cube_3D(){
     //la traslazione inziale sull'asse z serve a spostare indietro l'oggetto nel mondo, altrimenti la camera si troverebbe nell'origine e sarebbe "dentro" il cubo(e si vede la croce delle diagonali)
     //NB: se l'oggetto finisce alle spalle della camera viene visto "all'indietro" (front e back del cubo sono invertiti)
@@ -275,6 +274,7 @@ int Cube_3D::display_frame(){
     // alt_up_pixel_buffer_dma_draw_line_enhanced_clipping(pixel_buf_dma_dev,vertex_on_2D[6][X],vertex_on_2D[6][Y],vertex_on_2D[7][X],vertex_on_2D[7][Y], YELLOW, 1);
 
     //disegno il cubo tramite i vari triangoli
+    //disegno una linea tra i vertici dei triangoli, indicizzando la matrice vertex_on_2D con il contenuto di faces, che contiene il n. del vertice di ciascun triangolo
     for(int i=0; i<N_FACES; i++){
         alt_up_pixel_buffer_dma_draw_line_enhanced_clipping(pixel_buf_dma_dev, vertex_on_2D[faces[i][A]][X], vertex_on_2D[faces[i][A]][Y],vertex_on_2D[faces[i][B]][X],vertex_on_2D[faces[i][B]][Y], GREEN, 1);
         alt_up_pixel_buffer_dma_draw_line_enhanced_clipping(pixel_buf_dma_dev, vertex_on_2D[faces[i][B]][X], vertex_on_2D[faces[i][B]][Y],vertex_on_2D[faces[i][C]][X],vertex_on_2D[faces[i][C]][Y], GREEN, 1);
@@ -292,91 +292,75 @@ int Cube_3D::display_frame(){
 void Cube_3D::vector_matrix_multiply(){
 
     #ifdef DEBUG_VECTORS
-	printf("START PRINT 3D COORDINATES\n");
+	printf("START PRINT COORDINATES\n");
     #endif
 
+    float temp_transformed_vertex[4];
     for(int i = 0; i < N_VERTEX; i++){
-        transformed_vertex[M8(X,i)] =   complete_matrix[M4(0,0)] * vertex[M8(X,i)] + \
+        temp_transformed_vertex[X] =   complete_matrix[M4(0,0)] * vertex[M8(X,i)] + \
                                         complete_matrix[M4(0,1)] * vertex[M8(Y,i)] + \
                                         complete_matrix[M4(0,2)] * vertex[M8(Z,i)] + \
                                         complete_matrix[M4(0,3)] * vertex[M8(W,i)];
 
-        transformed_vertex[M8(Y,i)] =   complete_matrix[M4(1,0)] * vertex[M8(X,i)] + \
+         temp_transformed_vertex[Y] =   complete_matrix[M4(1,0)] * vertex[M8(X,i)] + \
                                         complete_matrix[M4(1,1)] * vertex[M8(Y,i)] + \
                                         complete_matrix[M4(1,2)] * vertex[M8(Z,i)] + \
                                         complete_matrix[M4(1,3)] * vertex[M8(W,i)];
 
-        transformed_vertex[M8(Z,i)] =   complete_matrix[M4(2,0)] * vertex[M8(X,i)] +\
+         temp_transformed_vertex[Z] =   complete_matrix[M4(2,0)] * vertex[M8(X,i)] +\
                                         complete_matrix[M4(2,1)] * vertex[M8(Y,i)] +\
                                         complete_matrix[M4(2,2)] * vertex[M8(Z,i)] +\
                                         complete_matrix[M4(2,3)] * vertex[M8(W,i)];
 
-        transformed_vertex[M8(W,i)] =   complete_matrix[M4(3,0)] * vertex[M8(X,i)] +\
+         temp_transformed_vertex[W] =   complete_matrix[M4(3,0)] * vertex[M8(X,i)] +\
                                         complete_matrix[M4(3,1)] * vertex[M8(Y,i)] +\
                                         complete_matrix[M4(3,2)] * vertex[M8(Z,i)] +\
                                         complete_matrix[M4(3,3)] * vertex[M8(W,i)];
-    }
-    for (int c = 0; c < 8; c++)
-    {
+        #ifdef DEBUG_VECTORS
+        printf("PRIMA DI NORMALIZZAZIONE Z\n");
+        printf("p%d : x%f\n", i, temp_transformed_vertex[X]);
+        printf("p%d : y%f\n", i, temp_transformed_vertex[Y]);
+        printf("p%d : z%f\n", i, temp_transformed_vertex[Z]);
+        printf("p%d : w%f\n", i, temp_transformed_vertex[W]);
+        #endif
 
-		#ifdef DEBUG_VECTORS
-		printf("PRIMA DI NORMALIZZAZIONE Z\n");
-		printf("p%d : x%f\n", c, transformed_vertex[M8(X,c)]);
-		printf("p%d : y%f\n", c, transformed_vertex[M8(Y,c)]);
-		printf("p%d : z%f\n", c, transformed_vertex[M8(Z,c)]);
-		printf("p%d : w%f\n", c, transformed_vertex[M8(W,c)]);
-		#endif
+        temp_transformed_vertex[X]/=temp_transformed_vertex[W];
+    	temp_transformed_vertex[Y]/=temp_transformed_vertex[W];
+    	temp_transformed_vertex[Z]/=temp_transformed_vertex[W];
+    	temp_transformed_vertex[W]=1;
 
-    	transformed_vertex[M8(X,c)]/=transformed_vertex[M8(W,c)];
-    	transformed_vertex[M8(Y,c)]/=transformed_vertex[M8(W,c)];
-    	transformed_vertex[M8(Z,c)]/=transformed_vertex[M8(W,c)];
-    	transformed_vertex[M8(W,c)]=1;
+        #ifdef DEBUG_VECTORS
+        printf("DOPO NORMALIZZAZIONE Z\n");
+        printf("p%d : x%f\n", i, temp_transformed_vertex[X]);
+        printf("p%d : y%f\n", i, temp_transformed_vertex[Y]);
+        printf("p%d : z%f\n", i, temp_transformed_vertex[Z]);
+        printf("p%d : w%f\n", i, temp_transformed_vertex[W]);
+        #endif
 
-		#ifdef DEBUG_VECTORS
-		printf("DOPO NORMALIZZAZIONE Z\n");
-		printf("p%d : x%f\n", c, transformed_vertex[M8(X,c)]);
-		printf("p%d : y%f\n", c, transformed_vertex[M8(Y,c)]);
-		printf("p%d : z%f\n", c, transformed_vertex[M8(Z,c)]);
-		printf("p%d : w%f\n", c, transformed_vertex[M8(W,c)]);
-		#endif
-    }
-	#ifdef DEBUG_VECTOR
-    printf("END PRINT 3D COORDINATES\n");
-	#endif
-}
- 
-void Cube_3D::from_3D_to_2D(){
-	#ifdef DEBUG_VECTOR
-	printf("START PRINT 2D COORDINATES\n");
-	#endif
-    /*
+//quello che segue era la vecchia void Cube_3D::from_3D_to_2D()
+        
+        #ifdef DEBUG_VECTOR
+	    printf("START PRINT 2D COORDINATES\n");
+	    #endif
+        /*
     *   (0,0)-----------(320,0)     (-1,1)-----------(1,1)    
     *   |                   |       |                   |
     *   |       VGA         |       |       CUBO        |    
     *   |                   |       |    normalizzato   |
     *   (0,240)---------(320,240)   (-1,-1)----------(1,-1)
     */
-    for(int i = 0; i < N_VERTEX; i++){
-    	vertex_on_2D[i][X] = ((transformed_vertex[M8(X,i)]*(X_RES/2))+(X_RES/2));
+        vertex_on_2D[i][X] = ((temp_transformed_vertex[X]*(X_RES/2))+(X_RES/2));
         //il meno è necessario per mappare nell'origine della vga, il valore y=1 nelle coordinate normalizzate del cubo
-        vertex_on_2D[i][Y] = (-(transformed_vertex[M8(Y,i)]*(Y_RES/2))+(Y_RES/2));
-
-        #ifdef DEBUG_VECTORS
-        printf("p%d : x%f\n", i, transformed_vertex[M8(X,i)]);
-        printf("p%d : y%f\n", i, transformed_vertex[M8(Y,i)]);
-        printf("p%d : z%f\n", i, transformed_vertex[M8(Z,i)]);
-        printf("p%d : w%f\n", i, transformed_vertex[M8(W,i)]);
-        #endif
-
-        #ifdef DEBUG_1
+        vertex_on_2D[i][Y] = (-(temp_transformed_vertex[Y]*(Y_RES/2))+(Y_RES/2));
+         #ifdef DEBUG_1
         printf("p%d - x:%d / y:%d\n",i, vertex_on_2D[i][X], vertex_on_2D[i][Y]);
         #endif
+                                
     }
     #ifdef DEBUG_1
-    printf("END PRINT 2D COORDINATES\n");
+    printf("END PRINT COORDINATES\n");
     #endif
 }
-
 
 void Cube_3D::Matrix4x4MultiplyBy4x4 (float src1[4*4], float src2[4*4], float dest[4*4])
 { 
