@@ -259,20 +259,27 @@ int Cube_3D::display_frame(){
     //for(int i=0; i<N_VERTEX; i++){
     //    alt_up_pixel_buffer_dma_draw(pixel_buf_dma_dev, WHITE, vertex_on_2D[i][X], vertex_on_2D[i][Y]);
     //}
-    //disegno i lati del cubo
-    alt_up_pixel_buffer_dma_draw_line_enhanced_clipping(pixel_buf_dma_dev,vertex_on_2D[0][X],vertex_on_2D[0][Y],vertex_on_2D[1][X],vertex_on_2D[1][Y], GREEN, 1);
-    alt_up_pixel_buffer_dma_draw_line_enhanced_clipping(pixel_buf_dma_dev,vertex_on_2D[0][X],vertex_on_2D[0][Y],vertex_on_2D[3][X],vertex_on_2D[3][Y], GREEN, 1);
-    alt_up_pixel_buffer_dma_draw_line_enhanced_clipping(pixel_buf_dma_dev,vertex_on_2D[0][X],vertex_on_2D[0][Y],vertex_on_2D[4][X],vertex_on_2D[4][Y], WHITE, 1);
-    alt_up_pixel_buffer_dma_draw_line_enhanced_clipping(pixel_buf_dma_dev,vertex_on_2D[1][X],vertex_on_2D[1][Y],vertex_on_2D[2][X],vertex_on_2D[2][Y], GREEN, 1);
-    alt_up_pixel_buffer_dma_draw_line_enhanced_clipping(pixel_buf_dma_dev,vertex_on_2D[1][X],vertex_on_2D[1][Y],vertex_on_2D[5][X],vertex_on_2D[5][Y], RED, 1);
-    alt_up_pixel_buffer_dma_draw_line_enhanced_clipping(pixel_buf_dma_dev,vertex_on_2D[2][X],vertex_on_2D[2][Y],vertex_on_2D[3][X],vertex_on_2D[3][Y], GREEN, 1);
-    alt_up_pixel_buffer_dma_draw_line_enhanced_clipping(pixel_buf_dma_dev,vertex_on_2D[2][X],vertex_on_2D[2][Y],vertex_on_2D[6][X],vertex_on_2D[6][Y], RED, 1);
-    alt_up_pixel_buffer_dma_draw_line_enhanced_clipping(pixel_buf_dma_dev,vertex_on_2D[3][X],vertex_on_2D[3][Y],vertex_on_2D[7][X],vertex_on_2D[7][Y], WHITE, 1);
-    alt_up_pixel_buffer_dma_draw_line_enhanced_clipping(pixel_buf_dma_dev,vertex_on_2D[4][X],vertex_on_2D[4][Y],vertex_on_2D[7][X],vertex_on_2D[7][Y], YELLOW, 1);
-    alt_up_pixel_buffer_dma_draw_line_enhanced_clipping(pixel_buf_dma_dev,vertex_on_2D[4][X],vertex_on_2D[4][Y],vertex_on_2D[5][X],vertex_on_2D[5][Y], YELLOW, 1);
-    alt_up_pixel_buffer_dma_draw_line_enhanced_clipping(pixel_buf_dma_dev,vertex_on_2D[5][X],vertex_on_2D[5][Y],vertex_on_2D[6][X],vertex_on_2D[6][Y], YELLOW, 1);
-    alt_up_pixel_buffer_dma_draw_line_enhanced_clipping(pixel_buf_dma_dev,vertex_on_2D[6][X],vertex_on_2D[6][Y],vertex_on_2D[7][X],vertex_on_2D[7][Y], YELLOW, 1);
 
+    //disegno i lati del cubo
+    // alt_up_pixel_buffer_dma_draw_line_enhanced_clipping(pixel_buf_dma_dev,vertex_on_2D[0][X],vertex_on_2D[0][Y],vertex_on_2D[1][X],vertex_on_2D[1][Y], GREEN, 1);
+    // alt_up_pixel_buffer_dma_draw_line_enhanced_clipping(pixel_buf_dma_dev,vertex_on_2D[0][X],vertex_on_2D[0][Y],vertex_on_2D[3][X],vertex_on_2D[3][Y], GREEN, 1);
+    // alt_up_pixel_buffer_dma_draw_line_enhanced_clipping(pixel_buf_dma_dev,vertex_on_2D[0][X],vertex_on_2D[0][Y],vertex_on_2D[4][X],vertex_on_2D[4][Y], WHITE, 1);
+    // alt_up_pixel_buffer_dma_draw_line_enhanced_clipping(pixel_buf_dma_dev,vertex_on_2D[1][X],vertex_on_2D[1][Y],vertex_on_2D[2][X],vertex_on_2D[2][Y], GREEN, 1);
+    // alt_up_pixel_buffer_dma_draw_line_enhanced_clipping(pixel_buf_dma_dev,vertex_on_2D[1][X],vertex_on_2D[1][Y],vertex_on_2D[5][X],vertex_on_2D[5][Y], RED, 1);
+    // alt_up_pixel_buffer_dma_draw_line_enhanced_clipping(pixel_buf_dma_dev,vertex_on_2D[2][X],vertex_on_2D[2][Y],vertex_on_2D[3][X],vertex_on_2D[3][Y], GREEN, 1);
+    // alt_up_pixel_buffer_dma_draw_line_enhanced_clipping(pixel_buf_dma_dev,vertex_on_2D[2][X],vertex_on_2D[2][Y],vertex_on_2D[6][X],vertex_on_2D[6][Y], RED, 1);
+    // alt_up_pixel_buffer_dma_draw_line_enhanced_clipping(pixel_buf_dma_dev,vertex_on_2D[3][X],vertex_on_2D[3][Y],vertex_on_2D[7][X],vertex_on_2D[7][Y], WHITE, 1);
+    // alt_up_pixel_buffer_dma_draw_line_enhanced_clipping(pixel_buf_dma_dev,vertex_on_2D[4][X],vertex_on_2D[4][Y],vertex_on_2D[7][X],vertex_on_2D[7][Y], YELLOW, 1);
+    // alt_up_pixel_buffer_dma_draw_line_enhanced_clipping(pixel_buf_dma_dev,vertex_on_2D[4][X],vertex_on_2D[4][Y],vertex_on_2D[5][X],vertex_on_2D[5][Y], YELLOW, 1);
+    // alt_up_pixel_buffer_dma_draw_line_enhanced_clipping(pixel_buf_dma_dev,vertex_on_2D[5][X],vertex_on_2D[5][Y],vertex_on_2D[6][X],vertex_on_2D[6][Y], YELLOW, 1);
+    // alt_up_pixel_buffer_dma_draw_line_enhanced_clipping(pixel_buf_dma_dev,vertex_on_2D[6][X],vertex_on_2D[6][Y],vertex_on_2D[7][X],vertex_on_2D[7][Y], YELLOW, 1);
+
+    //disegno il cubo tramite i vari triangoli
+    for(int i=0; i<N_FACES; i++){
+        alt_up_pixel_buffer_dma_draw_line_enhanced_clipping(pixel_buf_dma_dev, vertex_on_2D[faces[i][A]][X], vertex_on_2D[faces[i][A]][Y],vertex_on_2D[faces[i][B]][X],vertex_on_2D[faces[i][B]][Y], GREEN, 1);
+        alt_up_pixel_buffer_dma_draw_line_enhanced_clipping(pixel_buf_dma_dev, vertex_on_2D[faces[i][B]][X], vertex_on_2D[faces[i][B]][Y],vertex_on_2D[faces[i][C]][X],vertex_on_2D[faces[i][C]][Y], GREEN, 1);
+        alt_up_pixel_buffer_dma_draw_line_enhanced_clipping(pixel_buf_dma_dev, vertex_on_2D[faces[i][C]][X], vertex_on_2D[faces[i][C]][Y],vertex_on_2D[faces[i][A]][X],vertex_on_2D[faces[i][A]][Y], GREEN, 1);
+    }
     //disegna linea giusto per vedere se effettivamente programma
     //alt_up_pixel_buffer_dma_draw_line(pixel_buf_dma_dev,25, 70,100,100, WHITE, 1);
 

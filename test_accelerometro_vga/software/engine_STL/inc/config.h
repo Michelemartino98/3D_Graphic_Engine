@@ -87,6 +87,11 @@
 #define Z 2
 #define W 3
 
+//vertici facce
+#define A 0
+#define B 1
+#define C 2
+
 // user macros
 #define M4(x,y) (x*4+y)     //indirizza l'lemento (x,y) di una matrice a 4 colonne, (rappresentato sotto forma di array lineare)
 #define M8(x,y) (x*N_VERTEX+y) //TODO - rinominare M8 in V per avere più senso
