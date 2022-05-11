@@ -1,0 +1,8 @@
+
+-prima usavamo vertex[N_vertex*4] che veniva trasformato in transformed_vertex[N_vertex*4] e poi si finiva in vertex_on_2D, 
+e all'aumentare di N lo spazioe occupato è tanto, visto che sono float
+si può risparmiare transformed_vertex facendo tutte le operazioni sul singolo vertice, e così mi riparmio un vettore di N_vertex*4 elementi.
+
+-il fatto che si usano vettori al posto di matrici, che il processore dovrebbe trattare in maniera più efficiente(da verificare bene questo) 
+
+-nella rotazione ci calcoliamo tutti i coseni una sola volta, sempre per avere maggiore efficienza nelle operazioni.
