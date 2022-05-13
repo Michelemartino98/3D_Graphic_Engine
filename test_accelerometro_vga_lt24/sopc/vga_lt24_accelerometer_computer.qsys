@@ -1533,6 +1533,11 @@
    kind="clock"
    version="18.1"
    start="altpll_0.c2"
+   end="LT24_Controller.clock" />
+ <connection
+   kind="clock"
+   version="18.1"
+   start="altpll_0.c2"
    end="video_dual_clock_buffer_0.clock_stream_in" />
  <connection
    kind="clock"
@@ -1547,11 +1552,6 @@
    end="touch_pen_irq_n.clk" />
  <connection kind="clock" version="18.1" start="altpll_0.c3" end="touch_busy.clk" />
  <connection kind="clock" version="18.1" start="altpll_0.c3" end="spi.clk" />
- <connection
-   kind="clock"
-   version="18.1"
-   start="altpll_0.c3"
-   end="LT24_Controller.clock" />
  <connection
    kind="clock"
    version="18.1"
