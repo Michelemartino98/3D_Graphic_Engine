@@ -5,6 +5,11 @@ Created on Fri May 13 18:09:43 2022
 @author: zocco
 """
 
+"""Specificare il path da cui prendere il file STL e quello in cui salvare il file txt contenente i vertici"""
+
+file_STL_path   = "file_STL\Cubo.txt"
+file_vertex_path= "file_vertex/Cubo_vertex.txt"
+
 import numpy as np
 
 MAX_coordinate = 0
@@ -12,7 +17,7 @@ extracted_text=[]
 vertex=[]
 
 """SPECIFICARE IL PERCORSO DEL FILE STL CONVERTITO IN TXT"""
-with open ('file_STL\Cubo.txt', 'rt') as file_STL : 
+with open (file_STL_path, 'rt') as file_STL : 
     for line in file_STL:    #prendo una riga alla volta del file .stl
         extracted_text.append( line )
 
@@ -56,29 +61,34 @@ for i in range(len(vertex)):
             MAX_coordinate = vertex[i][j]
 
 """normalizzo"""
- #/////////////////////POTREBBE CAMBIARE//////////////////////////////
 i=0
 j=0
+vertex=np.array(vertex)
 for i in range(len(vertex)):
     for j in range (3): 
         vertex[i][j]= vertex[i][j] / MAX_coordinate
-        
-"""trasposizione"""
-vertex=np.array(vertex)
+
+"""trasposizione e aggiungo una riga di 1 che rappresenta la coordinata w dei vertici"""
+i=0
+w=np.array([])
+for i in range(len(vertex)):
+    w=np.append(w,1)
+    
 vertex=vertex.T
+vertex=np.vstack([vertex,w])
 
 
 """salvo file di testo contenente solo i vertici """
 
 """SPECIFICARE IL PERCORSO IN CUI SALVARE IL FILE CON VERTICI"""
-np.savetxt("file_vertex/Cubo_vertex.txt", vertex , fmt="%1.3f")
+np.savetxt( file_vertex_path, vertex , fmt="%1.3f")
 
 """apro il file generato sopra per aggiungere il numero di vertici"""
 
-N_VERTEX = str((vertex.size/3))
-with open ("file_vertex/Cubo_vertex.txt", 'at') as vertex_file : 
+N_VERTEX = str(int(float(vertex.size/4)))
+with open ( file_vertex_path, 'at') as vertex_file : 
     vertex_file.write("N_VERTEX=")
-    vertex_file.write(N_VERTEX )
+    vertex_file.write( N_VERTEX )
     
 
 
