@@ -7,14 +7,16 @@ Created on Fri May 13 18:09:43 2022
 
 """Specificare il path da cui prendere il file STL e quello in cui salvare il file txt contenente i vertici"""
 
-file_STL_path   = "file_STL\Cubo.txt"
-file_vertex_path= "file_vertex/Cubo_vertex.txt"
+file_STL_path   = "file_STL\Sphericon.txt"
+file_vertex_path= "file_vertex/Sphericon_vertex.txt"
 
 import numpy as np
+import re
 
 MAX_coordinate = 0
 extracted_text=[]
 vertex=[]
+triangles =[]
 
 """SPECIFICARE IL PERCORSO DEL FILE STL CONVERTITO IN TXT"""
 with open (file_STL_path, 'rt') as file_STL : 
@@ -77,6 +79,17 @@ for i in range(len(vertex)):
 vertex=vertex.T
 vertex=np.vstack([vertex,w])
 
+# salvo i parametri N_VERTEX e N_FACES come stringhe
+N_VERTEX = int(float((vertex.size/4)))
+N_FACES = int(float((float(N_VERTEX)/3)))
+
+# calcolo l'array per i triangoli
+triangles.append( "uint16_t faces[N_FACES][3] = {\n")
+temp =  0;
+for i in range(N_FACES):
+    triangles.append("{"+(str(temp))+", "+(str(temp+1))+", "+(str(temp+2))+"},\n")
+    temp+=3
+triangles.append("};\n")
 
 """salvo file di testo contenente solo i vertici """
 
@@ -85,11 +98,36 @@ np.savetxt( file_vertex_path, vertex , fmt="%1.3f")
 
 """apro il file generato sopra per aggiungere il numero di vertici"""
 
-N_VERTEX = str(int(float(vertex.size/4)))
-with open ( file_vertex_path, 'at') as vertex_file : 
+with open ( file_vertex_path, 'r') as vertex_file :
+    buffer = vertex_file.readlines()
+
+line_counter = 0
+buffer
+with open( file_vertex_path, 'w') as vertex_file:
+    for line in buffer:
+        if(line_counter == 0):
+            vertex_file.write( '{' + '\n' + re.sub("\s", ", ", line, count = N_VERTEX ) + '\n' )
+        elif( line_counter == 3 ) :
+            vertex_file.write( re.sub("\s", ", ", line, count = N_VERTEX-1 ) + '}' + ';' )
+        else :
+            vertex_file.write( re.sub("\s", ", ", line, count = N_VERTEX ) + '\n')
+        line_counter += 1
+        
+    vertex_file.write("\n")
+    vertex_file.write("\n")
     vertex_file.write("N_VERTEX=")
-    vertex_file.write( N_VERTEX )
-    
+    vertex_file.write(str(N_VERTEX))
+    vertex_file.write("\n")
+    vertex_file.write("N_FACES= ")
+    vertex_file.write(str(N_FACES))
+    vertex_file.write("\n")
+    vertex_file.write("\n")
+
+    c = 0
+
+    for i in range(N_FACES+2):
+        vertex_file.write(triangles[c])
+        c = c + 1
 
 
 
