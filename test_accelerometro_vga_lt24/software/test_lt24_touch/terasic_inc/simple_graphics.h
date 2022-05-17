@@ -5,7 +5,7 @@
 //#include "alt_video_display.h"
 //#include "vip_fr.h"
 #include "fonts.h"  // modify this file to add/remove fonts
-
+#include "alt_video_display.h"
 // use this background colour when you don't want a filled in box behind the alpha blended text
 #define CLEAR_BACKGROUND -1
 

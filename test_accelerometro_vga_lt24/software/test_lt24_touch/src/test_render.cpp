@@ -3,11 +3,18 @@
 
 //#include "terasic_includes.h"
 //#include "ILI9341.h"
+
 extern "C" {
 #include "touch_spi.h"
+#include "terasic_includes.h"
+#include "ILI9341.h"
+#include "simple_graphics.h"
+#include "alt_video_display.h"
 }
 
 alt_up_pixel_buffer_dma_dev *pixel_buf_dma_dev;
+
+alt_video_display Display;
 
 Cube_3D Cube;
 
@@ -34,11 +41,9 @@ int main(){
 
 	uint32_t fps;
 
-
 	init_accelerometer();
 	pixel_buf_dma_dev = alt_up_pixel_buffer_dma_open_dev("/dev/video_pixel_buffer_dma_0");
 	//alt_timestamp_start();
-
 
 	TOUCH_HANDLE *pTouch;
 
@@ -49,7 +54,16 @@ int main(){
 		count++;
 	}
 
-	printf("LT24 Demo!\n");
+
+	// init LCD
+	LCD_Init();
+	LCD_Clear(0X0000);
+
+	Display.interlace = 0;
+	Display.bytes_per_pixel = 2;
+	Display.color_depth = 16;
+	Display.height = SCREEN_HEIGHT;
+	Display.width = SCREEN_WIDTH;
 
 	// init touch
 	pTouch = Touch_Init(SPI_BASE, TOUCH_PEN_IRQ_N_BASE, TOUCH_PEN_IRQ_N_IRQ);
@@ -59,7 +73,20 @@ int main(){
 		printf("Init touch successfully\r\n");
 
 	}
+	vid_set_pixel(20, 200, RED_24, &Display);
+	vid_set_pixel(21, 200, RED_24, &Display);
+	vid_set_pixel(22, 200, RED_24, &Display);
+	vid_set_pixel(23, 200, RED_24, &Display);
 
+	vid_set_pixel(20, 201, RED_24, &Display);
+	vid_set_pixel(20, 202, RED_24, &Display);
+	vid_set_pixel(20, 203, RED_24, &Display);
+	vid_set_pixel(20, 204, RED_24, &Display);
+	vid_print_char (160, 160, RED_LT24, 'E', cour10_font,  &Display);
+	vid_print_char (160, 170, RED_LT24, 'E', cour10_font,  &Display);
+	vid_print_char (160, 180, RED_LT24, 'E', cour10_font,  &Display);
+
+	vid_print_string(20, 20, GREEN_24, cour10_font, &Display , "CIAO O");
 	int x,y;
 	for(;;){
 		//
