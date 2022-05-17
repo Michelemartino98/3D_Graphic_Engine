@@ -19,8 +19,8 @@ The RESX (active low) is an external reset signal.
 WRX is the parallel data write strobe, RDX is the parallel data read strobe and D[17:0] is parallel data bus.
 ILI9341  latches  the  input  data  at  the  rising  edge  of  WRX  signal.
 The  D/CX  is  the  signal  of  data/command selection.
-When  D/CX=¡¯1¡¯,  D  [17:0]  bits  are  display  RAM  data  or  command¡¯s  parameters.
-When  D/CX=¡¯0¡¯,  D [17:0] bits are commands.
+When  D/CX=ï¿½ï¿½1ï¿½ï¿½,  D  [17:0]  bits  are  display  RAM  data  or  commandï¿½ï¿½s  parameters.
+When  D/CX=ï¿½ï¿½0ï¿½ï¿½,  D [17:0] bits are commands.
 */
 #define  LCD_WR_REG(value)  IOWR(LT24_CONTROLLER_BASE,0x00,value)
 #define  LCD_WR_DATA(value)  IOWR(LT24_CONTROLLER_BASE,0x01,value)
@@ -73,7 +73,7 @@ void LCD_Clear(alt_u16 Color)
 
 void LCD_DrawPoint(alt_u16 x,alt_u16 y,alt_u16 color )
 {
-        LCD_SetCursor(x,y);
+        LCD_SetCursor(239-y,x); //modificato per rigirare di 90 gradi il display
         LCD_WR_REG(0x002C);
         LCD_WR_DATA(color);
 }

@@ -250,10 +250,10 @@ int vid_draw_box (int horiz_start, int vert_start, int horiz_end, int vert_end, 
      vid_paint_block (horiz_start, vert_start, horiz_end, vert_end, color, display);
   // If we're not filling in the box, just draw four lines.
   } else {
-    vid_draw_line(horiz_start, vert_start, horiz_start, vert_end-1, 1, color, display);
-    vid_draw_line(horiz_end-1, vert_start, horiz_end-1, vert_end-1, 1, color, display);
-    vid_draw_line(horiz_start, vert_start, horiz_end-1, vert_start, 1, color, display);
-    vid_draw_line(horiz_start, vert_end-1, horiz_end-1, vert_end-1, 1, color, display);
+    vid_draw_line(horiz_start, vert_start, horiz_start, vert_end-1, 3, color, display);
+    vid_draw_line(horiz_end-1, vert_start, horiz_end-1, vert_end-1, 3, color, display);
+    vid_draw_line(horiz_start, vert_start, horiz_end-1, vert_start, 3, color, display);
+    vid_draw_line(horiz_start, vert_end-1, horiz_end-1, vert_end-1, 3, color, display);
   }
 
   return (0);

@@ -11,6 +11,7 @@
 //#define DEBUG_VECTORS
 //#define DEBUG_ACC
 //#define DEBUG_TRASLATION
+#define DEBUG_TOUCH
 
 //C standard library
 
@@ -46,15 +47,9 @@
 #include "functions.h"
 #include "graphic_object.h"
 #include "accelerometer.h"
+#include "LT24_interface.h"
 
-//#include "../inc/terasic_includes.h"
-//#include "terasic_includes.h"
-//#include "ILI9341.h"
-//#include "touch_spi.h"
-//#include "alt_video_display.h"
-//#include "simple_graphics.h"
-//#include "simple_text.h"
-//#include "fonts.h"
+
 
 extern alt_up_pixel_buffer_dma_dev *pixel_buf_dma_dev;
 #define X_RESOLUTION       pixel_buf_dma_dev->x_resolution

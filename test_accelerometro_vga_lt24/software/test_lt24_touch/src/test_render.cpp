@@ -1,8 +1,7 @@
 
 #include "../inc/config.h"
 
-//#include "terasic_includes.h"
-//#include "ILI9341.h"
+
 
 extern "C" {
 #include "touch_spi.h"
@@ -43,17 +42,9 @@ int main(){
 
 	init_accelerometer();
 	pixel_buf_dma_dev = alt_up_pixel_buffer_dma_open_dev("/dev/video_pixel_buffer_dma_0");
-	//alt_timestamp_start();
+	alt_timestamp_start();
 
 	TOUCH_HANDLE *pTouch;
-
-	int delay , count ;
-	while (count<10) {
-		delay=0;
-		while (delay <200000) {delay++;}
-		count++;
-	}
-
 
 	// init LCD
 	LCD_Init();
@@ -66,39 +57,64 @@ int main(){
 	Display.width = SCREEN_WIDTH;
 
 	// init touch
-	pTouch = Touch_Init(SPI_BASE, TOUCH_PEN_IRQ_N_BASE, TOUCH_PEN_IRQ_N_IRQ);
+	pTouch = Touch_Init(TOUCH_SPI_BASE, TOUCH_PEN_IRQ_N_BASE, TOUCH_PEN_IRQ_N_IRQ);
+
+#ifdef DEBUG_TOUCH
 	if (!pTouch){
 		printf("Failed to init touch\r\n");
 	}else{
 		printf("Init touch successfully\r\n");
-
 	}
-	vid_set_pixel(20, 200, RED_24, &Display);
-	vid_set_pixel(21, 200, RED_24, &Display);
-	vid_set_pixel(22, 200, RED_24, &Display);
-	vid_set_pixel(23, 200, RED_24, &Display);
+    #endif
+		// vid_print_char (160, 160, RED_LT24, '1', cour10_font,  &Display);
+		// vid_print_char (170, 160, RED_LT24, '2', cour10_font,  &Display);
+		// vid_print_char (180, 160, RED_LT24, '3', cour10_font,  &Display);
 
-	vid_set_pixel(20, 201, RED_24, &Display);
-	vid_set_pixel(20, 202, RED_24, &Display);
-	vid_set_pixel(20, 203, RED_24, &Display);
-	vid_set_pixel(20, 204, RED_24, &Display);
-	vid_print_char (160, 160, RED_LT24, 'E', cour10_font,  &Display);
-	vid_print_char (160, 170, RED_LT24, 'E', cour10_font,  &Display);
-	vid_print_char (160, 180, RED_LT24, 'E', cour10_font,  &Display);
+		// vid_print_char (160, 160, GREEN_LT24, '4', cour10_font,  &Display);
+		// vid_print_char (160, 170, GREEN_LT24, '5', cour10_font,  &Display);
+		// vid_print_char (160, 180, GREEN_LT24, '6', cour10_font,  &Display);
 
-	vid_print_string(20, 20, GREEN_24, cour10_font, &Display , "CIAO O");
-	int x,y;
+		// vid_print_string(20, 20, GREEN_24, cour10_font, &Display , "CIAO mondo");
+
+	GUI_show_welcome(&Display);
+	usleep(1000000);
+	LCD_Clear(WHITE_24);
+
+	RECT rect_z_ctrl, rect_xy_ctrl, rect_cmd_ctrl;
+	POINT pt;
+	int x_touch,y_touch;		//uscita row del touch, da trasformare
+	//inizializza le strutture dei rettangoli e li disegna
+	GUI_desk_init(&rect_xy_ctrl, &rect_z_ctrl, &rect_cmd_ctrl);
+	
 	for(;;){
-		//
-		if (Touch_GetXY(pTouch, &x, &y)){
-			printf("x=%d, y=%d\r\n", x,y);
+		
+		if (Touch_GetXY(pTouch, &x_touch, &y_touch)){
+			pt.x = y_touch;
+			pt.y = 240 - x_touch;
+			#ifdef DEBUG_TOUCH
+			printf("x=%d, y=%d\r\n", pt.x,pt.y);
+			#endif
+			
+			if(is_point_in_rect(&pt,&rect_cmd_ctrl)){ //sono nell'are di controllo dei comandi
+printf("command\r\n");
+
+			}
+			else if(is_point_in_rect(&pt,&rect_z_ctrl)){ //sono nell'are di controllo z
+printf("Z area\r\n");
+
+			}
+			else if(is_point_in_rect(&pt,&rect_xy_ctrl)){	//sono nell'are di controllo xy
+printf("XY area\r\n");
+			}
+			
 		}
+
 		accelerometer_controller();
 		Cube.calculate_rendering();
 		Cube.display_frame();
-		//fps = TIMER_FREQ/alt_timestamp();
+		fps = TIMER_FREQ/alt_timestamp();
 		display_fps(fps);
-		//alt_timestamp_start();
+		alt_timestamp_start();
 
 	}
 }
