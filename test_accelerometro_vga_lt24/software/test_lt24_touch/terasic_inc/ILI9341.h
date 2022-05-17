@@ -17,6 +17,4 @@ void LCD_Init();
 void LCD_Clear(alt_u16 Color);
 void LCD_DrawPoint(alt_u16 x,alt_u16 y,alt_u16 color );
 
-void LCD_Pattern_Horizon(void);
-void LCD_Pattern_Vertical(void);
 #endif /* ILI9341_H_ */

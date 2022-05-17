@@ -97,10 +97,10 @@ void alt_up_pixel_buffer_dma_draw_line_enhanced_clipping(alt_up_pixel_buffer_dma
 	register int y_1 = y1;
 
 	//overkill per ora, utile se serve fare clipping vero e proprio
-	register char x0_valid = ((x_0 >=0) && (x_0<X_RES)) ? 1 : 0;
-	register char x1_valid = ((x_1 >=0) && (x_1<X_RES)) ? 1 : 0;
-	register char y0_valid = ((y_0 >=0) && (y_0<Y_RES)) ? 1 : 0;
-	register char y1_valid = ((y_1 >=0) && (y_1<Y_RES)) ? 1 : 0;
+	register char x0_valid = ((x_0 >=0) && (x_0<X_RESOLUTION)) ? 1 : 0;
+	register char x1_valid = ((x_1 >=0) && (x_1<X_RESOLUTION)) ? 1 : 0;
+	register char y0_valid = ((y_0 >=0) && (y_0<Y_RESOLUTION)) ? 1 : 0;
+	register char y1_valid = ((y_1 >=0) && (y_1<Y_RESOLUTION)) ? 1 : 0;
 	register char p0_valid = x0_valid && y0_valid;
 	register char p1_valid = x1_valid && y1_valid;
 	register char all_valid = p0_valid && p1_valid;

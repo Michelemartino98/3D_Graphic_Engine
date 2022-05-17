@@ -349,9 +349,9 @@ void Cube_3D::vector_matrix_multiply(){
     *   |                   |       |    normalizzato   |
     *   (0,240)---------(320,240)   (-1,-1)----------(1,-1)
     */
-        vertex_on_2D[i][X] = ((temp_transformed_vertex[X]*(X_RES/2))+(X_RES/2));
+        vertex_on_2D[i][X] = ((temp_transformed_vertex[X]*(X_RESOLUTION/2))+(X_RESOLUTION/2));
         //il meno è necessario per mappare nell'origine della vga, il valore y=1 nelle coordinate normalizzate del cubo
-        vertex_on_2D[i][Y] = (-(temp_transformed_vertex[Y]*(Y_RES/2))+(Y_RES/2));
+        vertex_on_2D[i][Y] = (-(temp_transformed_vertex[Y]*(Y_RESOLUTION/2))+(Y_RESOLUTION/2));
          #ifdef DEBUG_1
         printf("p%d - x:%d / y:%d\n",i, vertex_on_2D[i][X], vertex_on_2D[i][Y]);
         #endif
