@@ -81,15 +81,10 @@ extern alt_up_pixel_buffer_dma_dev *pixel_buf_dma_dev;
 #define YELLOW      0xFFE0
 #define MAGENTA     0xF81F
 #define CYAN        0x07FF
-//palette colori a 24 bit per lt24
-#define RED_LT24         0xff0000
-#define GREEN_LT24       0x00d900
-#define BLUE_LT24        0x0001fd
-#define BLACK_LT24       0x0000
-#define WHITE_LT24       0xFFFF
-#define YELLOW_LT24      0xffff00
 
 
+
+typedef enum {ROT,TRASL,SCALE} cmd_t;
 /*  controlla se mandare a terminale le coordinate x,y,z,w dei singoli vettori,
  *  oltre che le coordinate x,y dello schermo finali
  */

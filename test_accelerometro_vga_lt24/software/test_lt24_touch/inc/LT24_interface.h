@@ -3,7 +3,7 @@
 
 #include "config.h"
 extern "C" {
-//#include "touch_spi.h"
+#include "touch_spi.h"
 //#include "terasic_includes.h"
 #include "ILI9341.h"
 #include "simple_graphics.h"
@@ -22,12 +22,17 @@ typedef struct{
     int y;
 }POINT;
 
-void GUI_show_welcome(alt_video_display *);
+typedef struct{
+    int delta_x;
+    int delta_y;
+}SWIPE;
+
+void GUI_show_welcome();
 void GUI_desk_init( RECT *, RECT *, RECT *);
 bool is_point_in_rect(POINT *, RECT *);
 
-// void show_welcome();
-// bool in_pt_in_rect(POINT *pt, RECT *rc);
-// void pt_set(POINT *pt, int x, int y);
+bool evaluate_swipe(TOUCH_HANDLE, SWIPE *);
+
+
 
 #endif 

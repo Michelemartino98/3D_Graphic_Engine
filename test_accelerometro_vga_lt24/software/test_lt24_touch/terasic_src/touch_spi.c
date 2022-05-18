@@ -21,7 +21,7 @@
 
 // internal data structure
 #define ACTIVE_DELAY_TIME   (alt_ticks_per_second()/60)
-#define SAMPLE_RATE         60  // times per seconds
+#define SAMPLE_RATE         120  // times per seconds
 #define FIFO_SIZE           10
 
 typedef struct{
@@ -165,6 +165,13 @@ bool Touch_GetXY(TOUCH_HANDLE pHandle, int *x, int *y){
     //
     // translate
     touch_xy_transform(x, y);
+
+////////////////////
+//modificato da noi, per girare l'orientamento dell'lt24
+    alt_u32 temp=*x;
+    *x=*y;
+    *y=240 - temp;
+////////////////////
 
     DEBUG_OUT("[TOUCH] x=%d, y=%d\n", *x,*y);
 //    touch_clear_input(p);

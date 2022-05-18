@@ -39,10 +39,11 @@ void display_fps(uint32_t fps){
 int main(){
 
 	uint32_t fps;
+	uint32_t delta_for_fps;
 
 	init_accelerometer();
 	pixel_buf_dma_dev = alt_up_pixel_buffer_dma_open_dev("/dev/video_pixel_buffer_dma_0");
-	alt_timestamp_start();
+	
 
 	TOUCH_HANDLE *pTouch;
 
@@ -58,7 +59,10 @@ int main(){
 
 	// init touch
 	pTouch = Touch_Init(TOUCH_SPI_BASE, TOUCH_PEN_IRQ_N_BASE, TOUCH_PEN_IRQ_N_IRQ);
-
+	//stringhe per disegnare su LT24 
+	char *cmd_str[] = {"ROT" , "TRASL" , "SCALE"} ;
+	//flag di controllo : se false disabilita i comandi 
+	bool run_touch{FALSE};
 #ifdef DEBUG_TOUCH
 	if (!pTouch){
 		printf("Failed to init touch\r\n");
@@ -66,45 +70,57 @@ int main(){
 		printf("Init touch successfully\r\n");
 	}
     #endif
-		// vid_print_char (160, 160, RED_LT24, '1', cour10_font,  &Display);
-		// vid_print_char (170, 160, RED_LT24, '2', cour10_font,  &Display);
-		// vid_print_char (180, 160, RED_LT24, '3', cour10_font,  &Display);
 
-		// vid_print_char (160, 160, GREEN_LT24, '4', cour10_font,  &Display);
-		// vid_print_char (160, 170, GREEN_LT24, '5', cour10_font,  &Display);
-		// vid_print_char (160, 180, GREEN_LT24, '6', cour10_font,  &Display);
 
-		// vid_print_string(20, 20, GREEN_24, cour10_font, &Display , "CIAO mondo");
-
-	GUI_show_welcome(&Display);
+	GUI_show_welcome();
 	usleep(1000000);
 	LCD_Clear(WHITE_24);
 
 	RECT rect_z_ctrl, rect_xy_ctrl, rect_cmd_ctrl;
 	POINT pt;
+	SWIPE touch_swipe;
+	cmd_t actual_cmd = ROT;
 	int x_touch,y_touch;		//uscita row del touch, da trasformare
 	//inizializza le strutture dei rettangoli e li disegna
 	GUI_desk_init(&rect_xy_ctrl, &rect_z_ctrl, &rect_cmd_ctrl);
 	
+	alt_timestamp_start();
+	delta_for_fps = alt_timestamp();
+	//variabili per fare lo swipe
+
+
 	for(;;){
 		
 		if (Touch_GetXY(pTouch, &x_touch, &y_touch)){
-			pt.x = y_touch;
-			pt.y = 240 - x_touch;
+			pt.x = x_touch;//y_touch;   	LA TRASLAZIONE VIENE EFFETTUATA DIRETTAMENTE ALL'
+			pt.y = y_touch;//240 - x_touch; INTERNO DELLA FUNZIONE GET_XY
 			#ifdef DEBUG_TOUCH
 			printf("x=%d, y=%d\r\n", pt.x,pt.y);
 			#endif
 			
-			if(is_point_in_rect(&pt,&rect_cmd_ctrl)){ //sono nell'are di controllo dei comandi
-printf("command\r\n");
+			if(is_point_in_rect(&pt,&rect_cmd_ctrl)){ //sono nell'area di controllo dei comandi
+				if(!run_touch){
+					run_touch = true;	//creo un latch per il semaforo
+					vid_print_string( (rect_cmd_ctrl.right)/2 , rect_cmd_ctrl.bottom/2 , WHITE_24, cour10_font, &Display, "PRESS TO INIT" );
+				}
+				vid_print_string( (rect_cmd_ctrl.right)/2 , rect_cmd_ctrl.bottom/2 , WHITE_24, cour10_font, &Display, cmd_str[actual_cmd]);
+				actual_cmd = (actual_cmd >= 2) ? 0 : (actual_cmd+1);
+
+				#ifdef DEBUG_TOUCH
+				printf("command: %d\n", actual_cmd);
+				#endif
+				vid_print_string( (rect_cmd_ctrl.right)/2 , rect_cmd_ctrl.bottom/2 , GREEN_24, cour10_font, &Display, cmd_str[actual_cmd]);
+				usleep(800000);	//ritardo per evitare che pressioni prolungate facciano cambiare più comandi
+				Touch_EmptyFifo(pTouch);		//svuoto la FIFO
+			}
+			else if(is_point_in_rect(&pt,&rect_z_ctrl) && run_touch){ //sono nell'are di controllo z
+				printf("Z area\r\n");
 
 			}
-			else if(is_point_in_rect(&pt,&rect_z_ctrl)){ //sono nell'are di controllo z
-printf("Z area\r\n");
+			else if(is_point_in_rect(&pt,&rect_xy_ctrl) && run_touch){	//sono nell'are di controllo xy
+				printf("XY area\r\n\n");
+				evaluate_swipe(pTouch, &touch_swipe);
 
-			}
-			else if(is_point_in_rect(&pt,&rect_xy_ctrl)){	//sono nell'are di controllo xy
-printf("XY area\r\n");
 			}
 			
 		}
@@ -112,9 +128,12 @@ printf("XY area\r\n");
 		accelerometer_controller();
 		Cube.calculate_rendering();
 		Cube.display_frame();
-		fps = TIMER_FREQ/alt_timestamp();
+
+// s non riavvio maii il timer ci sta che quando va in overflow succedono cose strane
+		fps = TIMER_FREQ/ (alt_timestamp() - delta_for_fps);
+		delta_for_fps = alt_timestamp();
 		display_fps(fps);
-		alt_timestamp_start();
+		//alt_timestamp_start();		// tolto visto che non si riavvia il timer
 
 	}
 }
