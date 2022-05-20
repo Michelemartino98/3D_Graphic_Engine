@@ -22,7 +22,7 @@
 
 // internal data structure
 #define ACTIVE_DELAY_TIME   (alt_ticks_per_second()/60)
-#define SAMPLE_RATE         120  // times per seconds
+#define SAMPLE_RATE         150  // times per seconds
 #define FIFO_SIZE           10
 
 int touch_pending;

@@ -78,7 +78,19 @@ int main(){
 
 	RECT rect_z_ctrl, rect_xy_ctrl, rect_cmd_ctrl;
 	POINT pt;
-	SWIPE touch_swipe;
+	SWIPE touch_swipe = {
+			.delta_x = 0,
+			.delta_y = 0,
+			.delta_t = 0,
+			.previous_x = 0,
+			.previous_y = 0,
+			.current_x = 0,
+			.current_y = 0,
+			.point_valid = FALSE,
+			.end_of_swipe = TRUE,
+
+	};
+
 	cmd_t actual_cmd = ROT;
 	int x_touch,y_touch;		//uscita row del touch, da trasformare
 	//inizializza le strutture dei rettangoli e li disegna
