@@ -17,11 +17,6 @@ typedef struct{
     int bottom;
 }RECT;
 
-typedef struct{
-    int x;
-    int y;
-}POINT;
-
 
 
 void GUI_show_welcome();

@@ -3,7 +3,7 @@
 #include "terasic_includes.h"
 #include "alt_video_display.h"
 
-#define DEBUG_SWIPE
+//#define DEBUG_SWIPE
 
 // debug config
 //#define DEBUG_TOUCH_PANEL
@@ -18,12 +18,12 @@
 ////////////// configuration //////////////
 #define X_RES   SCREEN_WIDTH
 #define Y_RES   SCREEN_HEIGHT
-#define INVALID 0xFFFFFFFF
+#define INVALID 0xFFFFFF
 
 // internal data structure
 #define ACTIVE_DELAY_TIME   (alt_ticks_per_second()/60)
 #define SAMPLE_RATE         150  // times per seconds
-#define FIFO_SIZE           10
+#define FIFO_SIZE           2   // 10 modificato by us 
 
 int touch_pending;
 
@@ -189,7 +189,7 @@ bool Touch_GetXY(TOUCH_HANDLE pHandle, int *x, int *y){
 
 // penirq_n ISR
 #ifdef ALT_ENHANCED_INTERRUPT_API_PRESENT
-void touch_isr(void* context){
+void touch_isr(void* context){  
 #else
 void touch_isr(void* context, alt_u32 id){
 #endif
@@ -223,6 +223,7 @@ void touch_isr(void* context, alt_u32 id){
     IOWR_ALTERA_AVALON_PIO_EDGE_CAP(p->penirq_base,0);    
     
     touch_pending = TRUE;
+    printf("touch_pending nell' ISR = %d \n", touch_pending );
 
 #ifdef ALT_ENHANCED_INTERRUPT_API_PRESENT
     alt_ic_irq_enable(TOUCH_PANEL_PEN_IRQ_N_IRQ_INTERRUPT_CONTROLLER_ID,TOUCH_PANEL_PEN_IRQ_N_IRQ);
@@ -317,12 +318,21 @@ void touch_get_xy(TERASIC_TOUCH_PANEL *p){
     }
     DEBUG_OUT("[ ADC] x=%d, y=%d\n", x,y);
 
-    // push now
-    p->fifo_x[p->fifo_front] = x;
-    p->fifo_y[p->fifo_front] = y;    
-    p->fifo_front++;
-    p->fifo_front %= FIFO_SIZE;   
-    
+    // push now    
+    /*
+    p->fifo_x[p->fifo_front] = x; 
+    p->fifo_y[p->fifo_front] = y;     
+    p->fifo_front++; 
+    p->fifo_front %= FIFO_SIZE;    
+    */ 
+ 
+   /* hack immondo */ 
+    p->fifo_x[0] = x; 
+    p->fifo_x[1] = x; 
+    p->fifo_y[0] = y; 
+    p->fifo_y[1] = y;    
+    p->fifo_front++; 
+    p->fifo_front %= FIFO_SIZE;      
 }
 
 // polling x/y when penirq_n is low
@@ -369,46 +379,53 @@ void touch_xy_transform(int *x, int *y){
     
 }
 
-int evaluate_swipe(TOUCH_HANDLE pHandle, SWIPE *touch_swipe, uint32_t delta_t){
+
+int evaluate_swipe(TOUCH_HANDLE pHandle, SWIPE *touch_swipe, POINT *pt, uint32_t delta_t){
 
 	TERASIC_TOUCH_PANEL *tpanel = (TERASIC_TOUCH_PANEL *)pHandle;
-	if(touch_pending){ 							//prima della chiamata di questa funzione è stato registrato un tocco,
+	if(touch_pending){ 							//prima della chiamata di questa funzione ï¿½ stato registrato un tocco,
 												//	quindi inizio a discriminare tra tocco e swipe
 
 		touch_swipe->delta_t = alt_timestamp();	// Acquisisco il tempo
 
 		int x,y;
-		Touch_GetXY(pHandle, &x, &y); 			//acquisisco coordinate attuali
 
 		if(touch_swipe->point_valid){ 			//tocco predendente era valido, quindi calcolo i parametri dello swipe
  												//sarebbe da passargli direttamente il campo della struttura
 			touch_swipe->previous_x = touch_swipe->current_x;
 			touch_swipe->previous_y = touch_swipe->current_y;
-			touch_swipe->current_x = x;
-			touch_swipe->current_y = y;
+			touch_swipe->current_x = pt->x;
+			touch_swipe->current_y = pt->y;
 			touch_swipe->delta_x = touch_swipe->current_x - touch_swipe->previous_x;
 			touch_swipe->delta_y = touch_swipe->current_y - touch_swipe->previous_y;
-			}
+            printf("POINT VALID PRECEDENTE NON VALIDO\n");
+            
+		}
 
 
 		else {									//tocco precedente non esisteva, quindi mi limito a salvare i valori correnti
 			touch_swipe->previous_x = INVALID;	//INVALID magari utili per debug, ma si possono levare tranquillamente poi
 			touch_swipe->previous_y = INVALID;
-			touch_swipe->current_x = x;
-			touch_swipe->current_y = y;
+			touch_swipe->current_x = pt->x;
+			touch_swipe->current_y = pt->y;
 			touch_swipe->delta_x = INVALID;
 			touch_swipe->delta_y = INVALID;
 			touch_swipe->end_of_swipe = FALSE;	//ho nuovo tocco, quindi fermo end_of_swipe
 			touch_swipe->point_valid = TRUE;
+            printf("POINT VALID PRECEDENTE NON VALIDO\n");
 		}
-		touch_pending = FALSE;				//resetto il flag che verrà rimesso alto dalla isr del touch
+		touch_pending = FALSE;				    //resetto il flag che verrï¿½ rimesso alto dalla isr del touch
 	}
 	else{										//isr non ha registrato tocco
-		if(touch_swipe->point_valid){			//	ma se ultimo controllo era valido, significa che è la fine di uno swipe
+		if(touch_swipe->point_valid){			//	ma se ultimo controllo era valido, significa che ï¿½ la fine di uno swipe
 			touch_swipe->end_of_swipe = TRUE;
 		}
-		touch_swipe->point_valid = FALSE;		//quindi prossimo tocco sicuramente non risulterà in uno swipe
+		touch_swipe->point_valid = FALSE;		//quindi prossimo tocco sicuramente non risulterï¿½ in uno swipe
+		printf("NO TOUCH PENDING\n");
 	}
+
+    printf("delta_x = %d\t\t", touch_swipe->delta_x);
+	printf("delta_y = %d\n", touch_swipe->delta_y);
 	#if defined(DEBUG_SWIPE)
 		printf("current_x = %d\t\t", touch_swipe->current_x);
 		printf("current_y = %d\n", touch_swipe->current_y);
@@ -419,6 +436,6 @@ int evaluate_swipe(TOUCH_HANDLE pHandle, SWIPE *touch_swipe, uint32_t delta_t){
 		printf("delta_y = %d\n", touch_swipe->delta_y);
 		printf("point_valid = %d\n", touch_swipe->point_valid);
 
-		printf("\n\n");
+		printf("\n");
 	#endif /*DEBUG_SWIPE*/
 }

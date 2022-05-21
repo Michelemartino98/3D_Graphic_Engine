@@ -66,6 +66,13 @@ extern alt_up_pixel_buffer_dma_dev *pixel_buf_dma_dev;
 #define KEY1 		0					//key1 si trova in posizione zero nei registri della pio perchè key0 è usato come reset globale
 #define ACC_TH		4 					//soglia di accelerazione per evitare che il cubo si muova anche con board in orizzontale
 
+
+//controllo LT24
+#define ATTENUATION_FACTOR_ROT	 (float)50
+#define ATTENUATION_FACTOR_TRASL (float)200
+#define ATTENUATION_FACTOR_SCALE (float)200
+
+
 //define for showing fps
 #define FIRST_DISPLAY 	0
 #define SECOND_DISPLAY 	8

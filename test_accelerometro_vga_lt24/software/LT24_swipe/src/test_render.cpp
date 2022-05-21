@@ -11,6 +11,8 @@ extern "C" {
 #include "alt_video_display.h"
 }
 
+extern int touch_pending;
+
 alt_up_pixel_buffer_dma_dev *pixel_buf_dma_dev;
 
 alt_video_display Display;
@@ -102,13 +104,13 @@ int main(){
 
 
 	for(;;){
-		
 		if (Touch_GetXY(pTouch, &x_touch, &y_touch)){
 			pt.x = x_touch;//y_touch;   	LA TRASLAZIONE VIENE EFFETTUATA DIRETTAMENTE ALL'
 			pt.y = y_touch;//240 - x_touch; INTERNO DELLA FUNZIONE GET_XY
 			#ifdef DEBUG_TOUCH
 			printf("x=%d, y=%d\r\n", pt.x,pt.y);
 			#endif
+			evaluate_swipe(pTouch, &touch_swipe, &pt, delta_for_fps);
 			
 			if(is_point_in_rect(&pt,&rect_cmd_ctrl)){ //sono nell'area di controllo dei comandi
 				if(!run_touch){
@@ -122,7 +124,7 @@ int main(){
 				printf("command: %d\n", actual_cmd);
 				#endif
 				vid_print_string( (rect_cmd_ctrl.right)/2 , rect_cmd_ctrl.bottom/2 , GREEN_24, cour10_font, &Display, cmd_str[actual_cmd]);
-				usleep(800000);	//ritardo per evitare che pressioni prolungate facciano cambiare più comandi
+				usleep(800000);	//ritardo per evitare che pressioni prolungate facciano cambiare piï¿½ comandi
 				Touch_EmptyFifo(pTouch);		//svuoto la FIFO
 			}
 			else if(is_point_in_rect(&pt,&rect_z_ctrl) && run_touch){ //sono nell'are di controllo z
@@ -131,13 +133,30 @@ int main(){
 			}
 			else if(is_point_in_rect(&pt,&rect_xy_ctrl) && run_touch){	//sono nell'are di controllo xy
 				printf("XY area\r\n\n");
-				evaluate_swipe(pTouch, &touch_swipe,delta_for_fps);
-
+							
+			if( touch_swipe.point_valid == true ) {
+				if( actual_cmd == ROT ){
+					Cube.update_rotation_relative( touch_swipe.delta_x/ATTENUATION_FACTOR_ROT , Y);
+					Cube.update_rotation_relative( touch_swipe.delta_y/ATTENUATION_FACTOR_ROT , X);
+				}
+				else if ( actual_cmd == TRASL ){
+					Cube.update_translation_relative(touch_swipe.delta_x/ATTENUATION_FACTOR_TRASL , Y);
+					Cube.update_translation_relative(touch_swipe.delta_y/ATTENUATION_FACTOR_TRASL , X);
+				}
+				else{
+					Cube.update_scaling_relative( touch_swipe.delta_x/ATTENUATION_FACTOR_SCALE , Y );
+					Cube.update_scaling_relative( touch_swipe.delta_y/ATTENUATION_FACTOR_SCALE , X );
+				}
 			}
-			
+			}
 		}
-
-		accelerometer_controller();
+		else{
+			touch_pending = FALSE;
+		}
+		
+		if(IORD_ALTERA_AVALON_PIO_DATA(SLIDERS_BASE)&BIT(5)){
+			accelerometer_controller();
+		}
 		Cube.calculate_rendering();
 		Cube.display_frame();
 
