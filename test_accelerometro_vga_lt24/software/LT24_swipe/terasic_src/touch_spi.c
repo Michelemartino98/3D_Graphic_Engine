@@ -3,7 +3,7 @@
 #include "terasic_includes.h"
 #include "alt_video_display.h"
 
-//#define DEBUG_SWIPE
+#define DEBUG_SWIPE
 
 // debug config
 //#define DEBUG_TOUCH_PANEL
@@ -25,7 +25,7 @@
 #define ACTIVE_DELAY_TIME   (alt_ticks_per_second()/150)
 #define SAMPLE_RATE         150  // times per seconds
 #define FIFO_SIZE           2   // 10 modificato by us 
-
+#define ABS(x) (x>=0 ? x : -x)
 int touch_pending;
 
 
@@ -182,7 +182,6 @@ bool Touch_GetXY(TOUCH_HANDLE pHandle, int *x, int *y){
     //////////////////// 
     
         DEBUG_OUT("[TOUCH] x=%d, y=%d\n", *x,*y); 
-        printf("[TOUCH] x=%d, y=%d\n", *x,*y); 
     //    touch_clear_input(p); 
     //    touch_empty_fifo(p); 
         p->next_active_time = alt_nticks() + ACTIVE_DELAY_TIME; 
@@ -325,13 +324,6 @@ void touch_get_xy(TERASIC_TOUCH_PANEL *p){
     }
     DEBUG_OUT("[ ADC] x=%d, y=%d\n", x,y);
 
-
-    //modificato da noi, per girare l'orientamento dell'lt24 
-
-    alt_u32 x_aux = y; 
-    alt_u32 y_aux =240 - x; 
-
-    printf("[ ADC] x=%d, y=%d\n", x_aux,y_aux);
     // push now    
     
   //  p->fifo_x[p->fifo_front] = x; 
@@ -440,11 +432,10 @@ int evaluate_swipe(TOUCH_HANDLE pHandle, SWIPE *touch_swipe, POINT *pt, uint32_t
 			touch_swipe->end_of_swipe = TRUE;
 		}
 		touch_swipe->point_valid = FALSE;		//quindi prossimo tocco sicuramente non risulter� in uno swipe
-		printf("NO TOUCH PENDING\n");
+		//printf("NO TOUCH PENDING\n");
+
 	}
 
-    printf("delta_x = %d\t\t", touch_swipe->delta_x);
-	printf("delta_y = %d\n", touch_swipe->delta_y);
 	#if defined(DEBUG_SWIPE)
 		printf("current_x = %d\t\t", touch_swipe->current_x);
 		printf("current_y = %d\n", touch_swipe->current_y);

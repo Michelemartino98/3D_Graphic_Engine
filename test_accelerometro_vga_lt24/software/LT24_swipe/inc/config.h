@@ -11,7 +11,7 @@
 //#define DEBUG_VECTORS
 //#define DEBUG_ACC
 //#define DEBUG_TRASLATION
-#define DEBUG_TOUCH
+//#define DEBUG_TOUCH
 
 //C standard library
 
@@ -71,6 +71,11 @@ extern alt_up_pixel_buffer_dma_dev *pixel_buf_dma_dev;
 #define ATTENUATION_FACTOR_ROT	 (float)200
 #define ATTENUATION_FACTOR_TRASL (float)200
 #define ATTENUATION_FACTOR_SCALE (float)200
+
+//	controllo inerzie del touch
+#define TRASL_INERTIA 	2
+#define SCALE_INERTIA	2
+#define ROT_INERTIA 	1
 
 
 //define for showing fps
