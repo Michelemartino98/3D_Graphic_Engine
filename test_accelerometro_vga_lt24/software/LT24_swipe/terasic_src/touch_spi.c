@@ -18,7 +18,7 @@
 ////////////// configuration //////////////
 #define X_RES   SCREEN_WIDTH
 #define Y_RES   SCREEN_HEIGHT
-#define INVALID 0xFFFFFF
+#define INVALID 0x0
 
 // internal data structure
 #define ACTIVE_DELAY_TIME   (alt_ticks_per_second()/60)
@@ -37,6 +37,7 @@ typedef struct{
     alt_u16 fifo_rear;
     alt_u16 fifo_x[FIFO_SIZE];
     alt_u16 fifo_y[FIFO_SIZE];
+
     bool pen_pressed;
     alt_alarm alarm;
     alt_u32 alarm_dur;
@@ -151,6 +152,8 @@ void Touch_EmptyFifo(TOUCH_HANDLE pHandle){
     touch_empty_fifo(p);
 }
 
+
+
 // get x/y from internal FIFO
 bool Touch_GetXY(TOUCH_HANDLE pHandle, int *x, int *y){
     TERASIC_TOUCH_PANEL *p = (TERASIC_TOUCH_PANEL *)pHandle;
@@ -184,7 +187,6 @@ bool Touch_GetXY(TOUCH_HANDLE pHandle, int *x, int *y){
     
     return TRUE;
 }
-
 
 
 // penirq_n ISR
@@ -228,10 +230,12 @@ void touch_isr(void* context, alt_u32 id){
 #ifdef ALT_ENHANCED_INTERRUPT_API_PRESENT
     alt_ic_irq_enable(TOUCH_PANEL_PEN_IRQ_N_IRQ_INTERRUPT_CONTROLLER_ID,TOUCH_PANEL_PEN_IRQ_N_IRQ);
 #else
-    alt_irq_enable(id);
+    //alt_irq_enable(id);   //++++++++++++++++++++++++++rischio di danno+++++++++++++++++++++++++++++++++++++++++++++++++++++
+                            //va insieme a disabilitazione irq in ciclo for
 #endif
 
 }
+
 
 void touch_empty_fifo(TERASIC_TOUCH_PANEL *p){
     p->fifo_rear = p->fifo_front;
@@ -261,6 +265,7 @@ void touch_enable_penirq(TERASIC_TOUCH_PANEL *p){
 void touch_clear_input(TERASIC_TOUCH_PANEL *p){
     touch_enable_penirq(p);
 }
+
 
 // get x/y by SPI command
 void touch_get_xy(TERASIC_TOUCH_PANEL *p){
@@ -319,14 +324,14 @@ void touch_get_xy(TERASIC_TOUCH_PANEL *p){
     DEBUG_OUT("[ ADC] x=%d, y=%d\n", x,y);
 
     // push now    
-    /*
-    p->fifo_x[p->fifo_front] = x; 
-    p->fifo_y[p->fifo_front] = y;     
-    p->fifo_front++; 
-    p->fifo_front %= FIFO_SIZE;    
-    */ 
+    
+  //  p->fifo_x[p->fifo_front] = x; 
+  //  p->fifo_y[p->fifo_front] = y;     
+  //  p->fifo_front++; 
+  //  p->fifo_front %= FIFO_SIZE;    
+
  
-   /* hack immondo */ 
+//hack immondo  
     p->fifo_x[0] = x; 
     p->fifo_x[1] = x; 
     p->fifo_y[0] = y; 
@@ -334,6 +339,10 @@ void touch_get_xy(TERASIC_TOUCH_PANEL *p){
     p->fifo_front++; 
     p->fifo_front %= FIFO_SIZE;      
 }
+
+
+
+
 
 // polling x/y when penirq_n is low
 alt_u32 touch_alarm_callback(void *context){
@@ -398,7 +407,7 @@ int evaluate_swipe(TOUCH_HANDLE pHandle, SWIPE *touch_swipe, POINT *pt, uint32_t
 			touch_swipe->current_y = pt->y;
 			touch_swipe->delta_x = touch_swipe->current_x - touch_swipe->previous_x;
 			touch_swipe->delta_y = touch_swipe->current_y - touch_swipe->previous_y;
-            printf("POINT VALID PRECEDENTE NON VALIDO\n");
+            printf("point valid precedente valido\n");
             
 		}
 
@@ -412,7 +421,7 @@ int evaluate_swipe(TOUCH_HANDLE pHandle, SWIPE *touch_swipe, POINT *pt, uint32_t
 			touch_swipe->delta_y = INVALID;
 			touch_swipe->end_of_swipe = FALSE;	//ho nuovo tocco, quindi fermo end_of_swipe
 			touch_swipe->point_valid = TRUE;
-            printf("POINT VALID PRECEDENTE NON VALIDO\n");
+            printf("point valid precedente NON valido\n");
 		}
 		touch_pending = FALSE;				    //resetto il flag che verr� rimesso alto dalla isr del touch
 	}

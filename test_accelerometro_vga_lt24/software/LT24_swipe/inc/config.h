@@ -68,7 +68,7 @@ extern alt_up_pixel_buffer_dma_dev *pixel_buf_dma_dev;
 
 
 //controllo LT24
-#define ATTENUATION_FACTOR_ROT	 (float)50
+#define ATTENUATION_FACTOR_ROT	 (float)200
 #define ATTENUATION_FACTOR_TRASL (float)200
 #define ATTENUATION_FACTOR_SCALE (float)200
 
