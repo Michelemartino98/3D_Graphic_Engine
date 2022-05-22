@@ -21,7 +21,8 @@
 #define INVALID 0x0
 
 // internal data structure
-#define ACTIVE_DELAY_TIME   (alt_ticks_per_second()/60)
+//#define ACTIVE_DELAY_TIME   (alt_ticks_per_second()/60)
+#define ACTIVE_DELAY_TIME   (alt_ticks_per_second()/150)
 #define SAMPLE_RATE         150  // times per seconds
 #define FIFO_SIZE           2   // 10 modificato by us 
 
