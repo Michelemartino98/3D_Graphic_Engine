@@ -172,21 +172,22 @@ bool Touch_GetXY(TOUCH_HANDLE pHandle, int *x, int *y){
     //
     // translate
     touch_xy_transform(x, y);
-
-////////////////////
-//modificato da noi, per girare l'orientamento dell'lt24
-    alt_u32 temp=*x;
-    *x=*y;
-    *y=240 - temp;
-////////////////////
-
-    DEBUG_OUT("[TOUCH] x=%d, y=%d\n", *x,*y);
-//    touch_clear_input(p);
-//    touch_empty_fifo(p);
-    p->next_active_time = alt_nticks() + ACTIVE_DELAY_TIME;
+ 
+    //////////////////// 
+    //modificato da noi, per girare l'orientamento dell'lt24 
+        alt_u32 temp=*x; 
+        *x=*y; 
+        *y=240 - temp; 
+    //////////////////// 
     
-    return TRUE;
-}
+        DEBUG_OUT("[TOUCH] x=%d, y=%d\n", *x,*y); 
+        printf("[TOUCH] x=%d, y=%d\n", *x,*y); 
+    //    touch_clear_input(p); 
+    //    touch_empty_fifo(p); 
+        p->next_active_time = alt_nticks() + ACTIVE_DELAY_TIME; 
+
+        return TRUE; 
+    } 
 
 
 // penirq_n ISR
@@ -224,8 +225,8 @@ void touch_isr(void* context, alt_u32 id){
     // Reset the edge capture register
     IOWR_ALTERA_AVALON_PIO_EDGE_CAP(p->penirq_base,0);    
     
-    touch_pending = TRUE;
-    printf("touch_pending nell' ISR = %d \n", touch_pending );
+//    touch_pending = TRUE;
+//    printf("touch_pending nell' ISR = %d \n", touch_pending );
 
 #ifdef ALT_ENHANCED_INTERRUPT_API_PRESENT
     alt_ic_irq_enable(TOUCH_PANEL_PEN_IRQ_N_IRQ_INTERRUPT_CONTROLLER_ID,TOUCH_PANEL_PEN_IRQ_N_IRQ);
@@ -323,6 +324,13 @@ void touch_get_xy(TERASIC_TOUCH_PANEL *p){
     }
     DEBUG_OUT("[ ADC] x=%d, y=%d\n", x,y);
 
+
+    //modificato da noi, per girare l'orientamento dell'lt24 
+
+    alt_u32 x_aux = y; 
+    alt_u32 y_aux =240 - x; 
+
+    printf("[ ADC] x=%d, y=%d\n", x_aux,y_aux);
     // push now    
     
   //  p->fifo_x[p->fifo_front] = x; 
@@ -351,12 +359,13 @@ alt_u32 touch_alarm_callback(void *context){
     if (touch_is_pen_pressed(p)){//Touch.pen_pressed){
         if (alt_nticks() > p->next_active_time)
             touch_get_xy(p);
+            touch_pending = TRUE;
       //  p->last_active_time = alt_nticks(); 
     }else{
        // touch_empty_fifo(p);
         //if ((alt_nticks() - Touch.last_active_time) > alt_ticks_per_second()/10){
-         touch_enable_penirq(p);
-         touch_clear_input(p);
+         touch_enable_penirq(p);                                                                //cosa diavolo ci fanno?
+         touch_clear_input(p);                                                                  //sembra funzionare senza, ma dopo un po' si blocca
           //  p->last_active_time = alt_nticks(); 
         //}            
     }        
