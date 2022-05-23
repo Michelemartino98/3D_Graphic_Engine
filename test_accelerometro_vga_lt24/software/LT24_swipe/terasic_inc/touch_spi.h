@@ -20,12 +20,16 @@ typedef struct{
     int    end_of_swipe;
 }SWIPE;
 
+typedef struct{
+    int x;
+    int y;
+}POINT;
 
 TOUCH_HANDLE Touch_Init(const alt_u32 spi_base, const alt_u32 penirq_base, const alt_u32 penirq_irq);
 void Touch_UnInit(TOUCH_HANDLE pHandle);
 int Touch_GetXY(TOUCH_HANDLE p, int *x, int *y);
 void Touch_EmptyFifo(TOUCH_HANDLE pHandle);
-int evaluate_swipe(TOUCH_HANDLE, SWIPE *, uint32_t );
+int evaluate_swipe(TOUCH_HANDLE, SWIPE *, POINT *, uint32_t );
 
 
 #endif /*TERASIC_TOUCHPANEL_H_*/

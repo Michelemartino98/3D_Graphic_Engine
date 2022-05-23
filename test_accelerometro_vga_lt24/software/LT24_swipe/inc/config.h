@@ -11,7 +11,7 @@
 //#define DEBUG_VECTORS
 //#define DEBUG_ACC
 //#define DEBUG_TRASLATION
-#define DEBUG_TOUCH
+//#define DEBUG_TOUCH
 
 //C standard library
 
@@ -65,6 +65,18 @@ extern alt_up_pixel_buffer_dma_dev *pixel_buf_dma_dev;
 										// la scheda venga usata da ferma è l'accelerazione massima che si può avere lungo un asse
 #define KEY1 		0					//key1 si trova in posizione zero nei registri della pio perchè key0 è usato come reset globale
 #define ACC_TH		4 					//soglia di accelerazione per evitare che il cubo si muova anche con board in orizzontale
+
+
+//controllo LT24
+#define ATTENUATION_FACTOR_ROT	 (float)200
+#define ATTENUATION_FACTOR_TRASL (float)200
+#define ATTENUATION_FACTOR_SCALE (float)200
+
+//	controllo inerzie del touch
+#define TRASL_INERTIA 	2
+#define SCALE_INERTIA	2
+#define ROT_INERTIA 	1
+
 
 //define for showing fps
 #define FIRST_DISPLAY 	0
