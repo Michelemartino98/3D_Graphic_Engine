@@ -11,7 +11,7 @@ void init_accelerometer(){
     if ( accelerometer_dev == NULL)
         printf ("Error: could not open acc device \n");
     else
-        printf ("Opened accelerometer device \n");
+        printf ("Opened acc device \n");
 //#endif
 }
 
@@ -22,7 +22,7 @@ void accelerometer_controller(){
     //parametri per uso dell'accelerometro+slider
     static int32_t x_acc = 0;
     static int32_t y_acc = 0;
-
+    static int32_t z_acc = 0; 
 
     static uint16_t slider_data_reg;
     static uint16_t edge_capture_k1;
