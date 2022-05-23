@@ -176,7 +176,7 @@ int main(){
 						}
 						//inerzia su y
 						if( touch_swipe.delta_y > 0 ){
-							touch_swipe.delta_y = touch_swipe.delta_x-ROT_INERTIA < 0 ? 0 : touch_swipe.delta_y - ROT_INERTIA ;
+							touch_swipe.delta_y = touch_swipe.delta_y-ROT_INERTIA < 0 ? 0 : touch_swipe.delta_y - ROT_INERTIA ;
 							}
 						else if ( touch_swipe.delta_y < 0 ){
 							touch_swipe.delta_y = touch_swipe.delta_y+ROT_INERTIA > 0 ? 0 : touch_swipe.delta_y + ROT_INERTIA ;
@@ -196,7 +196,7 @@ int main(){
 						}
 						//inerzia su y
 						if( touch_swipe.delta_y > 0 ){
-							touch_swipe.delta_y = touch_swipe.delta_x-TRASL_INERTIA < 0 ? 0 : touch_swipe.delta_y - TRASL_INERTIA ;
+							touch_swipe.delta_y = touch_swipe.delta_y-TRASL_INERTIA < 0 ? 0 : touch_swipe.delta_y - TRASL_INERTIA ;
 							}
 						else if ( touch_swipe.delta_y < 0 ){
 							touch_swipe.delta_y = touch_swipe.delta_y+TRASL_INERTIA > 0 ? 0 : touch_swipe.delta_y + TRASL_INERTIA ;
