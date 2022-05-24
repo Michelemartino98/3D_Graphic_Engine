@@ -162,7 +162,7 @@ assign LT24_LCD_ON 		= 1'b1;	//default on
 //  Structural coding 
 //======================================================= 
 		 
-	    vga_lt24_accelerometer_computer our_PC ( 
+	    lt24_hires our_PC ( 
 			.clk_clk          (MAX10_CLK1_50),        			//        clk.clk 
 		  .reset_reset_n    	(KEY[0]),    							//      reset.reset_n 
          

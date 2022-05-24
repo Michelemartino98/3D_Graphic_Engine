@@ -1,0 +1,16 @@
+Analysis & Synthesis Status : Successful - Tue May 24 11:20:59 2022
+Quartus Prime Version : 18.1.0 Build 625 09/12/2018 SJ Lite Edition
+Revision Name : CPU4k
+Top-level Entity Name : DE10_LITE_Golden_Top
+Family : MAX 10
+Total logic elements : 9,705
+    Total combinational functions : 7,683
+    Dedicated logic registers : 5,699
+Total registers : 5699
+Total pins : 212
+Total virtual pins : 0
+Total memory bits : 1,153,936
+Embedded Multiplier 9-bit elements : 6
+Total PLLs : 1
+UFM blocks : 0
+ADC blocks : 0
