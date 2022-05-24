@@ -44,9 +44,17 @@ int main(){
 
 	uint32_t fps;
 
-	init_accelerometer();
+	
+
+	
 	pixel_buf_dma_dev = alt_up_pixel_buffer_dma_open_dev("/dev/video_pixel_buffer_dma_0");
-	bool accelerometer_on; //tramite LT24 accendo e spengo accelerometer
+
+	alt_up_pixel_buffer_dma_clear_screen_delayed(pixel_buf_dma_dev,1);	//pulisco il frame iniziale e lo mando alla vga
+	alt_up_pixel_buffer_dma_swap_buffers(pixel_buf_dma_dev);
+    while (alt_up_pixel_buffer_dma_check_swap_buffers_status(pixel_buf_dma_dev)){;}
+
+	init_accelerometer();
+	bool accelerometer_on; 
 
 	// init LCD
 	LCD_Init();
@@ -60,9 +68,7 @@ int main(){
 
 	// init touch
 	pTouch = Touch_Init(TOUCH_SPI_BASE, TOUCH_PEN_IRQ_N_BASE, TOUCH_PEN_IRQ_N_IRQ);
-	//stringhe per disegnare su LT24 
-	
-	//flag di controllo : se false disabilita i comandi 
+
 	
 #ifdef DEBUG_TOUCH
 	if (!pTouch){
