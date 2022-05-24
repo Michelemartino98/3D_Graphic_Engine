@@ -18,14 +18,14 @@
 #
 # Quartus Prime
 # Version 18.1.0 Build 625 09/12/2018 SJ Lite Edition
-# Date created = 09:30:34  May 13, 2022
+# Date created = 10:49:37  May 24, 2022
 #
 # -------------------------------------------------------------------------- #
 #
 # Notes:
 #
 # 1) The default values for assignments are stored in the file:
-#		computer_accelerometro_vga_lt24_assignment_defaults.qdf
+#		CPU4k_assignment_defaults.qdf
 #    If this file doesn't exist, see file:
 #		assignment_defaults.qdf
 #
@@ -344,62 +344,63 @@ set_location_assignment PIN_AB20 -to ARDUINO_IO[13]
 set_location_assignment PIN_AB21 -to ARDUINO_IO[14]
 set_location_assignment PIN_AA20 -to ARDUINO_IO[15]
 set_location_assignment PIN_F16 -to ARDUINO_RESET_N
-set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to LT24_ADC_BUSY
-set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to LT24_ADC_CS_N
-set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to LT24_ADC_DCLK
-set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to LT24_ADC_DIN
-set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to LT24_ADC_DOUT
-set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to LT24_ADC_PENIRQ_N
-set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to LT24_CS_N
-set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to LT24_D[0]
-set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to LT24_D[1]
-set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to LT24_D[2]
-set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to LT24_D[3]
-set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to LT24_D[4]
-set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to LT24_D[5]
-set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to LT24_D[6]
-set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to LT24_D[7]
-set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to LT24_D[8]
-set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to LT24_D[9]
-set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to LT24_D[10]
-set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to LT24_D[11]
-set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to LT24_D[12]
-set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to LT24_D[13]
-set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to LT24_D[14]
-set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to LT24_D[15]
-set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to LT24_LCD_ON
-set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to LT24_RD_N
-set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to LT24_RESET_N
-set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to LT24_RS
-set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to LT24_WR_N
-set_location_assignment PIN_V9 -to LT24_ADC_BUSY
-set_location_assignment PIN_AB2 -to LT24_ADC_CS_N
-set_location_assignment PIN_V8 -to LT24_ADC_DCLK
-set_location_assignment PIN_W9 -to LT24_ADC_DIN
-set_location_assignment PIN_W10 -to LT24_ADC_DOUT
-set_location_assignment PIN_V10 -to LT24_ADC_PENIRQ_N
-set_location_assignment PIN_Y7 -to LT24_CS_N
-set_location_assignment PIN_W6 -to LT24_D[0]
-set_location_assignment PIN_W7 -to LT24_D[1]
-set_location_assignment PIN_V7 -to LT24_D[2]
-set_location_assignment PIN_W8 -to LT24_D[3]
-set_location_assignment PIN_W13 -to LT24_D[4]
-set_location_assignment PIN_W12 -to LT24_D[5]
-set_location_assignment PIN_AB13 -to LT24_D[6]
-set_location_assignment PIN_AB12 -to LT24_D[7]
-set_location_assignment PIN_Y11 -to LT24_D[8]
-set_location_assignment PIN_AB11 -to LT24_D[9]
-set_location_assignment PIN_W11 -to LT24_D[10]
-set_location_assignment PIN_AB10 -to LT24_D[11]
-set_location_assignment PIN_AA10 -to LT24_D[12]
-set_location_assignment PIN_AA9 -to LT24_D[13]
-set_location_assignment PIN_Y8 -to LT24_D[14]
-set_location_assignment PIN_AA8 -to LT24_D[15]
-set_location_assignment PIN_AA2 -to LT24_LCD_ON
-set_location_assignment PIN_W5 -to LT24_RD_N
-set_location_assignment PIN_Y3 -to LT24_RESET_N
-set_location_assignment PIN_AA14 -to LT24_RS
-set_location_assignment PIN_AA15 -to LT24_WR_N
+
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to LT24_ADC_BUSY 
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to LT24_ADC_CS_N 
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to LT24_ADC_DCLK 
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to LT24_ADC_DIN 
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to LT24_ADC_DOUT 
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to LT24_ADC_PENIRQ_N 
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to LT24_CS_N 
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to LT24_D[0] 
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to LT24_D[1] 
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to LT24_D[2] 
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to LT24_D[3] 
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to LT24_D[4] 
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to LT24_D[5] 
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to LT24_D[6] 
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to LT24_D[7] 
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to LT24_D[8] 
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to LT24_D[9] 
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to LT24_D[10] 
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to LT24_D[11] 
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to LT24_D[12] 
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to LT24_D[13] 
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to LT24_D[14] 
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to LT24_D[15] 
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to LT24_LCD_ON 
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to LT24_RD_N 
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to LT24_RESET_N 
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to LT24_RS 
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to LT24_WR_N 
+set_location_assignment PIN_V9 -to LT24_ADC_BUSY 
+set_location_assignment PIN_AB2 -to LT24_ADC_CS_N 
+set_location_assignment PIN_V8 -to LT24_ADC_DCLK 
+set_location_assignment PIN_W9 -to LT24_ADC_DIN 
+set_location_assignment PIN_W10 -to LT24_ADC_DOUT 
+set_location_assignment PIN_V10 -to LT24_ADC_PENIRQ_N 
+set_location_assignment PIN_Y7 -to LT24_CS_N 
+set_location_assignment PIN_W6 -to LT24_D[0] 
+set_location_assignment PIN_W7 -to LT24_D[1] 
+set_location_assignment PIN_V7 -to LT24_D[2] 
+set_location_assignment PIN_W8 -to LT24_D[3] 
+set_location_assignment PIN_W13 -to LT24_D[4] 
+set_location_assignment PIN_W12 -to LT24_D[5] 
+set_location_assignment PIN_AB13 -to LT24_D[6] 
+set_location_assignment PIN_AB12 -to LT24_D[7] 
+set_location_assignment PIN_Y11 -to LT24_D[8] 
+set_location_assignment PIN_AB11 -to LT24_D[9] 
+set_location_assignment PIN_W11 -to LT24_D[10] 
+set_location_assignment PIN_AB10 -to LT24_D[11] 
+set_location_assignment PIN_AA10 -to LT24_D[12] 
+set_location_assignment PIN_AA9 -to LT24_D[13] 
+set_location_assignment PIN_Y8 -to LT24_D[14] 
+set_location_assignment PIN_AA8 -to LT24_D[15] 
+set_location_assignment PIN_AA2 -to LT24_LCD_ON 
+set_location_assignment PIN_W5 -to LT24_RD_N 
+set_location_assignment PIN_Y3 -to LT24_RESET_N 
+set_location_assignment PIN_AA14 -to LT24_RS 
+set_location_assignment PIN_AA15 -to LT24_WR_N 
 
 set_global_assignment -name PARTITION_NETLIST_TYPE SOURCE -section_id Top
 set_global_assignment -name PARTITION_FITTER_PRESERVATION_LEVEL PLACEMENT_AND_ROUTING -section_id Top
@@ -409,6 +410,6 @@ set_global_assignment -name MAX_CORE_JUNCTION_TEMP 85
 set_global_assignment -name POWER_PRESET_COOLING_SOLUTION "23 MM HEAT SINK WITH 200 LFPM AIRFLOW"
 set_global_assignment -name POWER_BOARD_THERMAL_MODEL "NONE (CONSERVATIVE)"
 set_global_assignment -name BOARD "MAX 10 DE10 - Lite"
-set_global_assignment -name QIP_FILE synthesis/vga_lt24_accelerometer_computer.qip
+set_global_assignment -name QIP_FILE CPU/synthesis/lt24_hires.qip
 set_global_assignment -name VERILOG_FILE DE10_LITE_Golden_Top.v
 set_instance_assignment -name PARTITION_HIERARCHY root_partition -to | -section_id Top
