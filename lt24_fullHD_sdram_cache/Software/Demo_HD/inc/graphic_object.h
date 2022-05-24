@@ -3,12 +3,12 @@
 
 #include "./config.h"
 
-#define CUBE
+#define TEAPOT_MK2
 
 #if defined (CUBE)
 	#define N_VERTEX 8
 	#define N_FACES 12
-#elif defined (SPERICHON)
+#elif defined (SPHERICON)
 	#define N_VERTEX 720
 	#define N_FACES 420
 #elif defined (TEAPOT)
