@@ -6,3 +6,5 @@ si può risparmiare transformed_vertex facendo tutte le operazioni sul singolo v
 -il fatto che si usano vettori al posto di matrici, che il processore dovrebbe trattare in maniera più efficiente(da verificare bene questo) 
 
 -nella rotazione ci calcoliamo tutti i coseni una sola volta, sempre per avere maggiore efficienza nelle operazioni.
+
+-abbiamo modificato la libreria dell'LT24 per "ruotare lo schermo" e idem per il touch. poi abbiamo modificato l'isr del touch per costruire la funzione dello swipe

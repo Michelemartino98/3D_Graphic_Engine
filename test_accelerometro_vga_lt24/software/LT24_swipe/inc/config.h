@@ -73,9 +73,8 @@ extern alt_up_pixel_buffer_dma_dev *pixel_buf_dma_dev;
 #define ATTENUATION_FACTOR_SCALE (float)200
 
 //	controllo inerzie del touch
-#define TRASL_INERTIA 	2
-#define SCALE_INERTIA	2
-#define ROT_INERTIA 	1
+#define TRASL_INERTIA 	(float)1.5
+#define ROT_INERTIA 	(float)0.9
 
 
 //define for showing fps
@@ -97,6 +96,7 @@ extern alt_up_pixel_buffer_dma_dev *pixel_buf_dma_dev;
 
 
 typedef enum {ROT,TRASL,SCALE} cmd_t;
+
 /*  controlla se mandare a terminale le coordinate x,y,z,w dei singoli vettori,
  *  oltre che le coordinate x,y dello schermo finali
  */
