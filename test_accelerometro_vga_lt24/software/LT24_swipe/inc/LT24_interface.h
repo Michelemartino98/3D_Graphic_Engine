@@ -10,6 +10,8 @@ extern "C" {
 #include "alt_video_display.h"
 }
 
+#define OFFSET 20
+
 typedef struct{
     int left;
     int right;
@@ -20,10 +22,9 @@ typedef struct{
 
 
 void GUI_show_welcome();
-
-
-void GUI_desk_init( RECT *, RECT *, RECT *);
+void GUI_desk_init();
 bool is_point_in_rect(POINT *, RECT *);
+void LT24_controller();
 
 
 

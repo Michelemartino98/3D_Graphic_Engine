@@ -45,6 +45,13 @@ void alt_up_pixel_buffer_dma_clear_screen_delayed(alt_up_pixel_buffer_dma_dev *p
 				asm("nop");
 				asm("nop");
 				asm("nop");
+				asm("nop");
+				asm("nop");
+				asm("nop");
+				asm("nop");
+				asm("nop");
+				asm("nop");
+				asm("nop");
 
 			}
 			addr = addr + (1 << offset_y);
@@ -58,16 +65,24 @@ void alt_up_pixel_buffer_dma_clear_screen_delayed(alt_up_pixel_buffer_dma_dev *p
 		{
 			IOWR_32DIRECT(addr, x, 0);
 			asm("nop");
-			asm("nop");
-			asm("nop");
-			asm("nop");
-			asm("nop");
-			asm("nop");
-			asm("nop");
-			asm("nop");
-			asm("nop");
-			asm("nop");
-			asm("nop");
+							asm("nop");
+							asm("nop");
+							asm("nop");
+							asm("nop");
+							asm("nop");
+							asm("nop");
+							asm("nop");
+							asm("nop");
+							asm("nop");
+							asm("nop");
+							asm("nop");
+							asm("nop");
+							asm("nop");
+							asm("nop");
+							asm("nop");
+							asm("nop");
+							asm("nop");
+
 
 		}
 	}

@@ -3,11 +3,11 @@
 #include "terasic_includes.h"
 #include "alt_video_display.h"
 
-#define DEBUG_SWIPE
+
 
 // debug config
 //#define DEBUG_TOUCH_PANEL
-
+//#define DEBUG_SWIPE
 
 #ifdef DEBUG_TOUCH_PANEL
     #define DEBUG_OUT(format, arg...) printf(format, ## arg);
@@ -26,6 +26,7 @@
 #define SAMPLE_RATE         150  // times per seconds
 #define FIFO_SIZE           2   // 10 modificato by us 
 #define ABS(x) (x>=0 ? x : -x)
+
 int touch_pending;
 
 
@@ -391,13 +392,11 @@ void touch_xy_transform(int *x, int *y){
 }
 
 
-int evaluate_swipe(TOUCH_HANDLE pHandle, SWIPE *touch_swipe, POINT *pt, uint32_t delta_t){
+void evaluate_swipe(TOUCH_HANDLE pHandle, SWIPE *touch_swipe, POINT *pt){
 
 	TERASIC_TOUCH_PANEL *tpanel = (TERASIC_TOUCH_PANEL *)pHandle;
 	if(touch_pending){ 							//prima della chiamata di questa funzione � stato registrato un tocco,
 												//	quindi inizio a discriminare tra tocco e swipe
-
-		touch_swipe->delta_t = alt_timestamp();	// Acquisisco il tempo
 
 		int x,y;
 
@@ -409,8 +408,9 @@ int evaluate_swipe(TOUCH_HANDLE pHandle, SWIPE *touch_swipe, POINT *pt, uint32_t
 			touch_swipe->current_y = pt->y;
 			touch_swipe->delta_x = touch_swipe->current_x - touch_swipe->previous_x;
 			touch_swipe->delta_y = touch_swipe->current_y - touch_swipe->previous_y;
+            #if defined(DEBUG_SWIPE)
             printf("point valid precedente valido\n");
-            
+            #endif /*DEBUG_SWIPE*/
 		}
 
 
@@ -423,7 +423,9 @@ int evaluate_swipe(TOUCH_HANDLE pHandle, SWIPE *touch_swipe, POINT *pt, uint32_t
 			touch_swipe->delta_y = INVALID;
 			touch_swipe->end_of_swipe = FALSE;	//ho nuovo tocco, quindi fermo end_of_swipe
 			touch_swipe->point_valid = TRUE;
+            #if defined(DEBUG_SWIPE)
             printf("point valid precedente NON valido\n");
+            #endif /*DEBUG_SWIPE*/
 		}
 		touch_pending = FALSE;				    //resetto il flag che verr� rimesso alto dalla isr del touch
 	}
