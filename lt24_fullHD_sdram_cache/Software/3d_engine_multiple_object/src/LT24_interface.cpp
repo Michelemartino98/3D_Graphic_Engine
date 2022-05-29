@@ -11,7 +11,9 @@ extern "C" {
 #include "config.h"
 
 extern alt_video_display Display;
+
 extern Graphic_engine Object_3D;
+
 extern TOUCH_HANDLE pTouch;
 
 RECT rect_z_ctrl, rect_xy_ctrl, rect_cmd_ctrl, rect_acc_ctrl;

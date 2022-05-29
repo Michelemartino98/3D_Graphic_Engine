@@ -1,8 +1,9 @@
  
 #include "../inc/config.h" 
+
+#define test_heap
  
- 
- 
+
 extern "C" { 
 #include "touch_spi.h" 
 #include "terasic_includes.h" 
@@ -18,9 +19,11 @@ alt_up_pixel_buffer_dma_dev *pixel_buf_dma_dev;
 TOUCH_HANDLE *pTouch; 
  
 alt_video_display Display; 
- 
+
+#ifdef test_heap 
 Graphic_engine Object_3D; 
- 
+#endif 
+
 uint8_t display_digit(uint8_t val){ 
 	uint8_t lut[20] = {0x3F, 0x06, 0x5B, 0x4F, 	//0 to 3 
 			0x66, 0x6D, 0x7D, 0x07,	//4 to 7 
@@ -44,9 +47,6 @@ int main(){
  
 	uint32_t fps; 
  
-	 
- 
-	 
 	pixel_buf_dma_dev = alt_up_pixel_buffer_dma_open_dev("/dev/video_pixel_buffer_dma_0"); 
  
 	alt_up_pixel_buffer_dma_clear_screen_delayed(pixel_buf_dma_dev,1);	//pulisco il frame iniziale e lo mando alla vga 
@@ -82,13 +82,15 @@ int main(){
 	int x,y; 
 	//schermata di benevenuto 
 	GUI_show_welcome(); 
-	while( !Touch_GetXY(pTouch,&x,&y) ) {;}
+	printf("A\n");
+	while( !Touch_GetXY(pTouch,&x,&y) ) {}
+	printf("B\n");
 	//usleep(1000000); 
 	//pulizia schermo 
 	//LCD_Clear(WHITE_24); 
 	// 
 	GUI_desk_init(); 
-	 
+	printf("c\n");
 	alt_timestamp_start(); 
  
 	for(;;){ 
@@ -99,15 +101,17 @@ int main(){
 			accelerometer_controller(); 
 		} 
 		
+		#ifdef test_heap 
 		Object_3D.calculate_rendering(); 
 		Object_3D.display_frame();
 		Object_3D.change_object(); 
-		
+		#endif
  
 		//calcolo fps e riavvio del timer 
 		fps = TIMER_FREQ/ alt_timestamp(); 
 		display_fps(fps); 
 		alt_timestamp_start();	
+		printf("time: %d",fps );
 			 
  
 	} 

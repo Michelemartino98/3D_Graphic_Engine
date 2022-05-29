@@ -79,17 +79,20 @@ class Graphic_engine{
         float n = 0.1; 
         float f = 100;
         float r, l, t, b; 
-        float angleOfView = 45;
-        float imageAspectRatio = (float)4/3;
-        float scale = tan(angleOfView * 0.5 * M_PI / 180) * n; //= 0.1;          //tan(angleOfView * 0.5 * M_PI / 180) * n;  
+        float angle_of_view = 45;
+        float image_aspect_ratio = (float)4/3;
+        float scale = tan(angle_of_view * 0.5 * M_PI / 180) * n; //= 0.1;          //tan(angle_of_view * 0.5 * M_PI / 180) * n;  
           
 
         //contiene i vertici trasformati, ma sempre 3D
-        float transformed_vertex[N_VERTEX*4];
-        
+        //float* transformed_vertex; non serve che tanto c'è temp_trasfomed_vertex
+        //float transformed_vertex[N_VERTEX*4];
+      
         //struttura dati che contiene le coordinate dei vertici del solido proiettati in 2D, da mandare direttamente a schermo. 
         //Viene inizializzata quando viene costruita la classe moltiplicando vertex per le matrici di rotazione, proiezione, etc...
-        int vertex_on_2D[N_VERTEX][2];
+       
+        int* vertex_on_2D;
+        //int vertex_on_2D[N_VERTEX][2];
 
         float projection_matrix[4*4];
         float rotation_matrix[4*4];
@@ -109,18 +112,16 @@ class Graphic_engine{
                                     0,0,0,1};
 
         void Matrix4x4MultiplyBy4x4(float *, float *, float *);
-        //motliplicazione della matrice finale per ciascun vertice
+        //motliplicazione della matrice finale per ciascun vertice e trasfomazione 3D->2D
         void vector_matrix_multiply();
-        // parte dalla matrice trasformed_vertex e lo spiattella in 2D   
-        void from_3D_to_2D();
-    
+
 
     public:
-       
 
         Graphic_engine();
 
         //#define M8(x,y) (x*N_VERTEX+y)
+        
         inline int V(int x, int y){ return x * (int)(*n_vertex_pnt) + y; }
         //funzioni overloaded per modificare tutti i parametri oppure solamente quelli di un asse
         void update_translation(float, float, float);
