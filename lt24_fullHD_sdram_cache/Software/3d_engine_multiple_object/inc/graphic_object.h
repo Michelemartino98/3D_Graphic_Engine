@@ -83,13 +83,12 @@ class Graphic_engine{
         float imageAspectRatio = (float)4/3;
         float scale = tan(angleOfView * 0.5 * M_PI / 180) * n; //= 0.1;          //tan(angleOfView * 0.5 * M_PI / 180) * n;  
           
-
-        //contiene i vertici trasformati, ma sempre 3D
-        float transformed_vertex[N_VERTEX*4];
         
         //struttura dati che contiene le coordinate dei vertici del solido proiettati in 2D, da mandare direttamente a schermo. 
         //Viene inizializzata quando viene costruita la classe moltiplicando vertex per le matrici di rotazione, proiezione, etc...
-        int vertex_on_2D[N_VERTEX][2];
+        
+        //int vertex_on_2D[N_VERTEX][2];
+        int* vertex_on_2d_pnt;
 
         float projection_matrix[4*4];
         float rotation_matrix[4*4];
@@ -177,6 +176,7 @@ struct {
                                 {4,5 ,6},
                                 {4,7 ,6}                                        
                                 };
+    int vertex_on_2D[N_VERTEX_CUBO][2];
 }cubo;
 
 
@@ -202,6 +202,7 @@ struct{
                                 {4,5 ,6},
                                 {4,7 ,6}                                        
                                 };
+    int vertex_on_2D[N_VERTEX_CUBO2][2];
 }cubo2;
 
 

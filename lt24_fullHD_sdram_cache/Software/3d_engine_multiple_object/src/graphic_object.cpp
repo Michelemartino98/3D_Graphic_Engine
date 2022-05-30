@@ -12,7 +12,7 @@ Graphic_engine::Graphic_engine(){
     // faces_pnt = &(cubo.faces[0][0]);
     vertex_pnt = (cubo.vertex);      // punto sempre al primo elemento della matrice, e poi lavoro con gli indici
     faces_pnt = (cubo.faces[0]);
-    
+    vertex_on_2d_pnt = (cubo.vertex_on_2D[0]);
 
 
     //la traslazione inziale sull'asse z serve a spostare indietro l'oggetto nel mondo, altrimenti la camera si troverebbe nell'origine e sarebbe "dentro" il cubo(e si vede la croce delle diagonali)
@@ -270,19 +270,25 @@ int Graphic_engine::display_frame(){
     //disegno una linea tra i vertici dei triangoli, indicizzando la matrice vertex_on_2D con il contenuto di faces, che contiene il n. del vertice di ciascun triangolo
     for(int i=0; i < (*n_faces_pnt) ; i++){
         // { *(faces_pnt + i * 3 + A) } tutto questo serve a mettere il corretto offset per accedere a faces[i][A], da cui si ottiene il numero del vertice per indicizzare vertex_on_2D
-        alt_up_pixel_buffer_dma_draw_line_enhanced_clipping(pixel_buf_dma_dev, \
-            vertex_on_2D[*(faces_pnt + i * 3 + A)][X],  vertex_on_2D[*(faces_pnt + i * 3 + A)][Y], \ 
-            vertex_on_2D[*(faces_pnt + i * 3 + B)][X],vertex_on_2D[*(faces_pnt + i * 3 + B)][Y], \
-             GREEN, 1);
+        // alt_up_pixel_buffer_dma_draw_line_enhanced_clipping(pixel_buf_dma_dev, \
+        //     vertex_on_2D[*(faces_pnt + i * 3 + A)][X],  vertex_on_2D[*(faces_pnt + i * 3 + A)][Y], \ 
+        //     vertex_on_2D[*(faces_pnt + i * 3 + B)][X],vertex_on_2D[*(faces_pnt + i * 3 + B)][Y], \
+        //      GREEN, 1);
         
-        alt_up_pixel_buffer_dma_draw_line_enhanced_clipping(pixel_buf_dma_dev, \
-            vertex_on_2D[*(faces_pnt + i * 3 + B)][X], vertex_on_2D[*(faces_pnt + i * 3 + B)][Y], \
-            vertex_on_2D[*(faces_pnt + i * 3 + C)][X],vertex_on_2D[*(faces_pnt + i * 3 + C)][Y], \
+        ////////////usando il puntatore vertex_on_2d
+        alt_up_pixel_buffer_dma_draw_line_enhanced_clipping(pixel_buf_dma_dev,\
+            *(vertex_on_2d_pnt + (*(faces_pnt + i * 3 + A))*2 + X), *(vertex_on_2d_pnt + (*(faces_pnt + i * 3 + A))*2 + Y),\ 
+            *(vertex_on_2d_pnt + (*(faces_pnt + i * 3 + B))*2 + X), *(vertex_on_2d_pnt + (*(faces_pnt + i * 3 + B))*2 + Y),\
             GREEN, 1);
 
         alt_up_pixel_buffer_dma_draw_line_enhanced_clipping(pixel_buf_dma_dev,\
-            vertex_on_2D[*(faces_pnt + i * 3 + C)][X], vertex_on_2D[*(faces_pnt + i * 3 + C)][Y],\
-            vertex_on_2D[*(faces_pnt + i * 3 + A)][X],vertex_on_2D[*(faces_pnt + i * 3 + A)][Y],\
+            *(vertex_on_2d_pnt + (*(faces_pnt + i * 3 + B))*2 + X), *(vertex_on_2d_pnt + (*(faces_pnt + i * 3 + B))*2 + Y),\
+            *(vertex_on_2d_pnt + (*(faces_pnt + i * 3 + C))*2 + X), *(vertex_on_2d_pnt + (*(faces_pnt + i * 3 + C))*2 + Y),\
+            GREEN, 1);
+
+        alt_up_pixel_buffer_dma_draw_line_enhanced_clipping(pixel_buf_dma_dev,\
+            *(vertex_on_2d_pnt + (*(faces_pnt + i * 3 + C))*2 + X), *(vertex_on_2d_pnt + (*(faces_pnt + i * 3 + C))*2 + Y),\
+            *(vertex_on_2d_pnt + (*(faces_pnt + i * 3 + A))*2 + X), *(vertex_on_2d_pnt + (*(faces_pnt + i * 3 + A))*2 + Y),\
             GREEN, 1);
     }
 
@@ -365,9 +371,11 @@ void Graphic_engine::vector_matrix_multiply(){
     *   |                   |       |    normalizzato   |
     *   (0,240)---------(320,240)   (-1,-1)----------(1,-1)
     */
-        vertex_on_2D[i][X] = ((temp_transformed_vertex[X]*(X_RESOLUTION/2))+(X_RESOLUTION/2));
+        //vertex_on_2D[i][X] = ((temp_transformed_vertex[X]*(X_RESOLUTION/2))+(X_RESOLUTION/2));
+        *(vertex_on_2d_pnt + i*2 + X) = ((temp_transformed_vertex[X]*(X_RESOLUTION/2))+(X_RESOLUTION/2));
+
         //il meno è necessario per mappare nell'origine della vga, il valore y=1 nelle coordinate normalizzate del cubo
-        vertex_on_2D[i][Y] = (-(temp_transformed_vertex[Y]*(Y_RESOLUTION/2))+(Y_RESOLUTION/2));
+        *(vertex_on_2d_pnt + i*2 + Y) = (-(temp_transformed_vertex[Y]*(Y_RESOLUTION/2))+(Y_RESOLUTION/2));
          #ifdef DEBUG_1
         printf("p%d - x:%d / y:%d\n",i, vertex_on_2D[i][X], vertex_on_2D[i][Y]);
         #endif
@@ -415,7 +423,9 @@ void Graphic_engine::change_object(){
                 n_vertex_pnt = &cubo2.n_vertex;
                 n_faces_pnt = &cubo2.n_faces;
                 vertex_pnt = cubo2.vertex;      // punto sempre al primo elemento della matrice, e poi lavoro con gli indici
-                faces_pnt = (cubo2.faces[0]);       
+                faces_pnt = (cubo2.faces[0]);
+                vertex_on_2d_pnt = (cubo2.vertex_on_2D[0]);
+
                 break;
             case 2:
                 
@@ -423,6 +433,8 @@ void Graphic_engine::change_object(){
                 n_faces_pnt = &cubo.n_faces;
                 vertex_pnt = cubo.vertex;      // punto sempre al primo elemento della matrice, e poi lavoro con gli indici
                 faces_pnt = (cubo.faces[0]);
+                vertex_on_2d_pnt = (cubo.vertex_on_2D[0]);
+
                 break;
             default:
                 break;

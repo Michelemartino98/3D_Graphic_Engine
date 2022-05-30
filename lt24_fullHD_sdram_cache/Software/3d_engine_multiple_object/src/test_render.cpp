@@ -90,6 +90,15 @@ int main(){
 	GUI_desk_init(); 
 	 
 	alt_timestamp_start(); 
+
+	uint32_t* pt;
+	pt = new int[512];
+	for(int i=0; i<512;i++){
+		pt[i]=i;
+	}
+	for(int i=0; i<512;i++){
+		printf("%d\n", pt[i]);
+	}
  
 	for(;;){ 
 		 
@@ -108,7 +117,7 @@ int main(){
 		fps = TIMER_FREQ/ alt_timestamp(); 
 		display_fps(fps); 
 		alt_timestamp_start();	
-			 
+		printf("%d\n", pt[99]);
  
 	} 
 } 
