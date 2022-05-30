@@ -4,9 +4,6 @@ extern alt_up_pixel_buffer_dma_dev *pixel_buf_dma_dev;
 
 Graphic_engine::Graphic_engine(){
 
-
-
-
     //la traslazione inziale sull'asse z serve a spostare indietro l'oggetto nel mondo, altrimenti la camera si troverebbe nell'origine e sarebbe "dentro" il cubo(e si vede la croce delle diagonali)
     //NB: se l'oggetto finisce alle spalle della camera viene visto "all'indietro" (front e back del cubo sono invertiti)
     
@@ -28,7 +25,7 @@ Graphic_engine::Graphic_engine(){
     translation_matrix[M4(3,2)] = 0;
     translation_matrix[M4(3,3)] = 1;
 
-    update_translation(0, 0, -3);
+    update_translation(0, 0, -3);   //sposto l'oggetto "indietro" altrimenti la camera si troverebbe al suo interno
 
     //inizializzo matrice di rotazione
     
@@ -58,11 +55,9 @@ Graphic_engine::Graphic_engine(){
     scaling_matrix[M4(3,1)] = 0; 
     scaling_matrix[M4(3,2)] = 0; 
     scaling_matrix[M4(3,3)] = 1; 
-    update_scaling(0.4, 0.4, 0.4);
+    update_scaling(0.4, 0.4, 0.4);  // riduco le dimensioni dell'oggetto per farlo entrare nello schermo
 
-    
-    
-    // set OpenGL perspective projection matrix
+    // inizialiizzo la matrice 
     r = imageAspectRatio * scale;
     l = -r;
     t = scale;
@@ -87,10 +82,7 @@ Graphic_engine::Graphic_engine(){
     projection_matrix[M4(1,3)] = (float)0; 
     projection_matrix[M4(2,3)] = (float) -2 * f * n / (f - n);
     projection_matrix[M4(3,3)] = (float)0; 
-
-    
-
-   
+ 
 }
 
 void Graphic_engine::update_translation(float x, float y,float z){
@@ -255,11 +247,6 @@ void Graphic_engine::update_scaling_relative(float new_value, int axis){
 
 
 int Graphic_engine::display_frame(){
-                printf("&cubo.n_vertex = %d\n", &cubo.n_vertex);
-    printf("cubo.n_vertex = %d\n", cubo.n_vertex);
-    printf("n_vertex_pnt = %d\n", n_vertex_pnt);
-    printf("*n_vertex_pnt = %d\n", *n_vertex_pnt);
-    printf("&n_vertex_pnt = %d\n", &n_vertex_pnt);
     //pulisco il back buffer
     alt_up_pixel_buffer_dma_clear_screen_delayed(pixel_buf_dma_dev,1);
 
@@ -276,27 +263,18 @@ int Graphic_engine::display_frame(){
         alt_up_pixel_buffer_dma_draw_line_enhanced_clipping(pixel_buf_dma_dev,\
             *(vertex_on_2d_pnt + (*(faces_pnt + i * 3 + A))*2 + X), *(vertex_on_2d_pnt + (*(faces_pnt + i * 3 + A))*2 + Y),\ 
             *(vertex_on_2d_pnt + (*(faces_pnt + i * 3 + B))*2 + X), *(vertex_on_2d_pnt + (*(faces_pnt + i * 3 + B))*2 + Y),\
-            GREEN, 1);
+            *color_pnt, 1);
 
         alt_up_pixel_buffer_dma_draw_line_enhanced_clipping(pixel_buf_dma_dev,\
             *(vertex_on_2d_pnt + (*(faces_pnt + i * 3 + B))*2 + X), *(vertex_on_2d_pnt + (*(faces_pnt + i * 3 + B))*2 + Y),\
             *(vertex_on_2d_pnt + (*(faces_pnt + i * 3 + C))*2 + X), *(vertex_on_2d_pnt + (*(faces_pnt + i * 3 + C))*2 + Y),\
-            GREEN, 1);
+            *color_pnt, 1);
 
         alt_up_pixel_buffer_dma_draw_line_enhanced_clipping(pixel_buf_dma_dev,\
             *(vertex_on_2d_pnt + (*(faces_pnt + i * 3 + C))*2 + X), *(vertex_on_2d_pnt + (*(faces_pnt + i * 3 + C))*2 + Y),\
             *(vertex_on_2d_pnt + (*(faces_pnt + i * 3 + A))*2 + X), *(vertex_on_2d_pnt + (*(faces_pnt + i * 3 + A))*2 + Y),\
-            GREEN, 1);
+            *color_pnt, 1);
     }
-
-    // for(int i=0; i< (*n_faces_pnt) ; i++){
-    //     printf("   v: %d  ", vertex_on_2D[*(faces_pnt + i * 3 + A)][X] );
-       
-    // }
-    // for(int i=0; i< (*n_faces_pnt) ; i++){
-    //      printf("   i: %d   ", *(faces_pnt + i * 3 + A) );
-    // }
-    // printf("END \n\n");
 
     //swap del buffer, e attesa che sia eseguito
     alt_up_pixel_buffer_dma_swap_buffers(pixel_buf_dma_dev);
@@ -304,9 +282,6 @@ int Graphic_engine::display_frame(){
     return 0;
 }
 
-//m[i][j]  è uguale a  *(m + i*C +j)
-
-//vertex[V(X,i)]    *(vertex_pnt + V(X,i))
 
 void Graphic_engine::vector_matrix_multiply(){
 
@@ -403,21 +378,9 @@ void Graphic_engine::Matrix4x4MultiplyBy4x4 (float src1[4*4], float src2[4*4], f
     dest[M4(3,3)] = src1[M4(3,0)] * src2[M4(0,3)] + src1[M4(3,1)] * src2[M4(1,3)] + src1[M4(3,2)] * src2[M4(2,3)] + src1[M4(3,3)] * src2[M4(3,3)];
 };
 
-void Graphic_engine::init_object(){
-    n_vertex_pnt = &cubo.n_vertex;
-    n_faces_pnt = &cubo.n_faces;
 
-    vertex_pnt = (cubo.vertex);      // punto sempre al primo elemento della matrice, e poi lavoro con gli indici
-    faces_pnt = (cubo.faces[0]);
-    //vertex_on_2d_pnt = (cubo.vertex_on_2D[0]);
-    printf("&cubo.n_vertex = %d\n", &cubo.n_vertex);
-    printf("cubo.n_vertex = %d\n", cubo.n_vertex);
-    printf("n_vertex_pnt = %d\n", n_vertex_pnt);
-    printf("*n_vertex_pnt = %d\n", *n_vertex_pnt);
-    vertex_on_2d_pnt = new int[(*n_vertex_pnt) * 2];
-}
 
-void Graphic_engine::change_object(){
+ void Graphic_engine::change_object(){
 
     uint16_t    edge_capture_k1;
     static int  index_figure = 2;
@@ -432,37 +395,53 @@ void Graphic_engine::change_object(){
             //per aggiungere oggetti modificare anche N_OBJECT 
             case 1:
                 delete []vertex_on_2d_pnt;
+                n_vertex_pnt = &hello_world.n_vertex;
+                n_faces_pnt = &hello_world.n_faces;
+                color_pnt = &hello_world.color;
+                vertex_pnt = hello_world.vertex;      
+                faces_pnt = (hello_world.faces[0]);
+                vertex_on_2d_pnt = new int[(*n_vertex_pnt) * 2];
+                break;   
+            case 2:
+                delete []vertex_on_2d_pnt;
                 n_vertex_pnt = &cubo.n_vertex;
                 n_faces_pnt = &cubo.n_faces;
+                color_pnt = &cubo.color;
                 vertex_pnt = cubo.vertex;      
                 faces_pnt = (cubo.faces[0]);
                 vertex_on_2d_pnt = new int[(*n_vertex_pnt) * 2];
                 break;
-            case 2:
+            case 3:
                 delete []vertex_on_2d_pnt;
                 n_vertex_pnt = &teapot.n_vertex;
                 n_faces_pnt = &teapot.n_faces;
+                color_pnt = &teapot.color;
                 vertex_pnt = teapot.vertex;     
                 faces_pnt = (teapot.faces[0]);
                 vertex_on_2d_pnt = new int[(*n_vertex_pnt) * 2];
+                //risistemo la figura per mostrarla
+                update_scaling(0.7,0.7,0.7);
+                update_rotation(-90,0,0);
                 break;
-            // case 3:
-            //     delete []vertex_on_2d_pnt;
-            //     n_vertex_pnt = &sphere.n_vertex;
-            //     n_faces_pnt = &sphere.n_faces;
-            //     vertex_pnt = sphere.vertex;      
-            //     faces_pnt = (sphere.faces[0]);
-            //     vertex_on_2d_pnt = new int[(*n_vertex_pnt) * 2];
-            //     break;
             case 4:
+                delete []vertex_on_2d_pnt;
+                n_vertex_pnt = &sphere.n_vertex;
+                n_faces_pnt = &sphere.n_faces;
+                color_pnt = &sphere.color;
+                vertex_pnt = sphere.vertex;      
+                faces_pnt = (sphere.faces[0]);
+                vertex_on_2d_pnt = new int[(*n_vertex_pnt) * 2];
+                break;
+            case 5:
                 delete []vertex_on_2d_pnt;
                 n_vertex_pnt = &sphericon.n_vertex;
                 n_faces_pnt = &sphericon.n_faces;
+                color_pnt = &sphericon.color;
                 vertex_pnt = sphericon.vertex;      
                 faces_pnt = (sphericon.faces[0]);
                 vertex_on_2d_pnt = new int[(*n_vertex_pnt) * 2];
                 break;            
-            
+
             default:
                 break;
         }

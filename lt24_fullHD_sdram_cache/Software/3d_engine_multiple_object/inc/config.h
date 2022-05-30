@@ -72,9 +72,7 @@ extern alt_up_pixel_buffer_dma_dev *pixel_buf_dma_dev;
 #define ATTENUATION_FACTOR_TRASL (float)200
 #define ATTENUATION_FACTOR_SCALE (float)200
 
-//	controllo inerzie del touch
-#define TRASL_INERTIA 	(float)1.5
-#define ROT_INERTIA 	(float)0.9
+
 
 
 //define for showing fps
@@ -83,17 +81,15 @@ extern alt_up_pixel_buffer_dma_dev *pixel_buf_dma_dev;
 #define THIRD_DISPLAY  	16
 #define NO_NUMBER 	16
 
-//palette colori a 16 bit
-#define RED         0xF800
-#define GREEN       0x07E0
-#define BLUE        0x001F
-#define BLACK       0x0000
-#define WHITE       0xFFFF
-#define YELLOW      0xFFE0
-#define MAGENTA     0xF81F
-#define CYAN        0x07FF
-
-
+// //palette colori a 16 bit
+// #define RED         0xF800
+// #define GREEN       0x07E0
+// #define BLUE        0x001F
+// #define BLACK       0x0000
+// #define WHITE       0xFFFF
+// #define YELLOW      0xFFE0
+// #define MAGENTA     0xF81F
+// #define CYAN        0x07FF
 
 typedef enum {ROT,TRASL,SCALE} cmd_t;
 
@@ -119,4 +115,5 @@ typedef enum {ROT,TRASL,SCALE} cmd_t;
 #define BIT(x)	(1<<x)
 #define HEX3_HEX0_DATA_REG	(*(volatile uint32_t*) 	(HEX3_HEX0_BASE))		// HEX3_HEX0_DATA_REG � il nome del registro
 #define HEX5_HEX4_DATA_REG	(*(volatile uint32_t*) 	(HEX5_HEX4_BASE))
+
 #endif /* CONFIG_H_ */

@@ -4,7 +4,7 @@
 #include "./config.h"
 #include "models_3D.h"  // contiene le struct con i vari modelli 
 
-#define N_OBJECT 4
+#define N_OBJECT 5
 
 /*
  * viene impiegato un sistema destrogiro,
@@ -66,6 +66,8 @@ class Graphic_engine{
         //puntatori per cambio figura
         const uint16_t* n_vertex_pnt;
         const uint16_t* n_faces_pnt;
+        const uint16_t* color_pnt;
+
         float* vertex_pnt;  //ci sta dichiararlo const ??
         uint16_t* faces_pnt; //ci sta dichiararlo const ??
         
@@ -115,10 +117,14 @@ class Graphic_engine{
 
     public:
        
-
         Graphic_engine();
-        void init_object();
-
+        void change_object();
+        void init_object(){n_vertex_pnt = &hello_world.n_vertex;
+                n_faces_pnt = &hello_world.n_faces;
+                color_pnt = &hello_world.color;
+                vertex_pnt = hello_world.vertex;      
+                faces_pnt = (hello_world.faces[0]);
+                vertex_on_2d_pnt = new int[(*n_vertex_pnt) * 2];}
         //#define M8(x,y) (x*N_VERTEX+y)
         inline int V(int x, int y){ return x * (int)(*n_vertex_pnt) + y; }
         //funzioni overloaded per modificare tutti i parametri oppure solamente quelli di un asse
@@ -148,63 +154,8 @@ class Graphic_engine{
         }
         //ritorna 0 quando ha effettivamente fatto lo swap del buffer
         int display_frame();
-        void change_object();
+        
 };
-
-
-
-// struct {
-//     #define N_VERTEX_CUBO 8
-//     #define N_FACES_CUBO 12
-    
-//      const uint16_t n_vertex = N_VERTEX_CUBO; 
-//      const uint16_t n_faces = N_FACES_CUBO; 
-//     float vertex[N_VERTEX_CUBO*4] = {   -1,  1,   1, -1, -1,  1,  1, -1,
-//                                         -1, -1,   1,  1, -1, -1,  1,  1,
-//                                         1,  1,   1,  1, -1, -1, -1, -1,
-//                                         1,  1,   1,  1,  1,  1,  1,  1 };
-//     uint16_t faces[N_FACES_CUBO][3] = {  {0,  2, 3},
-//                                 {0, 1, 2},
-//                                 {1, 5, 6},
-//                                 { 1,2 ,6 },
-//                                 { 3,2 ,7 },
-//                                 { 2,7 ,6 },
-//                                 { 0,3 ,7 },
-//                                 { 0, 4,7 },
-//                                 { 0, 1,5 },
-//                                 {0,4 ,5},                                        
-//                                 {4,5 ,6},
-//                                 {4,7 ,6}                                        
-//                                 };
-//     //int vertex_on_2D[N_VERTEX_CUBO][2];
-// }cubo;
-
-
-// struct{
-//     #define N_VERTEX_CUBO2 8
-//     #define N_FACES_CUBO2 12
-//     uint16_t const n_vertex = N_VERTEX_CUBO2; 
-//     uint16_t const n_faces = N_FACES_CUBO2; 
-//     float vertex[N_VERTEX_CUBO2*4] = {  -0.5,  0.5,  0.5, -0.5, -0.5,  0.5,  0.5, -0.5,
-//                                         -0.5, -0.5,  0.5,  0.5, -0.5, -0.5,  0.5,  0.5,
-//                                          0.5,  0.5,  0.5,  0.5, -0.5, -0.5, -0.5, -0.5,
-//                                          1,  1,  1,  1,  1,  1,  1,  1 };
-//     uint16_t faces[N_FACES_CUBO2][3] = {  {0,  2, 3},
-//                                 {0, 1, 2},
-//                                 {1, 5, 6},
-//                                 { 1,2 ,6 },
-//                                 { 3,2 ,7 },
-//                                 { 2,7 ,6 },
-//                                 { 0,3 ,7 },
-//                                 { 0, 4,7 },
-//                                 { 0, 1,5 },
-//                                 {0,4 ,5},                                        
-//                                 {4,5 ,6},
-//                                 {4,7 ,6}                                        
-//                                 };
-//     //int vertex_on_2D[N_VERTEX_CUBO2][2];
-// }cubo2;
-
 
 #endif //GRAPHIC_OBJECT_H_
 

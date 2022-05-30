@@ -34,24 +34,11 @@ void alt_up_pixel_buffer_dma_clear_screen_delayed(alt_up_pixel_buffer_dma_dev *p
 			for (x = 0; x < limit_x; x = x + 4)
 			{
 				IOWR_32DIRECT(addr, x, 0);
-				asm("nop");
-				asm("nop");
-				asm("nop");
-				asm("nop");
-				asm("nop");
-				asm("nop");
-				asm("nop");
-				asm("nop");
-				asm("nop");
-				asm("nop");
-				asm("nop");
-				asm("nop");
-				asm("nop");
-				asm("nop");
-				asm("nop");
-				asm("nop");
-				asm("nop");
-				asm("nop");
+				if (!(x%64)){ 
+					for(int i = 0; i < 32;i++){ 
+					asm("nop"); 
+					}
+				} 
 
 			}
 			addr = addr + (1 << offset_y);
@@ -64,26 +51,11 @@ void alt_up_pixel_buffer_dma_clear_screen_delayed(alt_up_pixel_buffer_dma_dev *p
 		for (x = 0; x < limit_y; x = x + 4)
 		{
 			IOWR_32DIRECT(addr, x, 0);
-			asm("nop");
-							asm("nop");
-							asm("nop");
-							asm("nop");
-							asm("nop");
-							asm("nop");
-							asm("nop");
-							asm("nop");
-							asm("nop");
-							asm("nop");
-							asm("nop");
-							asm("nop");
-							asm("nop");
-							asm("nop");
-							asm("nop");
-							asm("nop");
-							asm("nop");
-							asm("nop");
-
-
+			if (!(x%64)){ 
+				for(int i = 0; i < 16;i++){ 
+					asm("nop"); 
+				}
+			} 
 		}
 	}
 }
