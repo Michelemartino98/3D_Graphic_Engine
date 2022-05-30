@@ -1,8 +1,5 @@
- 
 #include "../inc/config.h" 
- 
- 
- 
+  
 extern "C" { 
 #include "touch_spi.h" 
 #include "terasic_includes.h" 
@@ -88,18 +85,11 @@ int main(){
 	//LCD_Clear(WHITE_24); 
 	// 
 	GUI_desk_init(); 
-	 
+
+	Object_3D.init_object();
+
 	alt_timestamp_start(); 
 
-	uint32_t* pt;
-	pt = new int[512];
-	for(int i=0; i<512;i++){
-		pt[i]=i;
-	}
-	for(int i=0; i<512;i++){
-		printf("%d\n", pt[i]);
-	}
- 
 	for(;;){ 
 		 
 		accelerometer_on = LT24_controller(); 
@@ -117,7 +107,6 @@ int main(){
 		fps = TIMER_FREQ/ alt_timestamp(); 
 		display_fps(fps); 
 		alt_timestamp_start();	
-		printf("%d\n", pt[99]);
  
 	} 
 } 

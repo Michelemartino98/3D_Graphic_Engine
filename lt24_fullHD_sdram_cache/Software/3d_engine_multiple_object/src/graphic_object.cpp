@@ -4,15 +4,7 @@ extern alt_up_pixel_buffer_dma_dev *pixel_buf_dma_dev;
 
 Graphic_engine::Graphic_engine(){
 
-    n_vertex_pnt = &cubo.n_vertex;
-    n_faces_pnt = &cubo.n_faces;
 
-    //vertex_pnt = new float[n_vertex_pnt * 4];
-    // vertex_pnt = &(cubo.vertex[0][0]);      // punto sempre al primo elemento della matrice, e poi lavoro con gli indici
-    // faces_pnt = &(cubo.faces[0][0]);
-    vertex_pnt = (cubo.vertex);      // punto sempre al primo elemento della matrice, e poi lavoro con gli indici
-    faces_pnt = (cubo.faces[0]);
-    vertex_on_2d_pnt = (cubo.vertex_on_2D[0]);
 
 
     //la traslazione inziale sull'asse z serve a spostare indietro l'oggetto nel mondo, altrimenti la camera si troverebbe nell'origine e sarebbe "dentro" il cubo(e si vede la croce delle diagonali)
@@ -263,6 +255,11 @@ void Graphic_engine::update_scaling_relative(float new_value, int axis){
 
 
 int Graphic_engine::display_frame(){
+                printf("&cubo.n_vertex = %d\n", &cubo.n_vertex);
+    printf("cubo.n_vertex = %d\n", cubo.n_vertex);
+    printf("n_vertex_pnt = %d\n", n_vertex_pnt);
+    printf("*n_vertex_pnt = %d\n", *n_vertex_pnt);
+    printf("&n_vertex_pnt = %d\n", &n_vertex_pnt);
     //pulisco il back buffer
     alt_up_pixel_buffer_dma_clear_screen_delayed(pixel_buf_dma_dev,1);
 
@@ -406,11 +403,24 @@ void Graphic_engine::Matrix4x4MultiplyBy4x4 (float src1[4*4], float src2[4*4], f
     dest[M4(3,3)] = src1[M4(3,0)] * src2[M4(0,3)] + src1[M4(3,1)] * src2[M4(1,3)] + src1[M4(3,2)] * src2[M4(2,3)] + src1[M4(3,3)] * src2[M4(3,3)];
 };
 
+void Graphic_engine::init_object(){
+    n_vertex_pnt = &cubo.n_vertex;
+    n_faces_pnt = &cubo.n_faces;
+
+    vertex_pnt = (cubo.vertex);      // punto sempre al primo elemento della matrice, e poi lavoro con gli indici
+    faces_pnt = (cubo.faces[0]);
+    //vertex_on_2d_pnt = (cubo.vertex_on_2D[0]);
+    printf("&cubo.n_vertex = %d\n", &cubo.n_vertex);
+    printf("cubo.n_vertex = %d\n", cubo.n_vertex);
+    printf("n_vertex_pnt = %d\n", n_vertex_pnt);
+    printf("*n_vertex_pnt = %d\n", *n_vertex_pnt);
+    vertex_on_2d_pnt = new int[(*n_vertex_pnt) * 2];
+}
 
 void Graphic_engine::change_object(){
 
     uint16_t    edge_capture_k1;
-    static int  index_figure = 1;
+    static int  index_figure = 2;
 
     edge_capture_k1 =  IORD_ALTERA_AVALON_PIO_EDGE_CAP(KEY_BASE) & BIT(KEY1);
     
@@ -418,24 +428,41 @@ void Graphic_engine::change_object(){
         edge_capture_k1 = 0;
         IOWR_ALTERA_AVALON_PIO_EDGE_CAP(KEY_BASE, BIT(KEY1));
         switch (index_figure)
-        {
+        {   
+            //per aggiungere oggetti modificare anche N_OBJECT 
             case 1:
-                n_vertex_pnt = &cubo2.n_vertex;
-                n_faces_pnt = &cubo2.n_faces;
-                vertex_pnt = cubo2.vertex;      // punto sempre al primo elemento della matrice, e poi lavoro con gli indici
-                faces_pnt = (cubo2.faces[0]);
-                vertex_on_2d_pnt = (cubo2.vertex_on_2D[0]);
-
+                delete []vertex_on_2d_pnt;
+                n_vertex_pnt = &cubo.n_vertex;
+                n_faces_pnt = &cubo.n_faces;
+                vertex_pnt = cubo.vertex;      
+                faces_pnt = (cubo.faces[0]);
+                vertex_on_2d_pnt = new int[(*n_vertex_pnt) * 2];
                 break;
             case 2:
-                
-                 n_vertex_pnt = &cubo.n_vertex;
-                n_faces_pnt = &cubo.n_faces;
-                vertex_pnt = cubo.vertex;      // punto sempre al primo elemento della matrice, e poi lavoro con gli indici
-                faces_pnt = (cubo.faces[0]);
-                vertex_on_2d_pnt = (cubo.vertex_on_2D[0]);
-
+                delete []vertex_on_2d_pnt;
+                n_vertex_pnt = &teapot.n_vertex;
+                n_faces_pnt = &teapot.n_faces;
+                vertex_pnt = teapot.vertex;     
+                faces_pnt = (teapot.faces[0]);
+                vertex_on_2d_pnt = new int[(*n_vertex_pnt) * 2];
                 break;
+            // case 3:
+            //     delete []vertex_on_2d_pnt;
+            //     n_vertex_pnt = &sphere.n_vertex;
+            //     n_faces_pnt = &sphere.n_faces;
+            //     vertex_pnt = sphere.vertex;      
+            //     faces_pnt = (sphere.faces[0]);
+            //     vertex_on_2d_pnt = new int[(*n_vertex_pnt) * 2];
+            //     break;
+            case 4:
+                delete []vertex_on_2d_pnt;
+                n_vertex_pnt = &sphericon.n_vertex;
+                n_faces_pnt = &sphericon.n_faces;
+                vertex_pnt = sphericon.vertex;      
+                faces_pnt = (sphericon.faces[0]);
+                vertex_on_2d_pnt = new int[(*n_vertex_pnt) * 2];
+                break;            
+            
             default:
                 break;
         }
