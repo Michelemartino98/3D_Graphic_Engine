@@ -23,9 +23,10 @@ int main(){
 /////////////   init VGA   ///////////////////////// 
 	pixel_buf_dma_dev = alt_up_pixel_buffer_dma_open_dev("/dev/video_pixel_buffer_dma_0"); 
 	
-	//pulisco il frame iniziale e lo mando alla vga
-	alt_up_pixel_buffer_dma_clear_screen_delayed(pixel_buf_dma_dev,1);	 
-	alt_up_pixel_buffer_dma_swap_buffers(pixel_buf_dma_dev); 
+	//pulisco entrambi i buffer
+    alt_up_pixel_buffer_dma_clear_screen(pixel_buf_dma_dev,1);
+    alt_up_pixel_buffer_dma_clear_screen(pixel_buf_dma_dev,0); 
+
     while (alt_up_pixel_buffer_dma_check_swap_buffers_status(pixel_buf_dma_dev)){;} 
 
 /////////////   init acelerometer /////////////////////// 
@@ -55,7 +56,10 @@ int main(){
 	//schermata di benvenuto 
 	GUI_show_welcome(); 
 	int x,y; 
+
+	#ifdef LT24_PRESENT
 	while( !Touch_GetXY(pTouch,&x,&y) ) {;}
+	#endif
 
 	GUI_desk_init(); 
 
@@ -65,11 +69,14 @@ int main(){
 
 	for(;;){ 
 		 
+		#ifdef LT24_PRESENT
 		accelerometer_on = LT24_controller(fps); 
-
 		if( accelerometer_on ){ 
 			accelerometer_controller(); 
-		} 
+		}
+		#else
+		accelerometer_controller();
+		#endif
 		
 		
 		Object_3D.calculate_rendering();

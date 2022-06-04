@@ -90,6 +90,7 @@ class Graphic_engine{
         
         //int vertex_on_2D[N_VERTEX][2];
         int* vertex_on_2d_pnt;
+        int* previous_vertex_on_2d_pnt;
 
         float projection_matrix[4*4];
         float rotation_matrix[4*4];
