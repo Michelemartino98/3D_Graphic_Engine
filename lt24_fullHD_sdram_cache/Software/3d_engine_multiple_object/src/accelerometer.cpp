@@ -39,15 +39,8 @@ void accelerometer_controller(){
     alt_up_accelerometer_spi_read_x_axis(accelerometer_dev, &x_acc);
     alt_up_accelerometer_spi_read_y_axis(accelerometer_dev, &y_acc);
     
-    //uso key1 per passare dal controllo della rotazione a quello della traslazione tramite accelerometro
-    edge_capture_k1 =  IORD_ALTERA_AVALON_PIO_EDGE_CAP(KEY_BASE) & BIT(KEY1);
-    if( edge_capture_k1 ) {
-        command_sw=!command_sw;
-        edge_capture_k1 = 0;
-        IOWR_ALTERA_AVALON_PIO_EDGE_CAP(KEY_BASE, BIT(KEY1));
-    }
     //ROTAZIONE
-    if(command_sw){
+    if(slider_data_reg & BIT(9)){
         if( ABS(x_acc) > ACC_TH || ABS(y_acc) > ACC_TH){    // ACC_TH è una soglia per filtrare un po' l'accelerometro e evitare che anche in piano il cubo si muova
             inc_rx= (float)y_acc / G_ACC * MAX_INC_R;
             Object_3D.update_rotation_relative( inc_rx, X);
@@ -65,25 +58,25 @@ void accelerometer_controller(){
         } 
     }
     //SCALA
-    if(slider_data_reg & BIT(9)){                       //il segno dell'incremento della scala sta su slider9    
-        if(slider_data_reg & BIT(0)){                   //scala x
+    if(slider_data_reg & BIT(4)){                       //il segno dell'incremento della scala sta su slider9    
+        if(slider_data_reg & (BIT(0) | BIT(3))){                   //scala x
             Object_3D.update_scaling_relative( INC_S , X );
         }
-        if(slider_data_reg & BIT(1)){                   //scala y
+        if(slider_data_reg & (BIT(1) | BIT(3))){                   //scala y
             Object_3D.update_scaling_relative( INC_S , Y );
         }
-        if(slider_data_reg & BIT(2)){                   //scala z
+        if(slider_data_reg & (BIT(2) | BIT(3))){                   //scala z
             Object_3D.update_scaling_relative( INC_S , Z );
         }
     }
     else {                                              //incremento negativo
-        if(slider_data_reg & BIT(0)){ 
+        if(slider_data_reg & (BIT(0) | BIT(3))){ 
             Object_3D.update_scaling_relative( -INC_S , X );
         }
-        if(slider_data_reg & BIT(1)){ 
+        if(slider_data_reg & (BIT(1) | BIT(3))){ 
             Object_3D.update_scaling_relative( -INC_S , Y );
         }
-        if(slider_data_reg & BIT(2)){ 
+        if(slider_data_reg & (BIT(2) | BIT(3))){ 
             Object_3D.update_scaling_relative( -INC_S , Z );
         }
     }

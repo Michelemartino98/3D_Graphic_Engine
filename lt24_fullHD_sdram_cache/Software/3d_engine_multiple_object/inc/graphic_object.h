@@ -6,6 +6,8 @@
 
 #define N_OBJECT 5
 
+
+
 /*
  * viene impiegato un sistema destrogiro,
  * la camera punta verso l'asse Z negativo, 
@@ -90,6 +92,7 @@ class Graphic_engine{
         
         //int vertex_on_2D[N_VERTEX][2];
         int* vertex_on_2d_pnt;
+        int* previous_vertex_on_2d_pnt; 
 
         float projection_matrix[4*4];
         float rotation_matrix[4*4];
@@ -124,7 +127,8 @@ class Graphic_engine{
                 color_pnt = &hello_world.color;
                 vertex_pnt = hello_world.vertex;      
                 faces_pnt = (hello_world.faces[0]);
-                vertex_on_2d_pnt = new int[(*n_vertex_pnt) * 2];}
+                vertex_on_2d_pnt = new int[(*n_vertex_pnt) * 2];
+                previous_vertex_on_2d_pnt = new int[(*n_vertex_pnt) * 2]; }
         //#define M8(x,y) (x*N_VERTEX+y)
         inline int V(int x, int y){ return x * (int)(*n_vertex_pnt) + y; }
         //funzioni overloaded per modificare tutti i parametri oppure solamente quelli di un asse
